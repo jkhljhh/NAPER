@@ -1,18 +1,6 @@
 "use client";
 
 import * as React from "react";
-import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
-  SquareTerminal,
-} from "lucide-react";
 
 import {
   Collapsible,
@@ -30,7 +18,6 @@ import {
   SidebarHeader,
   SidebarGroup,
   SidebarGroupLabel,
-  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
@@ -42,52 +29,11 @@ import Link from "next/link";
 import {
   IconChevronRight,
   IconInnerShadowTop,
-  IconMessage,
-  IconSocial,
-  IconTextSize,
-  IconTypeface,
   TablerIcon,
 } from "@tabler/icons-react";
 import { site } from "@/data/site";
+import { navigation } from "@/data/sidebar";
 import type { User } from "@supabase/supabase-js";
-
-// This is sample data.
-const data = {
-  navMain: [
-    {
-      title: "Writing",
-      url: "#",
-      icon: IconTextSize,
-      isActive: true,
-      items: [
-        {
-          title: "Blog Generator",
-          url: "/agent/blog-generator",
-        },
-        {
-          title: "Email Campaigner",
-          url: "/agent/email-campaigner",
-        },
-      ],
-    },
-    {
-      title: "Social Media",
-      url: "#",
-      icon: IconMessage,
-      isActive: false,
-      items: [
-        {
-          title: "SEO Hashtags",
-          url: "/agent/seo-hashtags",
-        },
-        {
-          title: "Social Post",
-          url: "/agent/social-post",
-        },
-      ],
-    },
-  ],
-};
 
 type AppSidebarProps = React.ComponentProps<typeof Sidebar> & {
   user: User;
@@ -112,7 +58,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavItemsCollapsible items={data.navMain} title="Agents" />
+        <NavItemsCollapsible items={navigation.main} />
         {/* <NavProjects projects={data.projects} /> */}
       </SidebarContent>
       <SidebarFooter>
@@ -127,7 +73,7 @@ function NavItemsCollapsible({
   title,
   items,
 }: {
-  title: string;
+  title?: string;
   items: {
     title: string;
     url: string;
@@ -141,7 +87,7 @@ function NavItemsCollapsible({
 }) {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>{title}</SidebarGroupLabel>
+      {title && <SidebarGroupLabel>{title}</SidebarGroupLabel>}
       <SidebarMenu>
         {items.map((item) => (
           <Collapsible

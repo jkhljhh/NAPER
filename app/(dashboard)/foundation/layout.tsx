@@ -1,4 +1,3 @@
-// app/dashboard/agent/layout.tsx
 import { SiteHeader } from "@/components/site-header";
 import { SiteContent } from "@/components/site-content";
 
@@ -9,7 +8,7 @@ export default function Layout({
 }>) {
   return (
     <>
-      <SiteHeader title="Home" />
+      <SiteHeader title="Foundation" />
       <SiteContent>{children}</SiteContent>
     </>
   );

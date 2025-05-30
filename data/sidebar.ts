@@ -1,64 +1,57 @@
-import { IconTypeface } from "@tabler/icons-react";
+import {
+  IconTypeface,
+  IconTextSize,
+  IconWorld,
+  IconChartPie,
+  IconBuilding,
+} from "@tabler/icons-react";
 
-export const sidebar = {
-  user: {
-    name: "admin",
-    email: "admin@netision.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  nav: [
+export const navigation = {
+  main: [
     {
-      title: "Writing",
+      title: "Global",
       url: "#",
-      icon: IconTypeface,
+      icon: IconWorld,
       isActive: true,
       items: [
         {
-          title: "History",
+          title: "Entity",
           url: "#",
         },
         {
-          title: "Starred",
+          title: "Market",
           url: "#",
         },
         {
-          title: "Settings",
+          title: "Finance Year",
           url: "#",
         },
       ],
     },
 
-    // agents: [
-    //   {
-    //     name: "Blog Generator",
-    //     url: "/blog-generator",
-    //   },
-    //   {
-    //     name: "Email Campaigner",
-    //     url: "/email-campaigner",
-    //   },
-    //   {
-    //     name: "Product Price Comparison",
-    //     url: "/product-price-comparison",
-    //   },
-    //   {
-    //     name: "Product Details",
-    //     url: "/product-details",
-    //   },
-    //   {
-    //     name: "SEO Hashtags",
-    //     url: "/seo-hashtags",
-    //   },
-    //   {
-    //     name: "Social Post",
-    //     url: "/social-post",
-    //   },
-    // ],
-    // chats: [
-    //   {
-    //     name: "Create a Blog Post for Netipulse",
-    //     url: "#",
-    //   },
-    // ],
+    {
+      title: "Chart of Accounts",
+      url: "#",
+      icon: IconChartPie,
+      isActive: false,
+      items: [
+        {
+          title: "?",
+          url: "#",
+        },
+        {
+          title: "GL Mapping",
+          url: "#",
+        },
+      ],
+    },
+
+    {
+      title: "Branch",
+      url: "#",
+      icon: IconBuilding,
+      isActive: false,
+      items: [],
+    },
   ],
 };

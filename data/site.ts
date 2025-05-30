@@ -1,4 +1,4 @@
 export const site = {
-  title: "Netigen",
-  description: "Agentic AI Platform",
+  title: "BIQ",
+  description: "BIQ configuration",
 };
