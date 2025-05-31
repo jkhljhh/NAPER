@@ -24,7 +24,7 @@ export const navigation = {
         },
         {
           title: "Finance Year",
-          url: "#",
+          url: "/foundation/finance-year",
         },
       ],
     },

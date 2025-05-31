@@ -3,10 +3,6 @@
 import { z } from "zod";
 
 export const schema = z.object({
-  language: z.string({
-    required_error: "Please select a language.",
-  }),
-
   country: z.string(),
   currency: z.string(),
 });
@@ -14,7 +10,6 @@ export const schema = z.object({
 export type Schema = z.infer<typeof schema>;
 
 export const defaultValues: Schema = {
-  language: "",
   country: "",
   currency: "",
 };
