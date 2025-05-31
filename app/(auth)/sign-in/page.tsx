@@ -4,35 +4,38 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useActionState, useEffect } from "react";
+import { useTransition } from "react";
 import { toast } from "sonner";
 
 import { ActionState } from "@/lib/action-helpers";
 import { cn } from "@/lib/utils";
 
 import type { Schema } from "./shared";
-import { SignInForm as Form } from "./form";
-import { signInAction } from "./action";
+import { Form } from "./form";
+import { formAction } from "./action";
 
 export default function SignInPage() {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
-  const [state, action, pending] = useActionState<ActionState, Schema>(
-    signInAction,
-    { error: false, message: "", response: "" },
-  );
+  function onSubmit(values: Schema) {
+    startTransition(() => {
+      const promise = formAction(values).then((result: ActionState) => {
+        if (result.error) {
+          throw new Error(result.message);
+        }
 
-  useEffect(() => {
-    if (pending) return;
-    if (!state.message) return;
+        router.push("/");
+        return result.message;
+      });
 
-    if (state?.error === true) {
-      toast.error(state.message);
-    } else {
-      toast.success(state.message);
-      router.push("/");
-    }
-  }, [state.error, state.message, state.response, pending, router]);
+      toast.promise(promise, {
+        loading: "Loading...",
+        success: (msg) => msg || "Successfull.",
+        error: (err) => err.message || "Something went wrong",
+      });
+    });
+  }
 
   return (
     <div className={cn("flex flex-col gap-6")}>
@@ -44,7 +47,7 @@ export default function SignInPage() {
         </p>
       </div>
       {/*  */}
-      <Form action={action} pending={pending} />
+      <Form onSubmit={onSubmit} isPending={isPending} />
       {/*  */}
       <div className="text-center text-sm">
         Don&apos;t have an account?{" "}

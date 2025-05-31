@@ -2,15 +2,13 @@
 // Path: @/app/(auth)/sign-up/
 "use server";
 
-import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
-
 import { SupabaseError, toSupabaseError } from "@/lib/supabase/error";
 import { createClient } from "@/lib/supabase/server";
 import { validatedAction } from "@/lib/action-helpers";
+
 import { schema } from "./shared";
 
-export const signUpAction = validatedAction(schema, async (data) => {
+export const formAction = validatedAction(schema, async (data) => {
   try {
     const supabase = await createClient();
 

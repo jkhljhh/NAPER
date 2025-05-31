@@ -17,24 +17,19 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+
 import { schema, defaultValues, type Schema } from "./shared";
-import { Spinner } from "@/components/ui/spinner";
 
 type FormProps = {
-  action: (payload: Schema) => void;
-  pending: boolean;
+  onSubmit: (payload: Schema) => void;
+  isPending: boolean;
 };
 
-export function SignUpForm({ action, pending }: FormProps) {
+function F({ onSubmit, isPending }: FormProps) {
   const form = useForm<Schema>({
     resolver: zodResolver(schema),
     defaultValues: defaultValues,
   });
-
-  function onSubmit(values: Schema) {
-    console.debug(values);
-    startTransition(() => action(values));
-  }
 
   return (
     <Form {...form}>
@@ -81,10 +76,12 @@ export function SignUpForm({ action, pending }: FormProps) {
           )}
         />
 
-        <Button type="submit" className="w-full" disabled={pending}>
-          {pending ? <Spinner /> : "Sign Up"}
+        <Button type="submit" className="w-full" disabled={isPending}>
+          Sign Up
         </Button>
       </form>
     </Form>
   );
 }
+
+export { F as Form };

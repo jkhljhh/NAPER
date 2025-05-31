@@ -38,7 +38,6 @@ export function NavUser({ user }: { user: User }) {
     router.replace("/sign-in");
   };
 
-  console.log(user);
   return (
     <SidebarMenu>
       <SidebarMenuItem>

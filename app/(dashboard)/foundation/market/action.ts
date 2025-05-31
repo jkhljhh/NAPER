@@ -1,5 +1,5 @@
 // Filename: action.tsx
-// Path: @/app/(dashboard)/foundation/entity/
+// Path: @/app/(dashboard)/foundation/market/
 "use server";
 
 import { validatedActionWithUser } from "@/lib/action-helpers";
@@ -8,7 +8,6 @@ import { schema } from "./shared";
 
 export const formAction = validatedActionWithUser(schema, async (body) => {
   try {
-    console.log(body);
     return { message: JSON.stringify(body) };
   } catch (err) {
     console.error(err);

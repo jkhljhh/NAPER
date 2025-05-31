@@ -1,17 +1,19 @@
 // Filename: shared.ts
-// Path: @/app/(dashboard)/agent/blog-generator/
+// Path: @/app/(dashboard)/foundation/entity/
 import { z } from "zod";
 
 export const schema = z.object({
-  name: z.string(),
+  name: z.string().min(1, "Name is required"),
   icon: z
-    .array(z.custom<File>())
-    .min(1, "Please select one file")
-    .max(1, "Please select one file")
-    .refine((files) => files.every((file) => file.size <= 5 * 1024 * 1024), {
-      message: "File size must be less than 5MB",
-      path: ["files"],
-    }),
+    .array(
+      z
+        .instanceof(File, { message: "Each icon entry must be a File" })
+        .refine((file) => file.type.startsWith("image/"), {
+          message: "Only image files are allowed (PNG, JPG, SVG, etc.)",
+        }),
+    )
+    .min(1, "Icon is required")
+    .max(1, "Only one icon allowed"),
 });
 
 export type Schema = z.infer<typeof schema>;

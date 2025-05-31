@@ -16,11 +16,11 @@ export const navigation = {
       items: [
         {
           title: "Entity",
-          url: "#",
+          url: "/foundation/entity",
         },
         {
           title: "Market",
-          url: "#",
+          url: "/foundation/market",
         },
         {
           title: "Finance Year",
@@ -36,7 +36,7 @@ export const navigation = {
       isActive: false,
       items: [
         {
-          title: "?",
+          title: "Master View",
           url: "#",
         },
         {

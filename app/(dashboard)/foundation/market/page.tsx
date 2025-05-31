@@ -1,5 +1,5 @@
 // Filename: page.tsx
-// Path: @/app/(dashboard)/foundation/entity/
+// Path: @/app/(dashboard)/foundation/market/
 "use client";
 
 import { useTransition } from "react";
@@ -20,8 +20,8 @@ import { Form } from "./form";
 import { formAction } from "./action";
 
 const PageData = {
-  title: "Entity",
-  description: "Entity description",
+  title: "Market",
+  description: "Market description",
 };
 
 export default function Page() {

@@ -3,14 +3,12 @@
 "use client";
 
 import Link from "next/link";
-import { startTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -18,23 +16,19 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+
 import { schema, defaultValues, type Schema } from "./shared";
 
 type FormProps = {
-  action: (payload: Schema) => void;
-  pending: boolean;
+  onSubmit: (payload: Schema) => void;
+  isPending: boolean;
 };
 
-export function SignInForm({ action, pending }: FormProps) {
+function F({ onSubmit, isPending }: FormProps) {
   const form = useForm<Schema>({
     resolver: zodResolver(schema),
     defaultValues: defaultValues,
   });
-
-  function onSubmit(values: Schema) {
-    console.debug(values);
-    startTransition(() => action(values));
-  }
 
   return (
     <Form {...form}>
@@ -75,10 +69,12 @@ export function SignInForm({ action, pending }: FormProps) {
           )}
         />
 
-        <Button type="submit" className="w-full" disabled={pending}>
-          {pending ? "Signing In..." : "Sign In"}
+        <Button type="submit" className="w-full" disabled={isPending}>
+          Sign In
         </Button>
       </form>
     </Form>
   );
 }
+
+export { F as Form };

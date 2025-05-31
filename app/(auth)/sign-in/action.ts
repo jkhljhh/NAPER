@@ -3,20 +3,20 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 import { SupabaseError, toSupabaseError } from "@/lib/supabase/error";
 import { createClient } from "@/lib/supabase/server";
 import { validatedAction } from "@/lib/action-helpers";
+
 import { schema } from "./shared";
 
-export const signInAction = validatedAction(schema, async (data) => {
+export const formAction = validatedAction(schema, async (body) => {
   try {
     const supabase = await createClient();
 
     const { error: err } = await supabase.auth.signInWithPassword({
-      email: data.email,
-      password: data.password,
+      email: body.email,
+      password: body.password,
     });
 
     if (err) {
@@ -25,7 +25,7 @@ export const signInAction = validatedAction(schema, async (data) => {
 
     revalidatePath("/", "layout");
 
-    return { message: "Signed in successfully!" };
+    return { message: "Signed in successfully." };
   } catch (err) {
     if (err instanceof SupabaseError) {
       console.error("SupabaseError", err.message);
