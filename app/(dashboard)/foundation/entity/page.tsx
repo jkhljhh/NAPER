@@ -1,9 +1,6 @@
 // Filename: page.tsx
 // Path: @/app/(dashboard)/foundation/entity/
-"use client";
-
-import { useTransition } from "react";
-import { toast } from "sonner";
+import { Suspense } from "react";
 
 import {
   Card,
@@ -13,48 +10,31 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ActionState } from "@/lib/action-helpers";
 
-import { type Schema } from "./shared";
 import { Form } from "./form";
-import { formAction } from "./action";
+import { Entities } from "./entities";
 
 const PageData = {
   title: "Entity",
   description: "Entity description",
 };
 
-export default function Page() {
-  const [isPending, startTransition] = useTransition();
-
-  function onSubmit(values: Schema) {
-    startTransition(() => {
-      const promise = formAction(values).then((result: ActionState) => {
-        if (result.error) {
-          throw new Error(result.message);
-        }
-
-        return result.message;
-      });
-
-      toast.promise(promise, {
-        loading: "Loading...",
-        success: (msg) => msg || "Successfull.",
-        error: (err) => err.message || "Something went wrong",
-      });
-    });
-  }
-
+export default async function Page() {
   return (
     <Card>
       <CardHeader>
         <CardTitle>{PageData.title}</CardTitle>
         <CardDescription>{PageData.description}</CardDescription>
         <CardAction>
-          <Form onSubmit={onSubmit} isPending={isPending} />
+          <Form />
         </CardAction>
       </CardHeader>
-      <CardContent>Data display</CardContent>
+
+      <CardContent>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Entities />
+        </Suspense>
+      </CardContent>
     </Card>
   );
 }

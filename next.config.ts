@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
   eslint: { ignoreDuringBuilds: true },
   transpilePackages: ["@t3-oss/env-nextjs"],
   devIndicators: false,
+  images: {
+    remotePatterns: [new URL("https://*.supabase.co/**")],
+  },
 };
 
 export default nextConfig;
