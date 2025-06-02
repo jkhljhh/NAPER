@@ -14,15 +14,19 @@ export const formAction = validatedActionWithUser(schema, async (body) => {
     const supabase = await createClient();
 
     const { error: insertError } = await supabase
-      .from("finance_year")
-      .insert({ start_year: body.startDate, end_year: body.endDate, entity_id: 6 });
+      .from("entity")
+      .update({
+        start_date: body.startDate,
+        end_date: body.endDate,
+      })
+      .eq("id", 6);
 
     if (insertError) {
       throw toSupabaseError(insertError);
     }
 
     revalidatePath("/foundation/finance-year");
-    return { message: "Market created." };
+    return { message: "Year updated." };
   } catch (err) {
     console.error(err);
     return { error: true, message: "Internal Error" };
