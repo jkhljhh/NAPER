@@ -3,20 +3,14 @@
 "use server";
 
 import { validatedActionWithUser } from "@/lib/action-helpers";
-
-import { schema } from "./shared";
 import { createClient } from "@/lib/supabase/server";
 import { toSupabaseError } from "@/lib/supabase/error";
+
+import { schema } from "./shared";
 
 export const formAction = validatedActionWithUser(schema, async (body) => {
   try {
     const supabase = await createClient();
-
-    const { data: session, error: sessionError } =
-      await supabase.auth.getSession();
-    if (sessionError || !session) {
-      console.error("User not signed in", sessionError);
-    }
 
     const file = body.icon[0];
     const fileExt = file.name.split(".").pop();
@@ -40,8 +34,7 @@ export const formAction = validatedActionWithUser(schema, async (body) => {
 
     const { error: insertError } = await supabase
       .from("entity")
-      .insert([{ name: body.name, iconUrl: publicUrl }])
-      .select();
+      .insert([{ name: body.name, iconUrl: publicUrl }]);
 
     if (insertError) {
       throw toSupabaseError(insertError);

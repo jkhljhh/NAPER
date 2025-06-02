@@ -6,6 +6,7 @@ import { useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { IconCloudUpload, IconX } from "@tabler/icons-react";
+import { toast } from "sonner";
 
 import {
   FileUpload,
@@ -55,7 +56,6 @@ import { ActionState } from "@/lib/action-helpers";
 
 import { formAction } from "./action";
 import { schema, defaultValues, type Schema } from "./shared";
-import { toast } from "sonner";
 
 const PageData = {
   title: "Edit Entity",

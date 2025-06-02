@@ -2,9 +2,11 @@
 // Path: @/app/(dashboard)/foundation/market/
 "use client";
 
+import { useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { IconCheck, IconSelector } from "@tabler/icons-react";
 import { useForm } from "react-hook-form";
+import { IconCheck, IconSelector } from "@tabler/icons-react";
+import { toast } from "sonner";
 
 import {
   Command,
@@ -39,24 +41,26 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import { ActionState } from "@/lib/action-helpers";
 import { cn } from "@/lib/utils";
 
-import { defaultValues, schema, type Schema } from "./shared";
+import { formAction } from "./action";
+import { schema, defaultValues, type Schema } from "./shared";
 
 const countries = [
-  { label: "United States", value: "en" },
-  { label: "France", value: "fr" },
-  { label: "Germany", value: "de" },
-  { label: "Spain", value: "es" },
-  { label: "Portugal", value: "pt" },
-  { label: "Russia", value: "ru" },
-  { label: "Japan", value: "ja" },
-  { label: "South Korea", value: "ko" },
-  { label: "China", value: "zh" },
+  { label: "United States", value: "USA" },
+  { label: "France", value: "FRA" },
+  { label: "Germany", value: "DEU" },
+  { label: "Spain", value: "ESP" },
+  { label: "Portugal", value: "PRT" },
+  { label: "Russia", value: "RUS" },
+  { label: "Japan", value: "JPN" },
+  { label: "South Korea", value: "KOR" },
+  { label: "China", value: "CHN" },
 ] as const;
 
 const currencies = [
-  { label: "US Dollar", value: "USD" },
+  { label: "United States Dollar", value: "USD" },
   { label: "Euro", value: "EUR" },
   { label: "Russian Ruble", value: "RUB" },
   { label: "Japanese Yen", value: "JPY" },
@@ -69,16 +73,31 @@ const PageData = {
   description: "Make changes to your market here. Click save when you're done.",
 };
 
-type FormProps = {
-  onSubmit: (payload: Schema) => void;
-  isPending: boolean;
-};
+function F() {
+  const [isPending, startTransition] = useTransition();
 
-function F({ onSubmit, isPending }: FormProps) {
   const form = useForm<Schema>({
     resolver: zodResolver(schema),
     defaultValues: defaultValues,
   });
+
+  function onSubmit(values: Schema) {
+    startTransition(() => {
+      const promise = formAction(values).then((result: ActionState) => {
+        if (result.error) {
+          throw new Error(result.message);
+        }
+
+        return result.message;
+      });
+
+      toast.promise(promise, {
+        loading: "Loading...",
+        success: (msg) => msg || "Successfull.",
+        error: (err) => err.message || "Something went wrong",
+      });
+    });
+  }
 
   return (
     <Sheet>
