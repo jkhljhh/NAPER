@@ -1,3 +1,6 @@
+// Filename: middleware.ts
+// Path: @/lib/supabase/
+
 import { env } from "@/env";
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";

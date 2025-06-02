@@ -1,4 +1,6 @@
-// @/lib/action-helpers
+// Filename: action-helpers
+// Path: @/lib/
+
 import { z } from "zod";
 import { createClient } from "./supabase/server";
 

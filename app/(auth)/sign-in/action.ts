@@ -24,7 +24,6 @@ export const formAction = validatedAction(schema, async (body) => {
     }
 
     revalidatePath("/", "layout");
-
     return { message: "Signed in successfully." };
   } catch (err) {
     if (err instanceof SupabaseError) {

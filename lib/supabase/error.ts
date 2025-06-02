@@ -1,5 +1,5 @@
 // Filename: error.ts
-// Path: @/lib/supabase/error.ts
+// Path: @/lib/supabase/
 
 export class SupabaseError extends Error {
   status: number;

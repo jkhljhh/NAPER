@@ -37,27 +37,6 @@ import { cn } from "@/lib/utils";
 
 import { defaultValues, schema, type Schema } from "./shared";
 
-const countries = [
-  { label: "United States", value: "en" },
-  { label: "France", value: "fr" },
-  { label: "Germany", value: "de" },
-  { label: "Spain", value: "es" },
-  { label: "Portugal", value: "pt" },
-  { label: "Russia", value: "ru" },
-  { label: "Japan", value: "ja" },
-  { label: "South Korea", value: "ko" },
-  { label: "China", value: "zh" },
-] as const;
-
-const currencies = [
-  { label: "US Dollar", value: "USD" },
-  { label: "Euro", value: "EUR" },
-  { label: "Russian Ruble", value: "RUB" },
-  { label: "Japanese Yen", value: "JPY" },
-  { label: "South Korean Won", value: "KRW" },
-  { label: "Chinese Yuan", value: "CNY" },
-] as const;
-
 const PageData = {
   title: "Edit Market",
   description: "Make changes to your market here. Click save when you're done.",

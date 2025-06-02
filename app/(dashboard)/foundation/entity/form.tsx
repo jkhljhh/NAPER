@@ -19,14 +19,6 @@ import {
   FileUploadTrigger,
 } from "@/components/ui/file-upload";
 import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
-import {
   Form,
   FormControl,
   FormDescription,
@@ -35,11 +27,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import {
   Sheet,
   SheetClose,

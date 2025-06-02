@@ -1,3 +1,6 @@
+// Filename: server.ts
+// Path: @/lib/supabase/
+
 import { env } from "@/env";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";

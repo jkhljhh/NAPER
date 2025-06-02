@@ -1,3 +1,6 @@
+// Filename: client.ts
+// Path: @/lib/supabase/
+
 import { env } from "@/env";
 import { createBrowserClient } from "@supabase/ssr";
 
