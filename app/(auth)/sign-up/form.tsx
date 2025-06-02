@@ -2,10 +2,11 @@
 // Path: @/app/(auth)/sign-up/
 "use client";
 
-import Link from "next/link";
-import { startTransition } from "react";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 import {
   Form,
@@ -17,19 +18,38 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { ActionState } from "@/lib/action-helpers";
 
+import { formAction } from "./action";
 import { schema, defaultValues, type Schema } from "./shared";
 
-type FormProps = {
-  onSubmit: (payload: Schema) => void;
-  isPending: boolean;
-};
+function F() {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
-function F({ onSubmit, isPending }: FormProps) {
   const form = useForm<Schema>({
     resolver: zodResolver(schema),
     defaultValues: defaultValues,
   });
+
+  function onSubmit(values: Schema) {
+    startTransition(() => {
+      const promise = formAction(values).then((result: ActionState) => {
+        if (result.error) {
+          throw new Error(result.message);
+        }
+
+        router.push("/sign-in");
+        return result.message;
+      });
+
+      toast.promise(promise, {
+        loading: "Loading...",
+        success: (msg) => msg || "Successfull.",
+        error: (err) => err.message || "Something went wrong",
+      });
+    });
+  }
 
   return (
     <Form {...form}>
