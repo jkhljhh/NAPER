@@ -10,12 +10,12 @@ import {
 } from "@/components/ui/table";
 import Image from "next/image";
 
-export async function Entities() {
+export async function MarketTable() {
   const supabase = await createClient();
 
   const { data: entityData, error: entityError } = await supabase
-    .from("entity")
-    .select("id, name, iconUrl");
+    .from("market")
+    .select("id, country, currency");
 
   if (entityError) {
     return <p>Failed to fetch...</p>;
@@ -25,19 +25,15 @@ export async function Entities() {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Icon</TableHead>
-          <TableHead>Name</TableHead>
+          <TableHead>Country</TableHead>
+          <TableHead>Currency</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {entityData.map((item) => (
           <TableRow key={item.id}>
-            <TableCell>
-              <div className="relative w-14 h-14">
-                <Image src={item.iconUrl} alt="icon" fill objectFit="contain" />
-              </div>
-            </TableCell>
-            <TableCell className="font-medium">{item.name}</TableCell>
+            <TableCell className="font-medium">{item.country}</TableCell>
+            <TableCell>{item.currency}</TableCell>
           </TableRow>
         ))}
       </TableBody>

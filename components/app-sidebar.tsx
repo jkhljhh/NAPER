@@ -34,6 +34,7 @@ import {
 import { site } from "@/data/site";
 import { navigation } from "@/data/sidebar";
 import type { User } from "@supabase/supabase-js";
+import { usePathname } from "next/navigation";
 
 type AppSidebarProps = React.ComponentProps<typeof Sidebar> & {
   user: User;
@@ -85,6 +86,7 @@ function NavItemsCollapsible({
     }[];
   }[];
 }) {
+  const pathname = usePathname();
   return (
     <SidebarGroup>
       {title && <SidebarGroupLabel>{title}</SidebarGroupLabel>}
@@ -109,7 +111,10 @@ function NavItemsCollapsible({
                   {item.items?.map((subItem) => (
                     <SidebarMenuSubItem key={subItem.title}>
                       <SidebarMenuSubButton asChild>
-                        <Link href={subItem.url}>
+                        <Link
+                          href={subItem.url}
+                          data-active={pathname === subItem.url}
+                        >
                           <span>{subItem.title}</span>
                         </Link>
                       </SidebarMenuSubButton>

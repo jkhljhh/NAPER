@@ -10,9 +10,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { Form } from "./form";
-import { Entities } from "./entities";
+import { EntityTable } from "./entity-table";
 
 const PageData = {
   title: "Entity",
@@ -31,8 +32,16 @@ export default async function Page() {
       </CardHeader>
 
       <CardContent>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Entities />
+        <Suspense
+          fallback={
+            <div className="space-y-2">
+              <Skeleton className="h-6 w-full" />
+              <Skeleton className="h-6 w-3/6" />
+              <Skeleton className="h-6 w-4/6" />
+            </div>
+          }
+        >
+          <EntityTable />
         </Suspense>
       </CardContent>
     </Card>

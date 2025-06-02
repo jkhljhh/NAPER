@@ -2,6 +2,7 @@
 // Path: @/app/(dashboard)/foundation/market/
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { validatedActionWithUser } from "@/lib/action-helpers";
 import { createClient } from "@/lib/supabase/server";
 import { toSupabaseError } from "@/lib/supabase/error";
@@ -20,7 +21,8 @@ export const formAction = validatedActionWithUser(schema, async (body) => {
       throw toSupabaseError(insertError);
     }
 
-    return { message: "Record added." };
+    revalidatePath("/foundation/market");
+    return { message: "Market created." };
   } catch (err) {
     console.error(err);
     return { error: true, message: "Internal Error" };

@@ -1,7 +1,5 @@
 // Filename: page.tsx
 // Path: @/app/(dashboard)/foundation/market/
-"use client";
-
 import { Suspense } from "react";
 
 import {
@@ -12,8 +10,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { Form } from "./form";
+import { MarketTable } from "./market-table";
 
 const PageData = {
   title: "Market",
@@ -30,7 +30,19 @@ export default function Page() {
           <Form />
         </CardAction>
       </CardHeader>
-      <CardContent>Data display</CardContent>
+      <CardContent>
+        <Suspense
+          fallback={
+            <div className="space-y-2">
+              <Skeleton className="h-6 w-full" />
+              <Skeleton className="h-6 w-3/6" />
+              <Skeleton className="h-6 w-4/6" />
+            </div>
+          }
+        >
+          <MarketTable />
+        </Suspense>
+      </CardContent>
     </Card>
   );
 }

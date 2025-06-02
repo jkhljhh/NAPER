@@ -2,6 +2,7 @@
 // Path: @/app/(dashboard)/foundation/entity/
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { validatedActionWithUser } from "@/lib/action-helpers";
 import { createClient } from "@/lib/supabase/server";
 import { toSupabaseError } from "@/lib/supabase/error";
@@ -40,7 +41,8 @@ export const formAction = validatedActionWithUser(schema, async (body) => {
       throw toSupabaseError(insertError);
     }
 
-    return { message: "New record created" };
+    revalidatePath("/foundation/entity");
+    return { message: "Entity created" };
   } catch (err) {
     console.error(err);
     return { error: true, message: "Internal Error" };

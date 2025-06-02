@@ -102,7 +102,7 @@ function F() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">Edit</Button>
+        <Button variant="outline">Add</Button>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
