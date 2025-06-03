@@ -15,7 +15,7 @@ export async function EntityTable() {
 
   const { data: entityData, error: entityError } = await supabase
     .from("entity")
-    .select("id, name, iconUrl");
+    .select("id, name, iconUrl, start_date, end_date");
 
   if (entityError) {
     return <p>Failed to fetch...</p>;
@@ -27,6 +27,8 @@ export async function EntityTable() {
         <TableRow>
           <TableHead>Icon</TableHead>
           <TableHead>Name</TableHead>
+          <TableHead>Start Date</TableHead>
+          <TableHead>End Date</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -38,6 +40,8 @@ export async function EntityTable() {
               </div>
             </TableCell>
             <TableCell className="font-medium">{item.name}</TableCell>
+            <TableCell>{item.start_date}</TableCell>
+            <TableCell>{item.end_date}</TableCell>
           </TableRow>
         ))}
       </TableBody>

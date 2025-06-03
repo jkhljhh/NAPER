@@ -15,7 +15,7 @@ export const formAction = validatedActionWithUser(schema, async (body) => {
 
     const { error: insertError } = await supabase
       .from("market")
-      .insert({ country: body.country, currency: body.currency, entity_id: 6 });
+      .insert({ country: body.country, currency: body.currency, entity_id: 7 });
 
     if (insertError) {
       throw toSupabaseError(insertError);

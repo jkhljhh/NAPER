@@ -14,6 +14,12 @@ export const schema = z.object({
     )
     .min(1, "Icon is required")
     .max(1, "Only one icon allowed"),
+  startDate: z.date({
+    required_error: "A start date is required.",
+  }),
+  endDate: z.date({
+    required_error: "An end date is required.",
+  }),
 });
 
 export type Schema = z.infer<typeof schema>;
@@ -21,4 +27,6 @@ export type Schema = z.infer<typeof schema>;
 export const defaultValues: Schema = {
   name: "",
   icon: [],
+  startDate: new Date(),
+  endDate: new Date(),
 };

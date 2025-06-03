@@ -33,9 +33,12 @@ export const formAction = validatedActionWithUser(schema, async (body) => {
       data: { publicUrl },
     } = supabase.storage.from("logo").getPublicUrl(uploadData.path);
 
-    const { error: insertError } = await supabase
-      .from("entity")
-      .insert([{ name: body.name, iconUrl: publicUrl }]);
+    const { error: insertError } = await supabase.from("entity").insert({
+      name: body.name,
+      iconUrl: publicUrl,
+      start_date: body.startDate,
+      end_date: body.endDate,
+    });
 
     if (insertError) {
       throw toSupabaseError(insertError);
