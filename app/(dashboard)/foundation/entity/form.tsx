@@ -133,15 +133,27 @@ function F() {
                         }}
                         multiple={false}
                       >
-                        <FileUploadDropzone className="flex-row flex-wrap border-dotted text-center">
-                          <IconCloudUpload className="size-4" />
-                          Drag and drop or
+                        <FileUploadDropzone>
+                          <div className="flex flex-col items-center gap-1">
+                            <div className="flex items-center justify-center rounded-full border p-2.5">
+                              <IconCloudUpload className="size-6 text-muted-foreground" />
+                            </div>
+                            <p className="font-medium text-sm">
+                              Drag & drop Image here
+                            </p>
+                            <p className="text-muted-foreground text-xs">
+                              Or click to browse
+                            </p>
+                          </div>
                           <FileUploadTrigger asChild>
-                            <Button variant="link" size="sm" className="p-0">
-                              choose files
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="mt-2 w-fit"
+                            >
+                              Browse images
                             </Button>
                           </FileUploadTrigger>
-                          to upload
                         </FileUploadDropzone>
                         <FileUploadList>
                           {field.value.map((file, index) => (

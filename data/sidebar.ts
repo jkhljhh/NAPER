@@ -22,10 +22,6 @@ export const navigation = {
           title: "Market",
           url: "/foundation/market",
         },
-        {
-          title: "Finance Year",
-          url: "/foundation/finance-year",
-        },
       ],
     },
 
@@ -37,7 +33,7 @@ export const navigation = {
       items: [
         {
           title: "Master View",
-          url: "#",
+          url: "/chart-of-accounts/master-view",
         },
         {
           title: "GL Mapping",

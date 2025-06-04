@@ -1,0 +1,7 @@
+name,type,start,end,order_by
+Interest Income,Income,4000,4099,1
+Interest Expense,Expense,5000,5099,2
+Other Income,Income,6000,6099,4
+Operating Expenses,Expense,7000,7099,6
+Provisions & Contingencies,Expense,8000,8099,8
+Tax Expense,Expense,9000,9000,10
