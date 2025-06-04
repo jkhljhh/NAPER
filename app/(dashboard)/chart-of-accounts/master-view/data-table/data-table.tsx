@@ -28,9 +28,14 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { IconChevronDown } from "@tabler/icons-react";
+import { IconChevronDown, IconFilter } from "@tabler/icons-react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -68,15 +73,6 @@ export function DataTable<TData, TValue>({
   return (
     <>
       <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter name..."
-          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("name")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
@@ -109,14 +105,45 @@ export function DataTable<TData, TValue>({
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
+                const column = header.column;
+                const canFilter = column.getCanFilter();
+
                 return (
                   <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
+                    {header.isPlaceholder ? null : (
+                      <div className="flex justify-between items-center">
+                        {flexRender(
                           header.column.columnDef.header,
                           header.getContext(),
                         )}
+
+                        {canFilter && (
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <Button
+                                size="sm"
+                                variant="ghost"
+                                className="h-6 w-6 p-0"
+                              >
+                                <IconFilter className="w-4 h-4" />
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent align="end" className="p-2 w-48">
+                              <Input
+                                placeholder={`Filter...`}
+                                value={
+                                  (column.getFilterValue() as string) ?? ""
+                                }
+                                onChange={(e) =>
+                                  column.setFilterValue(e.target.value)
+                                }
+                                className="w-full"
+                              />
+                            </PopoverContent>
+                          </Popover>
+                        )}
+                      </div>
+                    )}
                   </TableHead>
                 );
               })}

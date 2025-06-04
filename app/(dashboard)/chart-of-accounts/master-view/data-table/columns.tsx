@@ -10,6 +10,7 @@ import { Schema } from "../shared";
 export const columns: ColumnDef<Schema>[] = [
   {
     accessorKey: "order_by",
+    enableColumnFilter: false,
     header: ({ column }) => {
       return (
         <Button
@@ -54,6 +55,7 @@ export const columns: ColumnDef<Schema>[] = [
   },
   {
     accessorKey: "start",
+    enableColumnFilter: false,
     header: ({ column }) => {
       return (
         <Button
@@ -68,6 +70,7 @@ export const columns: ColumnDef<Schema>[] = [
   },
   {
     accessorKey: "end",
+    enableColumnFilter: false,
     header: ({ column }) => {
       return (
         <Button
