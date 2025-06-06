@@ -2,7 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 
 import { Form as EntityCreateEditForm } from "./entity/create-edit/form";
 import { Form as EntityUploadLogoForm } from "./entity/upload-logo/form";
-import { Form as MarketCreateEditForm } from "./market/form";
+import { Form as MarketCreateEditForm } from "./market/create-edit/form";
 
 export default async function SettingsPage() {
   const supabase = await createClient();
