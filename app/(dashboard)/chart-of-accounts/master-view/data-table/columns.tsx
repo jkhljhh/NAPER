@@ -1,13 +1,29 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { IconSelector } from "@tabler/icons-react";
+import {
+  IconSelector,
+  IconDots,
+  IconTrash,
+  IconEdit,
+} from "@tabler/icons-react";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import { Form as DeleteForm } from "../delete/form";
+import { Form as EditForm } from "../edit/form";
 
-import { Schema } from "../shared";
+import type { Schema } from "../shared";
 
-export const columns: ColumnDef<Schema>[] = [
+export const columns: ColumnDef<Schema & { id: number }>[] = [
   {
     accessorKey: "order_by",
     enableColumnFilter: false,
@@ -80,6 +96,33 @@ export const columns: ColumnDef<Schema>[] = [
           End
           <IconSelector className="ml-2 h-4 w-4" />
         </Button>
+      );
+    },
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => {
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <IconDots className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuPortal>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <IconEdit /> Edit
+              </DropdownMenuItem>
+
+              <EditForm data={row.original} />
+              <DeleteForm id={row.original.id} />
+            </DropdownMenuContent>
+          </DropdownMenuPortal>
+        </DropdownMenu>
       );
     },
   },

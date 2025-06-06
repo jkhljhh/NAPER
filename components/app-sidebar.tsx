@@ -2,14 +2,13 @@
 
 import * as React from "react";
 
+import { type Icon } from "@tabler/icons-react";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-
 import { NavUser } from "@/components/nav-user";
-
 import {
   Sidebar,
   SidebarMenu,
@@ -18,6 +17,7 @@ import {
   SidebarHeader,
   SidebarGroup,
   SidebarGroupLabel,
+  SidebarGroupContent,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
@@ -35,12 +35,15 @@ import { site } from "@/data/site";
 import { navigation } from "@/data/sidebar";
 import type { User } from "@supabase/supabase-js";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 type AppSidebarProps = React.ComponentProps<typeof Sidebar> & {
   user: User;
 };
 
 export function AppSidebar({ user, ...props }: AppSidebarProps) {
+  const pathname = usePathname();
+
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -51,7 +54,14 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
               <Link href="/">
-                <IconInnerShadowTop className="!size-5" />
+                {/* <IconInnerShadowTop className="!size-5" /> */}
+                <Image
+                  src="/logo.svg"
+                  width={156.669}
+                  height={201.459}
+                  alt={site.title}
+                  className="w-4"
+                />
                 <span className="text-base font-semibold">{site.title}</span>
               </Link>
             </SidebarMenuButton>
@@ -59,7 +69,12 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavItemsCollapsible items={navigation.main} />
+        <NavItemsCollapsible items={navigation.main} pathname={pathname} />
+        <NavItems
+          items={navigation.misc}
+          className="mt-auto"
+          pathname={pathname}
+        />
         {/* <NavProjects projects={data.projects} /> */}
       </SidebarContent>
       <SidebarFooter>
@@ -72,9 +87,11 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
 
 function NavItemsCollapsible({
   title,
+  pathname,
   items,
 }: {
   title?: string;
+  pathname: string;
   items: {
     title: string;
     url: string;
@@ -86,7 +103,6 @@ function NavItemsCollapsible({
     }[];
   }[];
 }) {
-  const pathname = usePathname();
   return (
     <SidebarGroup>
       {title && <SidebarGroupLabel>{title}</SidebarGroupLabel>}
@@ -102,6 +118,7 @@ function NavItemsCollapsible({
               <CollapsibleTrigger asChild>
                 <SidebarMenuButton tooltip={item.title}>
                   {item.icon && <item.icon />}
+
                   <span>{item.title}</span>
                   <IconChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                 </SidebarMenuButton>
@@ -126,6 +143,38 @@ function NavItemsCollapsible({
           </Collapsible>
         ))}
       </SidebarMenu>
+    </SidebarGroup>
+  );
+}
+
+function NavItems({
+  items,
+  pathname,
+  ...props
+}: {
+  pathname: string;
+  items: {
+    title: string;
+    url: string;
+    icon: Icon;
+  }[];
+} & React.ComponentPropsWithoutRef<typeof SidebarGroup>) {
+  return (
+    <SidebarGroup {...props}>
+      <SidebarGroupContent>
+        <SidebarMenu>
+          {items.map((item) => (
+            <SidebarMenuItem key={item.title}>
+              <SidebarMenuButton asChild>
+                <a href={item.url}>
+                  <item.icon />
+                  <span>{item.title}</span>
+                </a>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          ))}
+        </SidebarMenu>
+      </SidebarGroupContent>
     </SidebarGroup>
   );
 }

@@ -173,34 +173,6 @@ function F() {
   const [isPending, startTransition] = useTransition();
   const [csvData, setCsvData] = useState<Schema[]>([]);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setFileName(file.name);
-      Papa.parse(file, {
-        header: true,
-        skipEmptyLines: true,
-        complete: (result) => {
-          const data = result.data as any[];
-          const validated = z.array(schema).safeParse(data);
-
-          if (!validated.success) {
-            toast.error("Invalid CSV data");
-            return;
-          }
-
-          if (data.length > 0) {
-            setCsvData(validated.data);
-          }
-        },
-        error: (err) => {
-          console.error("Error parsing CSV:", err);
-          toast.error("Error parsing CSV");
-        },
-      });
-    }
-  };
-
   const handleRemoveFile = () => {
     if (inputRef.current) {
       inputRef.current.value = "";

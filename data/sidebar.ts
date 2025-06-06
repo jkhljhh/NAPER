@@ -1,9 +1,8 @@
 import {
-  IconTypeface,
-  IconTextSize,
   IconWorld,
   IconChartPie,
   IconBuilding,
+  IconSettings,
 } from "@tabler/icons-react";
 
 export const navigation = {
@@ -48,6 +47,14 @@ export const navigation = {
       icon: IconBuilding,
       isActive: false,
       items: [],
+    },
+  ],
+
+  misc: [
+    {
+      title: "Settings",
+      url: "/settings",
+      icon: IconSettings,
     },
   ],
 };

@@ -1,31 +1,48 @@
 // Filename: form.tsx
-// Path: @/app/(auth)/sign-in/
+// Path: @/app/(dashboard)/foundation/entity/
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { IconCloudUpload, IconX, IconCalendar } from "@tabler/icons-react";
 import { toast } from "sonner";
+import { format } from "date-fns";
 
+import {
+  FileUpload,
+  FileUploadDropzone,
+  FileUploadItem,
+  FileUploadItemDelete,
+  FileUploadItemMetadata,
+  FileUploadItemPreview,
+  FileUploadList,
+  FileUploadTrigger,
+} from "@/components/ui/file-upload";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import { ActionState } from "@/lib/action-helpers";
+import { cn } from "@/lib/utils";
 
 import { formAction } from "./action";
-import { schema, defaultValues, type Schema } from "./shared";
+import { schema, type Schema } from "./shared";
 
-function F() {
-  const router = useRouter();
+function F({ defaultValues }: { defaultValues: Schema }) {
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<Schema>({
@@ -40,7 +57,6 @@ function F() {
           throw new Error(result.message);
         }
 
-        router.push("/");
         return result.message;
       });
 
@@ -54,45 +70,35 @@ function F() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-6">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="grid flex-1 auto-rows-min gap-6 px-4"
+      >
+        {defaultValues.id && (
+          <input
+            type="hidden"
+            {...form.register("id")}
+            defaultValue={defaultValues.id}
+          />
+        )}
+        {/*  */}
         <FormField
           control={form.control}
-          name="email"
+          name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="m@example.com" {...field} />
+                <Input placeholder="Name" {...field} required />
               </FormControl>
+              <FormDescription>Your organization name.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <div className="flex items-center">
-                <FormLabel htmlFor="password">Password</FormLabel>
-                <Link
-                  href="/forgot-password"
-                  className="ml-auto text-sm text-primary font-semibold"
-                >
-                  Forgot your password?
-                </Link>
-              </div>
-              <FormControl>
-                <Input type="password" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <Button type="submit" className="w-full" disabled={isPending}>
-          Sign In
+        {/*  */}
+        <Button type="submit" disabled={isPending} className="w-30">
+          Save changes
         </Button>
       </form>
     </Form>

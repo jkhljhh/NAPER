@@ -2,6 +2,7 @@ import Link from "next/link";
 import { IconInnerShadowTop } from "@tabler/icons-react";
 
 import { site } from "@/data/site";
+import Image from "next/image";
 
 export default function Layout({
   children,
@@ -14,8 +15,15 @@ export default function Layout({
       <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex justify-center gap-2 md:justify-start">
           <Link href="/" className="flex gap-2 items-center">
-            <IconInnerShadowTop className="!size-5" />
-            <span className="text-base font-semibold">{site.title}</span>
+            {/* <IconInnerShadowTop className="!size-5" /> */}
+            <Image
+              src="/logo.svg"
+              width={156.669}
+              height={201.459}
+              alt={site.title}
+              className="w-8"
+            />
+            <span className="text-4xl font-semibold">{site.title}</span>
           </Link>
         </div>
         <div className="flex flex-1 items-center justify-center">
@@ -23,12 +31,30 @@ export default function Layout({
         </div>
       </div>
       {/*  */}
-      <div className="bg-muted relative hidden lg:block">
-        <img
-          src="/placeholder.svg"
-          alt="Image"
-          className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+      <div className="bg-[linear-gradient(45deg,_#42307D,_#7F56D9)] relative hidden lg:block overflow-hidden">
+        <Image
+          src="/auth-pattern.svg"
+          alt="pattern"
+          width={298}
+          height={408}
+          className="absolute top-0 right-0"
         />
+        <Image
+          src="/auth-pattern.svg"
+          alt="pattern"
+          width={298}
+          height={408}
+          className="absolute -bottom-2/6 -left-12"
+        />
+        <div className="flex items-center justify-center h-full w-full">
+          <Image
+            src="/featured.jpeg"
+            alt="featured"
+            width={678}
+            height={704}
+            className="rounded-xl w-[350px] z-10"
+          />
+        </div>
       </div>
       {/*  */}
     </div>

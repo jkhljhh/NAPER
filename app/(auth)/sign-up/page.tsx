@@ -23,7 +23,7 @@ export default function SignInPage() {
       {/*  */}
       <div className="text-center text-sm">
         Already have an account?{" "}
-        <Link href="/sign-in" className="underline underline-offset-4">
+        <Link href="/sign-in" className="text-primary font-semibold">
           Sign in
         </Link>
       </div>
