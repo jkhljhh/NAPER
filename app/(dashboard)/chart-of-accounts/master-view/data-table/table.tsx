@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 
-import { DataTable } from "./data-table/data-table";
-import { columns } from "./data-table/columns";
+import { DataTable } from "./data-table";
+import { columns } from "./columns";
 
 export async function MasterViewTable() {
   const supabase = await createClient();

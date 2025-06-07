@@ -74,12 +74,6 @@ function F({ defaultValues }: { defaultValues: Schema }) {
         onSubmit={form.handleSubmit(onSubmit)}
         className="grid flex-1 auto-rows-min gap-6 px-4"
       >
-        <input
-          type="hidden"
-          {...form.register("id")}
-          defaultValue={defaultValues.id}
-        />
-
         {/*  */}
         <FormField
           control={form.control}
@@ -124,8 +118,20 @@ function F({ defaultValues }: { defaultValues: Schema }) {
                   <FileUploadList>
                     {field.value.map((file, index) => (
                       <FileUploadItem key={index} value={file}>
-                        <FileUploadItemPreview />
-                        <FileUploadItemMetadata />
+                        {typeof file === "string" ? (
+                          <div className="relative flex size-10 shrink-0 items-center justify-center overflow-hidden rounded border bg-accent/50">
+                            <img
+                              src={file} // your URL here
+                              alt="Current logo"
+                              className="h-full w-full object-cover"
+                            />
+                          </div>
+                        ) : (
+                          <>
+                            <FileUploadItemPreview />
+                            <FileUploadItemMetadata />
+                          </>
+                        )}
                         <FileUploadItemDelete asChild>
                           <Button
                             variant="ghost"

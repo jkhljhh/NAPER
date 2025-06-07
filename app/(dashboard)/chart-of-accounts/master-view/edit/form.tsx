@@ -74,21 +74,16 @@ import { schema, type Schema } from "./shared";
 import { Input } from "@/components/ui/input";
 
 const PageData = {
-  title: "Are you absolutely sure?",
-  description:
-    "This action cannot be undone. This will permanently delete the record.",
+  title: "Edit Master View",
+  description: "Edit Master View description",
 };
 
 function F({ data }: { data: Schema }) {
   const [isPending, startTransition] = useTransition();
 
-  const defaultValues: Schema = {
-    ...data,
-  };
-
   const form = useForm<Schema>({
     resolver: zodResolver(schema),
-    defaultValues: defaultValues,
+    defaultValues: data,
   });
 
   function onSubmit(values: Schema) {
@@ -112,7 +107,9 @@ function F({ data }: { data: Schema }) {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">Create</Button>
+        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+          <IconEdit /> Edit
+        </DropdownMenuItem>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
@@ -128,17 +125,6 @@ function F({ data }: { data: Schema }) {
               {/*  */}
               <FormField
                 control={form.control}
-                name="id"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input {...field} required />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
                 name="name"
                 render={({ field }) => (
                   <FormItem>
@@ -146,31 +132,31 @@ function F({ data }: { data: Schema }) {
                     <FormControl>
                       <Input placeholder="Name" {...field} required />
                     </FormControl>
-                    <FormDescription>Your organization name.</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+              {/*  */}
               <FormField
                 control={form.control}
                 name="type"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>Type</FormLabel>
                     <FormControl>
                       <Input placeholder="Type" {...field} required />
                     </FormControl>
-                    <FormDescription>Your organization name.</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+              {/*  */}
               <FormField
                 control={form.control}
                 name="start"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>Start</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Start"
@@ -179,17 +165,17 @@ function F({ data }: { data: Schema }) {
                         required
                       />
                     </FormControl>
-                    <FormDescription>Your organization name.</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+              {/*  */}
               <FormField
                 control={form.control}
                 name="end"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>End</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="End"
@@ -198,17 +184,17 @@ function F({ data }: { data: Schema }) {
                         required
                       />
                     </FormControl>
-                    <FormDescription>Your organization name.</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+              {/*  */}
               <FormField
                 control={form.control}
                 name="order_by"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>Order</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Order"
@@ -217,12 +203,12 @@ function F({ data }: { data: Schema }) {
                         required
                       />
                     </FormControl>
-                    <FormDescription>Your organization name.</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
+            {/*  */}
             <SheetFooter>
               <Button type="submit" disabled={isPending}>
                 Save changes

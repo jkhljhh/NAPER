@@ -1,17 +1,11 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import {
-  IconSelector,
-  IconDots,
-  IconTrash,
-  IconEdit,
-} from "@tabler/icons-react";
+import { IconSelector, IconDots } from "@tabler/icons-react";
 
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuPortal,
   DropdownMenuSeparator,
@@ -21,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Form as DeleteForm } from "../delete/form";
 import { Form as EditForm } from "../edit/form";
 
-import type { Schema } from "../shared";
+import type { Schema } from "../edit/shared";
 
 export const columns: ColumnDef<Schema & { id: number }>[] = [
   {
@@ -114,10 +108,6 @@ export const columns: ColumnDef<Schema & { id: number }>[] = [
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <IconEdit /> Edit
-              </DropdownMenuItem>
-
               <EditForm data={row.original} />
               <DeleteForm id={row.original.id} />
             </DropdownMenuContent>

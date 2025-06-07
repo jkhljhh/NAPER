@@ -6,8 +6,7 @@ import React, { useRef, useState, useTransition } from "react";
 import Papa from "papaparse";
 import { z } from "zod";
 import { toast } from "sonner";
-import { IconTrash } from "@tabler/icons-react";
-import { IconCloudUpload, IconX, IconCalendar } from "@tabler/icons-react";
+import { IconCloudUpload, IconX } from "@tabler/icons-react";
 
 import {
   Table,
@@ -37,8 +36,6 @@ import {
   FileUploadList,
   FileUploadTrigger,
 } from "@/components/ui/file-upload";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ActionState } from "@/lib/action-helpers";
 import { cn } from "@/lib/utils";
@@ -51,12 +48,15 @@ const PageData = {
   description: "Import master view data here. Click save when you're done.",
 };
 
-interface CsvFileUploaderProps {
+function CsvFileUploader({
+  setCsvData,
+  setFileName,
+  id,
+}: {
   setCsvData: (data: Schema[]) => void;
   setFileName: (name: string | null) => void;
-}
-
-function CsvFileUploader({ setCsvData, setFileName }: CsvFileUploaderProps) {
+  id: number;
+}) {
   const [files, setFiles] = React.useState<File[]>([]);
 
   const onFileValidate = React.useCallback(
@@ -97,8 +97,14 @@ function CsvFileUploader({ setCsvData, setFileName }: CsvFileUploaderProps) {
           header: true,
           skipEmptyLines: true,
           complete: (result) => {
-            const data = result.data as any[];
-            const validated = z.array(schema).safeParse(data);
+            const data = result.data as Schema[];
+
+            const dataWithEntity = data.map((row) => ({
+              ...row,
+              entity_id: id,
+            }));
+
+            const validated = z.array(schema).safeParse(dataWithEntity);
 
             if (!validated.success) {
               toast.error("Invalid CSV data");
@@ -167,7 +173,7 @@ function CsvFileUploader({ setCsvData, setFileName }: CsvFileUploaderProps) {
   );
 }
 
-function F() {
+function F({ id }: { id: number }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [fileName, setFileName] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -216,7 +222,11 @@ function F() {
             <DialogDescription>{PageData.description}</DialogDescription>
           </DialogHeader>
 
-          <CsvFileUploader setCsvData={setCsvData} setFileName={setFileName} />
+          <CsvFileUploader
+            setCsvData={setCsvData}
+            setFileName={setFileName}
+            id={id}
+          />
 
           {csvData.length > 0 && (
             <Table>

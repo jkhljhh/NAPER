@@ -74,13 +74,6 @@ function F({ defaultValues }: { defaultValues: Schema }) {
         onSubmit={form.handleSubmit(onSubmit)}
         className="grid flex-1 auto-rows-min gap-6 px-4"
       >
-        {defaultValues.id && (
-          <input
-            type="hidden"
-            {...form.register("id")}
-            defaultValue={defaultValues.id}
-          />
-        )}
         {/*  */}
         <FormField
           control={form.control}

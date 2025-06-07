@@ -3,6 +3,7 @@
 import { z } from "zod";
 
 export const schema = z.object({
+  entity_id: z.coerce.number().int().nonnegative(),
   name: z.string().min(1, "Name is required"),
   type: z.enum(["Income", "Expense"]),
   start: z.coerce.number().int().nonnegative(),

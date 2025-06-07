@@ -7,6 +7,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { IconCheck, IconSelector } from "@tabler/icons-react";
 import { toast } from "sonner";
+import { US } from "country-flag-icons/react/3x2";
+
+import ReactCountryFlag from "react-country-flag";
 
 import {
   Command,
@@ -37,34 +40,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { ActionState } from "@/lib/action-helpers";
 import { cn } from "@/lib/utils";
 
 import { formAction } from "./action";
 import { schema, type Schema } from "./shared";
-
-const countries = [
-  { label: "United States", value: "USA" },
-  { label: "France", value: "FRA" },
-  { label: "Germany", value: "DEU" },
-  { label: "Spain", value: "ESP" },
-  { label: "Portugal", value: "PRT" },
-  { label: "Russia", value: "RUS" },
-  { label: "Japan", value: "JPN" },
-  { label: "South Korea", value: "KOR" },
-  { label: "China", value: "CHN" },
-] as const;
+import countries from "./countries.json";
 
 const currencies = [
   { label: "United States Dollar", value: "USD" },
@@ -122,13 +104,6 @@ function F({ defaultValues }: { defaultValues: Schema }) {
         onSubmit={form.handleSubmit(onSubmit)}
         className="grid flex-1 auto-rows-min gap-6 px-4"
       >
-        {defaultValues.id && (
-          <input
-            type="hidden"
-            {...form.register("id")}
-            defaultValue={defaultValues.id}
-          />
-        )}
         {/*  */}
         <FormField
           control={form.control}
@@ -147,11 +122,22 @@ function F({ defaultValues }: { defaultValues: Schema }) {
                         !field.value && "text-muted-foreground",
                       )}
                     >
-                      {field.value
-                        ? countries.find(
-                            (country) => country.value === field.value,
-                          )?.label
-                        : "Select country"}
+                      {field.value ? (
+                        <span className="items-center justify-center flex">
+                          <ReactCountryFlag
+                            countryCode={field.value}
+                            style={{ width: "2em", marginRight: "0.5em" }}
+                            svg
+                          />
+                          {
+                            countries.find(
+                              (country) => country.code === field.value,
+                            )?.name
+                          }
+                        </span>
+                      ) : (
+                        "Select country"
+                      )}
                       <IconSelector className="opacity-50" />
                     </Button>
                   </FormControl>
@@ -167,17 +153,26 @@ function F({ defaultValues }: { defaultValues: Schema }) {
                       <CommandGroup>
                         {countries.map((country) => (
                           <CommandItem
-                            value={country.label}
-                            key={country.value}
+                            value={country.name}
+                            key={country.code}
                             onSelect={() => {
-                              form.setValue("country", country.value);
+                              form.setValue("country", country.code);
                             }}
                           >
-                            {country.label}
+                            <div className="flex items-center justify-center gap-2">
+                              {/* {getUnicodeFlagIcon(country.value)} */}
+                              <ReactCountryFlag
+                                countryCode={country.code}
+                                style={{ width: "2em" }}
+                                svg
+                              />
+
+                              {country.name}
+                            </div>
                             <IconCheck
                               className={cn(
                                 "ml-auto",
-                                country.value === field.value
+                                country.code === field.value
                                   ? "opacity-100"
                                   : "opacity-0",
                               )}

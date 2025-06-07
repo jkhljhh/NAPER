@@ -9,7 +9,7 @@ export default async function SettingsPage() {
 
   const { data: entityData, error: entityError } = await supabase
     .from("entity")
-    .select("id, name")
+    .select("id, name, logoUrl")
     .limit(1)
     .single();
 
@@ -46,7 +46,7 @@ export default async function SettingsPage() {
                 <EntityUploadLogoForm
                   defaultValues={{
                     id: entityData.id,
-                    logo: [],
+                    logo: entityData.logoUrl ? [entityData.logoUrl] : [],
                   }}
                 />
               </>

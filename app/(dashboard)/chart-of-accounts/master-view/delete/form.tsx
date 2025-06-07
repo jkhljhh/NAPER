@@ -6,13 +6,7 @@ import { useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import {
-  IconCheck,
-  IconSelector,
-  IconDots,
-  IconTrash,
-  IconEdit,
-} from "@tabler/icons-react";
+import { IconTrash } from "@tabler/icons-react";
 
 import {
   AlertDialog,
@@ -25,53 +19,13 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { ActionState } from "@/lib/action-helpers";
-import { cn } from "@/lib/utils";
 
 import { formAction } from "./action";
 import { schema, type Schema } from "./shared";
-import { Input } from "@/components/ui/input";
 
 const PageData = {
   title: "Are you absolutely sure?",
@@ -82,13 +36,9 @@ const PageData = {
 function F({ id }: { id: number }) {
   const [isPending, startTransition] = useTransition();
 
-  const defaultValues: Schema = {
-    id: id,
-  };
-
   const form = useForm<Schema>({
     resolver: zodResolver(schema),
-    defaultValues: defaultValues,
+    defaultValues: { id },
   });
 
   function onSubmit(values: Schema) {
@@ -133,17 +83,6 @@ function F({ id }: { id: number }) {
               onSubmit={form.handleSubmit(onSubmit)}
               className="flex flex-col h-full"
             >
-              <FormField
-                control={form.control}
-                name="id"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input {...field} required />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
               <AlertDialogAction type="submit" disabled={isPending}>
                 Delete
               </AlertDialogAction>

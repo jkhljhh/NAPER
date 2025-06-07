@@ -15,7 +15,7 @@ export const formAction = validatedActionWithUser(schemaArray, async (body) => {
 
     const { error: insertError } = await supabase
       .from("master_view_config")
-      .insert(body);
+      .upsert(body, { onConflict: "name" });
 
     if (insertError) {
       throw toSupabaseError(insertError);
