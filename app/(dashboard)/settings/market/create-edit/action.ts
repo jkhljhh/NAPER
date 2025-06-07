@@ -13,7 +13,6 @@ export const formAction = validatedActionWithUser(schema, async (body) => {
   try {
     const supabase = await createClient();
 
-    console.log(body);
     if (body.id) {
       const { error: updateError } = await supabase
         .from("market")

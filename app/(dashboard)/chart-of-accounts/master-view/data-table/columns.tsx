@@ -1,7 +1,12 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { IconSelector, IconDots } from "@tabler/icons-react";
+import {
+  IconSelector,
+  IconDots,
+  IconDotsDiagonal,
+  IconDotsVertical,
+} from "@tabler/icons-react";
 
 import {
   DropdownMenu,
@@ -16,103 +21,89 @@ import { Form as DeleteForm } from "../delete/form";
 import { Form as EditForm } from "../edit/form";
 
 import type { Schema } from "../edit/shared";
+import { DataTableColumnHeader } from "./data-table-column-header";
+import { Badge } from "@/components/ui/badge";
 
 export const columns: ColumnDef<Schema & { id: number }>[] = [
   {
     accessorKey: "order_by",
     enableColumnFilter: false,
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Order
-          <IconSelector className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Order" />
+    ),
+    cell: ({ row }) => <div className="px-3">{row.getValue("order_by")}</div>,
   },
   {
     accessorKey: "name",
-    header: ({ column }) => {
-      return (
-        <>
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Name
-            <IconSelector className="ml-2 h-4 w-4" />
-          </Button>
-        </>
-      );
-    },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Name" />
+    ),
+    cell: ({ row }) => <div className="px-3">{row.getValue("name")}</div>,
   },
   {
     accessorKey: "type",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Type
-          <IconSelector className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Type" />
+    ),
+    cell: ({ row }) => (
+      <div className="px-3">
+        <Badge variant="outline" className="text-muted-foreground px-1.5">
+          {row.getValue("type")}
+        </Badge>
+      </div>
+    ),
   },
   {
     accessorKey: "start",
     enableColumnFilter: false,
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Start
-          <IconSelector className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: ({ column }) => (
+      <DataTableColumnHeader
+        column={column}
+        title="Start"
+        className="justify-end"
+      />
+    ),
+    cell: ({ row }) => (
+      <div className="text-right px-3">{row.getValue("start")}</div>
+    ),
   },
   {
     accessorKey: "end",
     enableColumnFilter: false,
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          End
-          <IconSelector className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: ({ column }) => (
+      <DataTableColumnHeader
+        column={column}
+        title="End"
+        className="justify-end"
+      />
+    ),
+    cell: ({ row }) => (
+      <div className="text-right px-3">{row.getValue("end")}</div>
+    ),
   },
   {
     id: "actions",
+    enableHiding: false,
     cell: ({ row }) => {
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <IconDots className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuPortal>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <EditForm data={row.original} />
-              <DeleteForm id={row.original.id} />
-            </DropdownMenuContent>
-          </DropdownMenuPortal>
-        </DropdownMenu>
+        <div className="text-right px-3">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <IconDotsVertical className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuPortal>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <EditForm data={row.original} />
+                <DeleteForm id={row.original.id} />
+              </DropdownMenuContent>
+            </DropdownMenuPortal>
+          </DropdownMenu>
+        </div>
       );
     },
   },

@@ -21,9 +21,16 @@ const PageData = {
   description: "Master View description",
 };
 
-export default async function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const { page = 0, size = 10 } = await searchParams;
   const supabase = await createClient();
 
+  const pageIndex = Number(page ?? 0);
+  const pageSize = Number(size ?? 10);
   const { data: entityData, error: entityError } = await supabase
     .from("entity")
     .select("id")
@@ -43,7 +50,7 @@ export default async function Page() {
           <Form id={entityData.id} />
         </CardAction>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-col gap-2">
         <Suspense
           fallback={
             <div className="space-y-2">
@@ -53,7 +60,7 @@ export default async function Page() {
             </div>
           }
         >
-          <MasterViewTable />
+          <MasterViewTable pageIndex={pageIndex} pageSize={pageSize} />
         </Suspense>
       </CardContent>
     </Card>
