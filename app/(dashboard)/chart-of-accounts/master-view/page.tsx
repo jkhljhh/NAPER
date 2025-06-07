@@ -50,7 +50,7 @@ export default async function Page({
           <Form id={entityData.id} />
         </CardAction>
       </CardHeader>
-      <CardContent className="flex flex-col gap-2">
+      <CardContent>
         <Suspense
           fallback={
             <div className="space-y-2">
