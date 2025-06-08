@@ -26,6 +26,8 @@ import { ActionState } from "@/lib/action-helpers";
 
 import { formAction } from "./action";
 import { schema, type Schema } from "./shared";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const PageData = {
   title: "Are you absolutely sure?",
@@ -63,10 +65,13 @@ function F({ id }: { id: number }) {
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <DropdownMenuItem
-          className="text-destructive"
+          className={cn(
+            "text-destructive",
+            "font-medium gap-1.5 text-sm flex items-center justify-start  has-[>svg]:px-2.5 [&_svg:not([class*='size-'])]:size-4",
+          )}
           onSelect={(e) => e.preventDefault()}
         >
-          <IconTrash /> Delete
+          <IconTrash className="size-4" /> Delete
         </DropdownMenuItem>
       </AlertDialogTrigger>
       <AlertDialogContent>

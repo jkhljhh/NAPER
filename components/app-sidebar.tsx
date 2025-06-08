@@ -31,8 +31,8 @@ import {
   IconInnerShadowTop,
   TablerIcon,
 } from "@tabler/icons-react";
-import { site } from "@/data/site";
-import { navigation } from "@/data/sidebar";
+import { site } from "@/config/site";
+import { navigation } from "@/config/sidebar";
 import type { User } from "@supabase/supabase-js";
 import { usePathname } from "next/navigation";
 import Image from "next/image";

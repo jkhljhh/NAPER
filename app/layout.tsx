@@ -6,7 +6,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "@/app/globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/sonner";
-import { site } from "@/data/site";
+import { site } from "@/config/site";
 
 export const metadata: Metadata = {
   title: {

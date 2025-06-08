@@ -107,7 +107,10 @@ function F({ data }: { data: Schema }) {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+        <DropdownMenuItem
+          className="font-medium gap-1.5 text-sm flex items-center justify-start  has-[>svg]:px-2.5 [&_svg:not([class*='size-'])]:size-4"
+          onSelect={(e) => e.preventDefault()}
+        >
           <IconEdit /> Edit
         </DropdownMenuItem>
       </SheetTrigger>

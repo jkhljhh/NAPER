@@ -94,6 +94,9 @@ export function Table({ data, count }: { data: TableSchema[]; count: number }) {
         cell: ({ cell }) => (
           <div>{cell.getValue<TableSchema["order_by"]>()}</div>
         ),
+        meta: {
+          label: "Order",
+        },
       },
       {
         id: "name",

@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { IconInnerShadowTop } from "@tabler/icons-react";
 
-import { site } from "@/data/site";
+import { site } from "@/config/site";
 import Image from "next/image";
 
 export default function Layout({
