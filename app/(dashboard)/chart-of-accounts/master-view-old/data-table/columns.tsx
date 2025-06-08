@@ -2,6 +2,14 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import {
+  CheckCircle,
+  CheckCircle2,
+  DollarSign,
+  MoreHorizontal,
+  Text,
+  XCircle,
+} from "lucide-react";
+import {
   IconSelector,
   IconDots,
   IconDotsDiagonal,
@@ -39,6 +47,12 @@ export const columns: ColumnDef<Schema & { id: number }>[] = [
       <DataTableColumnHeader column={column} title="Name" />
     ),
     cell: ({ row }) => <div className="px-3">{row.getValue("name")}</div>,
+    meta: {
+      label: "Name",
+      placeholder: "Search Name...",
+      variant: "text",
+      icon: Text,
+    },
   },
   {
     accessorKey: "type",
@@ -52,6 +66,14 @@ export const columns: ColumnDef<Schema & { id: number }>[] = [
         </Badge>
       </div>
     ),
+    meta: {
+      label: "Type",
+      variant: "multiSelect",
+      options: [
+        { label: "Expense", value: "Expense", icon: CheckCircle },
+        { label: "Income", value: "Income", icon: XCircle },
+      ],
+    },
   },
   {
     accessorKey: "start",

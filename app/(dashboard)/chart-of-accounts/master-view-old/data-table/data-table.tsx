@@ -36,6 +36,7 @@ import { IconFilter } from "@tabler/icons-react";
 import { DataTablePagination } from "./data-table-pagination";
 import { DataTableViewOptions } from "./data-table-view-options";
 import { useRouter } from "next/navigation";
+import { DataTableToolbar } from "./data-table-toolbar";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -98,6 +99,7 @@ export function DataTable<TData, TValue>({
   return (
     <>
       <DataTableViewOptions table={table} />
+      <DataTableToolbar table={table} />
 
       <div className="rounded-md border my-4">
         <Table>

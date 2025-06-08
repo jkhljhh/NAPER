@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import "@/app/globals.css";
 import { cn } from "@/lib/utils";
@@ -23,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="light" style={{ colorScheme: "light" }}>
       <body className={cn(GeistSans.variable, GeistMono.variable)}>
-        <main>{children}</main>
+        <NuqsAdapter>
+          <main>{children}</main>
+        </NuqsAdapter>
         <Toaster richColors theme="light" />
       </body>
     </html>
