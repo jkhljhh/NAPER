@@ -2,12 +2,17 @@
 
 import * as React from "react";
 
+import type { Column, ColumnDef } from "@tanstack/react-table";
+import { CheckCircle2, MoreHorizontal, Text, XCircle } from "lucide-react";
+import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
+
 import { DataTable } from "@/components/data-table/data-table";
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
 import { DataTableToolbar } from "@/components/data-table/data-table-toolbar";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 
 import { Form as DeleteForm } from "./delete/form";
 import { Form as EditForm } from "./edit/form";
@@ -19,11 +24,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useDataTable } from "@/hooks/use-data-table";
-
-import type { Column, ColumnDef } from "@tanstack/react-table";
-import { CheckCircle2, MoreHorizontal, Text, XCircle } from "lucide-react";
-import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
-import { Checkbox } from "@/components/ui/checkbox";
 
 type TableSchema = Schema;
 
