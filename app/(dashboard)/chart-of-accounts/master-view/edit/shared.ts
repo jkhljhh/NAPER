@@ -5,7 +5,7 @@ import { z } from "zod";
 export const schema = z.object({
   id: z.coerce.number().int().nonnegative(),
   name: z.string().min(1, "Name is required"),
-  type: z.enum(["Income", "Expense"]),
+  type: z.enum(["income", "expense"]),
   start: z.coerce.number().int().nonnegative(),
   end: z.coerce.number().int().nonnegative(),
   order_by: z.coerce.number().int().nonnegative(),

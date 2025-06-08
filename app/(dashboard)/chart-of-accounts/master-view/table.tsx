@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 
 import { Form as DeleteForm } from "./delete/form";
 import { Form as EditForm } from "./edit/form";
+import { type Schema } from "./edit/shared";
 
 import {
   DropdownMenu,
@@ -22,13 +23,9 @@ import { useDataTable } from "@/hooks/use-data-table";
 import type { Column, ColumnDef } from "@tanstack/react-table";
 import { CheckCircle2, MoreHorizontal, Text, XCircle } from "lucide-react";
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
+import { Checkbox } from "@/components/ui/checkbox";
 
-interface TableSchema {
-  id: number;
-  name: string;
-  type: "Expense" | "Income";
-  start: number;
-}
+type TableSchema = Schema;
 
 export function Table({ data, count }: { data: TableSchema[]; count: number }) {
   const [name] = useQueryState("name", parseAsString.withDefault(""));
@@ -43,26 +40,61 @@ export function Table({ data, count }: { data: TableSchema[]; count: number }) {
 
   const filteredData = React.useMemo(() => {
     return data.filter((item) => {
-      const matchesTitle =
+      const matchesName =
         item.name === "" ||
         item.name.toLowerCase().includes(item.name.toLowerCase());
 
-      const matchesStatus =
+      const matchesType =
         item.type.length === 0 || item.type.includes(item.type);
 
-      const matchesBudget =
+      const matchesStart =
         start.length !== 2 ||
         (Number.isFinite(Number(start[0])) &&
           Number.isFinite(Number(start[1])) &&
           item.start >= Number(start[0]) &&
           item.start <= Number(start[1]));
 
-      return matchesTitle && matchesStatus && matchesBudget;
+      return matchesName && matchesType && matchesStart;
     });
   }, [name, type, start]);
 
   const columns = React.useMemo<ColumnDef<TableSchema>[]>(
     () => [
+      {
+        id: "select",
+        header: ({ table }) => (
+          <Checkbox
+            checked={
+              table.getIsAllPageRowsSelected() ||
+              (table.getIsSomePageRowsSelected() && "indeterminate")
+            }
+            onCheckedChange={(value) =>
+              table.toggleAllPageRowsSelected(!!value)
+            }
+            aria-label="Select all"
+          />
+        ),
+        cell: ({ row }) => (
+          <Checkbox
+            checked={row.getIsSelected()}
+            onCheckedChange={(value) => row.toggleSelected(!!value)}
+            aria-label="Select row"
+          />
+        ),
+        size: 32,
+        enableSorting: false,
+        enableHiding: false,
+      },
+      {
+        id: "order_by",
+        accessorKey: "order_by",
+        header: ({ column }: { column: Column<TableSchema, unknown> }) => (
+          <DataTableColumnHeader column={column} title="Order" />
+        ),
+        cell: ({ cell }) => (
+          <div>{cell.getValue<TableSchema["order_by"]>()}</div>
+        ),
+      },
       {
         id: "name",
         accessorKey: "name",
@@ -85,13 +117,13 @@ export function Table({ data, count }: { data: TableSchema[]; count: number }) {
           <DataTableColumnHeader column={column} title="Type" />
         ),
         cell: ({ cell }) => {
-          const status = cell.getValue<TableSchema["type"]>();
-          const Icon = status === "Expense" ? CheckCircle2 : XCircle;
+          const type = cell.getValue<TableSchema["type"]>();
+          const Icon = type === "expense" ? CheckCircle2 : XCircle;
 
           return (
             <Badge variant="outline" className="capitalize">
               <Icon />
-              {status}
+              {type}
             </Badge>
           );
         },
@@ -99,8 +131,8 @@ export function Table({ data, count }: { data: TableSchema[]; count: number }) {
           label: "Type",
           variant: "multiSelect",
           options: [
-            { label: "Expense", value: "Expense" },
-            { label: "Income", value: "Income" },
+            { label: "Expense", value: "expense" },
+            { label: "Income", value: "income" },
           ],
         },
         enableColumnFilter: true,
@@ -111,13 +143,23 @@ export function Table({ data, count }: { data: TableSchema[]; count: number }) {
         header: ({ column }: { column: Column<TableSchema, unknown> }) => (
           <DataTableColumnHeader column={column} title="Start" />
         ),
-        cell: ({ cell }) => {
-          const start = cell.getValue<TableSchema["start"]>();
-
-          return <div className="flex items-center gap-1">{start}</div>;
-        },
+        cell: ({ cell }) => <div>{cell.getValue<TableSchema["start"]>()}</div>,
         meta: {
           label: "Start",
+          placeholder: "num",
+          variant: "range",
+        },
+        enableColumnFilter: true,
+      },
+      {
+        id: "end",
+        accessorKey: "end",
+        header: ({ column }: { column: Column<TableSchema, unknown> }) => (
+          <DataTableColumnHeader column={column} title="End" />
+        ),
+        cell: ({ cell }) => <div>{cell.getValue<TableSchema["end"]>()}</div>,
+        meta: {
+          label: "End",
           placeholder: "num",
           variant: "range",
         },
@@ -156,8 +198,6 @@ export function Table({ data, count }: { data: TableSchema[]; count: number }) {
       columnPinning: { right: ["actions"] },
     },
     getRowId: (row) => String(row.id),
-    shallow: false,
-    clearOnDefault: true,
   });
 
   return (

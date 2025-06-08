@@ -2,6 +2,7 @@
 // Path: @/app/(dashboard)/charts-of-accounts/master-view/
 import * as React from "react";
 
+import { createClient } from "@/lib/supabase/server";
 import {
   Card,
   CardAction,
@@ -10,10 +11,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
-import { createClient } from "@/lib/supabase/server";
-import { Table } from "./table";
 import { DataTableSkeleton } from "@/components/data-table/data-table-skeleton";
+
+import { Table } from "./table";
+import { Form } from "./create/form";
 
 const PageData = {
   title: "Master View",
@@ -25,14 +26,23 @@ export default async function Page({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const { page = 1, perPage = 10 } = await searchParams;
   const supabase = await createClient();
 
+  const { page = 1, perPage = 10 } = await searchParams;
   const pageIndex = Number(page ?? 1) - 1;
   const pageSize = Number(perPage ?? 10);
-
   const start = pageIndex * pageSize;
   const end = start + pageSize - 1;
+
+  const { data: entityData, error: entityError } = await supabase
+    .from("entity")
+    .select("id")
+    .limit(1)
+    .single();
+
+  if (entityError) {
+    return <p>Please create an Entity first.</p>;
+  }
 
   const {
     data: masterViewData,
@@ -52,6 +62,9 @@ export default async function Page({
       <CardHeader>
         <CardTitle>{PageData.title}</CardTitle>
         <CardDescription>{PageData.description}</CardDescription>
+        <CardAction>
+          <Form id={entityData.id} />
+        </CardAction>
       </CardHeader>
       <CardContent>
         <React.Suspense
