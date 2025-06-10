@@ -24,6 +24,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useDataTable } from "@/hooks/use-data-table";
+import { cn } from "@/lib/utils";
 
 type TableSchema = Schema;
 
@@ -31,10 +32,6 @@ export function Table({ data, count }: { data: TableSchema[]; count: number }) {
   const [name] = useQueryState("name", parseAsString.withDefault(""));
   const [type] = useQueryState(
     "type",
-    parseAsArrayOf(parseAsString).withDefault([]),
-  );
-  const [start] = useQueryState(
-    "start",
     parseAsArrayOf(parseAsString).withDefault([]),
   );
 
@@ -47,55 +44,21 @@ export function Table({ data, count }: { data: TableSchema[]; count: number }) {
       const matchesType =
         item.type.length === 0 || item.type.includes(item.type);
 
-      const matchesStart =
-        start.length !== 2 ||
-        (Number.isFinite(Number(start[0])) &&
-          Number.isFinite(Number(start[1])) &&
-          item.start >= Number(start[0]) &&
-          item.start <= Number(start[1]));
-
-      return matchesName && matchesType && matchesStart;
+      return matchesName && matchesType;
     });
-  }, [name, type, start]);
+  }, [name, type]);
 
   const columns = React.useMemo<ColumnDef<TableSchema>[]>(
     () => [
       {
-        id: "select",
-        header: ({ table }) => (
-          <Checkbox
-            checked={
-              table.getIsAllPageRowsSelected() ||
-              (table.getIsSomePageRowsSelected() && "indeterminate")
-            }
-            onCheckedChange={(value) =>
-              table.toggleAllPageRowsSelected(!!value)
-            }
-            aria-label="Select all"
-          />
-        ),
-        cell: ({ row }) => (
-          <Checkbox
-            checked={row.getIsSelected()}
-            onCheckedChange={(value) => row.toggleSelected(!!value)}
-            aria-label="Select row"
-          />
-        ),
-        size: 32,
-        enableSorting: false,
-        enableHiding: false,
-      },
-      {
-        id: "order_by",
-        accessorKey: "order_by",
+        id: "code",
+        accessorKey: "code",
         header: ({ column }: { column: Column<TableSchema, unknown> }) => (
-          <DataTableColumnHeader column={column} title="Order" />
+          <DataTableColumnHeader column={column} title="Code" />
         ),
-        cell: ({ cell }) => (
-          <div>{cell.getValue<TableSchema["order_by"]>()}</div>
-        ),
+        cell: ({ cell }) => <div>{cell.getValue<TableSchema["code"]>()}</div>,
         meta: {
-          label: "Order",
+          label: "Code",
         },
       },
       {
@@ -114,6 +77,58 @@ export function Table({ data, count }: { data: TableSchema[]; count: number }) {
         enableColumnFilter: true,
       },
       {
+        id: "state",
+        accessorKey: "state",
+        header: ({ column }: { column: Column<TableSchema, unknown> }) => (
+          <DataTableColumnHeader column={column} title="State" />
+        ),
+        cell: ({ cell }) => <div>{cell.getValue<TableSchema["state"]>()}</div>,
+        meta: {
+          label: "State",
+        },
+        enableColumnFilter: true,
+      },
+      {
+        id: "city",
+        accessorKey: "city",
+        header: ({ column }: { column: Column<TableSchema, unknown> }) => (
+          <DataTableColumnHeader column={column} title="City" />
+        ),
+        cell: ({ cell }) => <div>{cell.getValue<TableSchema["city"]>()}</div>,
+        meta: {
+          label: "City",
+        },
+        enableColumnFilter: true,
+      },
+      {
+        id: "latitude",
+        accessorKey: "latitude",
+        header: ({ column }: { column: Column<TableSchema, unknown> }) => (
+          <DataTableColumnHeader column={column} title="Latitude" />
+        ),
+        cell: ({ cell }) => (
+          <div>{cell.getValue<TableSchema["latitude"]>()}</div>
+        ),
+        meta: {
+          label: "Latitude",
+        },
+        enableColumnFilter: false,
+      },
+      {
+        id: "longitude",
+        accessorKey: "longitude",
+        header: ({ column }: { column: Column<TableSchema, unknown> }) => (
+          <DataTableColumnHeader column={column} title="Longitude" />
+        ),
+        cell: ({ cell }) => (
+          <div>{cell.getValue<TableSchema["longitude"]>()}</div>
+        ),
+        meta: {
+          label: "Longitude",
+        },
+        enableColumnFilter: false,
+      },
+      {
         id: "type",
         accessorKey: "type",
         header: ({ column }: { column: Column<TableSchema, unknown> }) => (
@@ -121,11 +136,17 @@ export function Table({ data, count }: { data: TableSchema[]; count: number }) {
         ),
         cell: ({ cell }) => {
           const type = cell.getValue<TableSchema["type"]>();
-          const Icon = type === "expense" ? CheckCircle2 : XCircle;
-
           return (
-            <Badge variant="outline" className="capitalize">
-              <Icon />
+            <Badge
+              variant="outline"
+              className={cn(
+                type === "urban" &&
+                  "bg-green-400/10 text-green-600 border-green-400/50",
+                type === "rural" &&
+                  "bg-sky-400/10 text-sky-600/80 border-sky-400/50",
+                "capitalize",
+              )}
+            >
               {type}
             </Badge>
           );
@@ -134,37 +155,9 @@ export function Table({ data, count }: { data: TableSchema[]; count: number }) {
           label: "Type",
           variant: "multiSelect",
           options: [
-            { label: "Expense", value: "expense" },
-            { label: "Income", value: "income" },
+            { label: "Urban", value: "urban" },
+            { label: "Rural", value: "rural" },
           ],
-        },
-        enableColumnFilter: true,
-      },
-      {
-        id: "start",
-        accessorKey: "start",
-        header: ({ column }: { column: Column<TableSchema, unknown> }) => (
-          <DataTableColumnHeader column={column} title="Start" />
-        ),
-        cell: ({ cell }) => <div>{cell.getValue<TableSchema["start"]>()}</div>,
-        meta: {
-          label: "Start",
-          placeholder: "num",
-          variant: "range",
-        },
-        enableColumnFilter: true,
-      },
-      {
-        id: "end",
-        accessorKey: "end",
-        header: ({ column }: { column: Column<TableSchema, unknown> }) => (
-          <DataTableColumnHeader column={column} title="End" />
-        ),
-        cell: ({ cell }) => <div>{cell.getValue<TableSchema["end"]>()}</div>,
-        meta: {
-          label: "End",
-          placeholder: "num",
-          variant: "range",
         },
         enableColumnFilter: true,
       },
@@ -197,7 +190,7 @@ export function Table({ data, count }: { data: TableSchema[]; count: number }) {
     columns,
     pageCount: count,
     initialState: {
-      sorting: [{ id: "name", desc: true }],
+      sorting: [{ id: "code", desc: false }],
       columnPinning: { right: ["actions"] },
     },
     getRowId: (row) => String(row.id),

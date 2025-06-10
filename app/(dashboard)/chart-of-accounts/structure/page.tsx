@@ -1,5 +1,5 @@
 // Filename: page.tsx
-// Path: @/app/(dashboard)/charts-of-accounts/master-view/
+// Path: @/app/(dashboard)/charts-of-accounts/structure/
 import * as React from "react";
 
 import { createClient } from "@/lib/supabase/server";
@@ -17,8 +17,8 @@ import { Table } from "./table";
 import { Form } from "./create/form";
 
 const PageData = {
-  title: "Master View",
-  description: "Master View description",
+  title: "Structure",
+  description: "Structure description",
 };
 
 export default async function Page({
@@ -28,9 +28,13 @@ export default async function Page({
 }) {
   const supabase = await createClient();
 
-  const { page = 1, perPage = 10 } = await searchParams;
-  const pageIndex = Number(page ?? 1) - 1;
-  const pageSize = Number(perPage ?? 10);
+  const params = await searchParams;
+  const pageIndex = Number(params.page ?? "1") - 1;
+  const pageSize = Number(params.perPage ?? "10");
+
+  console.table(params.page);
+  // const pageIndex = Number(page ?? 1) - 1;
+  // const pageSize = Number(perPage ?? 10);
   const start = pageIndex * pageSize;
   const end = start + pageSize - 1;
 
@@ -45,17 +49,19 @@ export default async function Page({
   }
 
   const {
-    data: masterViewData,
-    count: masterViewCount,
-    error: masterViewError,
+    data: structureData,
+    count: structureCount,
+    error: structureError,
   } = await supabase
     .from("master_view_config")
     .select("id, name, type, start, end, order_by", { count: "exact" })
     .range(start, end);
 
-  if (masterViewError) {
+  if (structureError) {
     return <p>Failed to fetch...</p>;
   }
+
+  // console.table(structureData);
 
   return (
     <Card>
@@ -86,8 +92,8 @@ export default async function Page({
           }
         >
           <Table
-            data={masterViewData}
-            count={Math.ceil((masterViewCount ?? 0) / pageSize)}
+            data={structureData}
+            count={Math.ceil((structureCount ?? 0) / pageSize)}
           />
         </React.Suspense>
       </CardContent>

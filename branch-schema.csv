@@ -1,0 +1,21 @@
+code,name,city,state,latitude,longitude,type,zone,opening_date
+BR1001,Mumbai,Mumbai,Maharashtra,19.076,72.8777,Urban,West,2002-07-15
+BR1002,Delhi,Delhi,Delhi (NCT),28.6139,77.209,Urban,North,2005-11-02
+BR1003,Chennai,Chennai,Tamil Nadu,13.0827,80.2707,Urban,South,2009-03-21
+BR1004,Kolkata,Kolkata,West Bengal,22.5726,88.3639,Urban,East,2001-06-08
+BR1005,Bangalore,Bangalore,Karnataka,12.9716,77.5946,Urban,South,2010-09-27
+BR1006,Ahmedabad,Ahmedabad,Gujarat,23.0225,72.5714,Urban,West,2003-02-13
+BR1007,Jaipur,Jaipur,Rajasthan,26.9124,75.7873,Urban,West,2012-01-05
+BR1008,Lucknow,Lucknow,Uttar Pradesh,26.8467,80.9462,Urban,North,2015-04-18
+BR1009,Patna,Patna,Bihar,25.5941,85.1376,Urban,East,2008-08-30
+BR1010,Thiruvananthapuram,Thiruvananthapuram,Kerala,8.5241,76.9366,Urban,South,2013-05-22
+BR1011,Coimbatore,Coimbatore,Tamil Nadu,11.0168,76.9558,Urban,South,2011-10-10
+BR1012,Vijayawada,Vijayawada,Andhra Pradesh,16.5062,80.648,Urban,South,2007-12-04
+BR1013,Jodhpur,Jodhpur,Rajasthan,26.2389,73.0243,Urban,West,2016-03-19
+BR1014,Vadodara,Vadodara,Gujarat,22.3072,73.1812,Urban,West,2014-07-07
+BR1015,Varanasi,Varanasi,Uttar Pradesh,25.3176,82.9739,Urban,North,2020-01-14
+BR1016,Palghar,Palghar,Maharashtra,19.6869,72.7736,Rural,West,2023-06-01
+BR1017,Saharanpur,Saharanpur,Uttar Pradesh,29.9672,77.5512,Rural,North,2017-09-09
+BR1018,Cooch Behar,Cooch Behar,West Bengal,26.3227,89.4455,Rural,East,2018-11-23
+BR1019,Karimnagar,Karimnagar,Telangana,18.4386,79.1285,Rural,South,2022-04-12
+BR1020,Dhule,Dhule,Maharashtra,20.9042,74.7831,Rural,West,2019-02-28

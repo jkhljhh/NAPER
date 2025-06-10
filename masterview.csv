@@ -1,7 +1,12 @@
 name,type,start,end,order_by
-Interest Income,Income,4000,4099,1
-Interest Expense,Expense,5000,5099,2
-Other Income,Income,6000,6099,4
-Operating Expenses,Expense,7000,7099,6
-Provisions & Contingencies,Expense,8000,8099,8
-Tax Expense,Expense,9000,9000,10
+Interest Income,income,4000,4099,1
+Interest Expense,expense,5000,5099,2
+Net Interest income (NII),derived,,,3
+Other Income,income,6000,6099,4
+Total Operating income,derived,,,5
+Operating Expenses,expense,7000,7099,6
+Operating Profit,derived,,,7
+Provisions & Contingencies,expense,8000,8099,8
+Profit Before Tax (PBT),derived,,,9
+Tax Expense,expense,9000,9000,10
+Net Profit / PAT,derived,,,11

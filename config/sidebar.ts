@@ -3,6 +3,8 @@ import {
   IconChartPie,
   IconBuilding,
   IconSettings,
+  IconRobot,
+  IconRobotFace,
 } from "@tabler/icons-react";
 
 export const navigation = {
@@ -31,22 +33,34 @@ export const navigation = {
       isActive: false,
       items: [
         {
-          title: "Master View",
-          url: "/chart-of-accounts/master-view",
-        },
-        {
-          title: "GL Mapping",
-          url: "#",
+          title: "Structure",
+          url: "/chart-of-accounts/structure",
         },
       ],
     },
-
     {
       title: "Branch",
       url: "#",
       icon: IconBuilding,
       isActive: false,
-      items: [],
+      items: [
+        {
+          title: "Schema",
+          url: "/branch/schema",
+        },
+      ],
+    },
+    {
+      title: "Model",
+      url: "#",
+      icon: IconRobotFace,
+      isActive: false,
+      items: [
+        {
+          title: "Schema",
+          url: "/branch/schema",
+        },
+      ],
     },
   ],
 
