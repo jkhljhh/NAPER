@@ -8,28 +8,34 @@ import type { Column, ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal, Text } from "lucide-react";
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
 
+import { useDataTable } from "@/hooks/use-data-table";
+
 import { DataTable } from "@/components/data-table/data-table";
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
 import { DataTableToolbar } from "@/components/data-table/data-table-toolbar";
-
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-
-import { Form as DeleteForm } from "./delete/form";
-import { Form as EditForm } from "./edit/form";
-import { type Schema } from "./edit/shared";
-
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useDataTable } from "@/hooks/use-data-table";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+
+import { Form as DeleteForm } from "./delete/form";
+import { Form as EditForm } from "./edit/form";
+import { type Schema } from "./edit/shared";
 
 type TableSchema = Schema;
 
-export function Table({ data, count }: { data: TableSchema[]; count: number }) {
+type TableProps = {
+  startRange: { min: number; max: number } | null;
+  endRange: { min: number; max: number } | null;
+  data: TableSchema[];
+  count: number;
+};
+
+export function Table({ startRange, endRange, data, count }: TableProps) {
   const [name] = useQueryState("name", parseAsString.withDefault(""));
   const [type] = useQueryState(
     "type",
@@ -43,11 +49,9 @@ export function Table({ data, count }: { data: TableSchema[]; count: number }) {
   const filteredData = React.useMemo(() => {
     return data.filter((item) => {
       const matchesName =
-        item.name === "" ||
-        item.name.toLowerCase().includes(item.name.toLowerCase());
+        name === "" || item.name.toLowerCase().includes(name.toLowerCase());
 
-      const matchesType =
-        item.type.length === 0 || item.type.includes(item.type);
+      const matchesType = type.length === 0 || type.includes(item.type);
 
       const matchesStart =
         start.length !== 2 ||
@@ -58,133 +62,134 @@ export function Table({ data, count }: { data: TableSchema[]; count: number }) {
 
       return matchesName && matchesType && matchesStart;
     });
-  }, [name, type, start]);
+  }, [data, name, type, start]);
 
-  const columns = React.useMemo<ColumnDef<TableSchema>[]>(
-    () => [
-      {
-        id: "order_by",
-        accessorKey: "order_by",
-        header: ({ column }: { column: Column<TableSchema, unknown> }) => (
-          <DataTableColumnHeader column={column} title="Order" />
-        ),
-        cell: ({ cell }) => (
-          <div>{cell.getValue<TableSchema["order_by"]>()}</div>
-        ),
-        meta: {
-          label: "Order",
-        },
+  const columns: ColumnDef<TableSchema>[] = [
+    {
+      id: "order_by",
+      accessorKey: "order_by",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Order" />
+      ),
+      cell: ({ cell }) => {
+        const item = cell.getValue<TableSchema["order_by"]>();
+        return <div>{item}</div>;
       },
-      {
-        id: "name",
-        accessorKey: "name",
-        header: ({ column }: { column: Column<TableSchema, unknown> }) => (
-          <DataTableColumnHeader column={column} title="Name" />
-        ),
-        cell: ({ cell }) => <div>{cell.getValue<TableSchema["name"]>()}</div>,
-        meta: {
-          label: "Name",
-          placeholder: "Search name...",
-          variant: "text",
-          icon: Text,
-        },
-        enableColumnFilter: true,
+      meta: { label: "Order" },
+    },
+    {
+      id: "name",
+      accessorKey: "name",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Name" />
+      ),
+      cell: ({ cell }) => {
+        const item = cell.getValue<TableSchema["name"]>();
+        return <div>{item}</div>;
       },
-      {
-        id: "type",
-        accessorKey: "type",
-        header: ({ column }: { column: Column<TableSchema, unknown> }) => (
-          <DataTableColumnHeader column={column} title="Type" />
-        ),
-        cell: ({ cell }) => {
-          const type = cell.getValue<TableSchema["type"]>();
+      meta: {
+        label: "Name",
+        placeholder: "Search name...",
+        variant: "text",
+        icon: Text,
+      },
+      enableColumnFilter: true,
+    },
+    {
+      id: "type",
+      accessorKey: "type",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Type" />
+      ),
+      cell: ({ cell }) => {
+        const item = cell.getValue<TableSchema["type"]>();
 
-          return (
-            <Badge
-              variant="outline"
-              className={cn(
-                type === "income" &&
-                  "bg-green-400/10 text-green-600 border-green-400/50",
-                type === "expense" &&
-                  "bg-rose-500/10 text-rose-500/80 border-rose-400/50",
-                type === "derived" &&
-                  "bg-sky-400/10 text-sky-600/80 border-sky-400/50",
-                "capitalize",
-              )}
-            >
-              {type}
-            </Badge>
-          );
-        },
-        meta: {
-          label: "Type",
-          variant: "multiSelect",
-          options: [
-            { label: "Expense", value: "expense" },
-            { label: "Income", value: "income" },
-          ],
-        },
-        enableColumnFilter: true,
+        return (
+          <Badge
+            variant="outline"
+            className={cn(
+              item === "income" &&
+                "bg-green-400/10 text-green-600 border-green-400/50",
+              item === "expense" &&
+                "bg-rose-500/10 text-rose-500/80 border-rose-400/50",
+              item === "derived" &&
+                "bg-sky-400/10 text-sky-600/80 border-sky-400/50",
+              "capitalize",
+            )}
+          >
+            {item}
+          </Badge>
+        );
       },
-      {
-        id: "start",
-        accessorKey: "start",
-        header: ({ column }: { column: Column<TableSchema, unknown> }) => (
-          <DataTableColumnHeader column={column} title="Start" />
-        ),
-        cell: ({ cell }) => {
-          const start = cell.getValue<TableSchema["start"]>();
+      meta: {
+        label: "Type",
+        variant: "multiSelect",
+        options: [
+          { label: "Expense", value: "expense" },
+          { label: "Income", value: "income" },
+          { label: "Derived", value: "derived" },
+        ],
+      },
+      enableColumnFilter: true,
+    },
+    {
+      id: "start",
+      accessorKey: "start",
+      header: ({ column }: { column: Column<TableSchema, unknown> }) => (
+        <DataTableColumnHeader column={column} title="Start" />
+      ),
+      cell: ({ cell }) => {
+        const item = cell.getValue<TableSchema["start"]>();
+        return <div>{item === 0 ? "-" : item}</div>;
+      },
+      meta: {
+        label: "Start",
+        placeholder: "num",
+        variant: "range",
 
-          return <div>{start === 0 ? "" : start}</div>;
-        },
-        meta: {
-          label: "Start",
-          placeholder: "num",
-          variant: "range",
-        },
-        enableColumnFilter: true,
+        range: [startRange!.min, startRange!.max],
       },
-      {
-        id: "end",
-        accessorKey: "end",
-        header: ({ column }: { column: Column<TableSchema, unknown> }) => (
-          <DataTableColumnHeader column={column} title="End" />
-        ),
-        cell: ({ cell }) => {
-          const end = cell.getValue<TableSchema["end"]>();
-
-          return <div>{end === 0 ? "" : end}</div>;
-        },
-        meta: {
-          label: "End",
-          placeholder: "num",
-          variant: "range",
-        },
-        enableColumnFilter: true,
+      enableColumnFilter: true,
+    },
+    {
+      id: "end",
+      accessorKey: "end",
+      header: ({ column }: { column: Column<TableSchema, unknown> }) => (
+        <DataTableColumnHeader column={column} title="End" />
+      ),
+      cell: ({ cell }) => {
+        const item = cell.getValue<TableSchema["end"]>();
+        return <div>{item === 0 ? "-" : item}</div>;
       },
-      {
-        id: "actions",
-        cell: ({ row }) => {
-          return (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <MoreHorizontal className="h-4 w-4" />
-                  <span className="sr-only">Open menu</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <EditForm data={row.original} />
-                <DeleteForm id={row.original.id} />
-              </DropdownMenuContent>
-            </DropdownMenu>
-          );
-        },
-        size: 32,
+      meta: {
+        label: "End",
+        placeholder: "num",
+        variant: "range",
+        range: [endRange!.min, endRange!.max],
       },
-    ],
-    [],
-  );
+      enableColumnFilter: true,
+    },
+    {
+      id: "actions",
+      cell: ({ row }) => {
+        return (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <MoreHorizontal className="h-4 w-4" />
+                <span className="sr-only">Open menu</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <EditForm data={row.original} />
+              <DeleteForm id={row.original.id} />
+            </DropdownMenuContent>
+          </DropdownMenu>
+        );
+      },
+      size: 32,
+    },
+  ];
 
   const { table } = useDataTable({
     data: filteredData,
@@ -194,6 +199,7 @@ export function Table({ data, count }: { data: TableSchema[]; count: number }) {
       sorting: [{ id: "order_by", desc: false }],
       columnPinning: { right: ["actions"] },
     },
+    shallow: false,
     getRowId: (row) => String(row.id),
   });
 
