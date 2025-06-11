@@ -1,5 +1,5 @@
 // Filename: action.tsx
-// Path: @/app/(dashboard)/foundation/market/
+// Path: @/app/(dashboard)/branch/schema/delete/
 "use server";
 
 import { revalidatePath } from "next/cache";
@@ -14,7 +14,7 @@ export const formAction = validatedActionWithUser(schema, async (body) => {
     const supabase = await createClient();
 
     const { error: deleteError } = await supabase
-      .from("master_view_config")
+      .from("chart_of_accounts_structure")
       .delete()
       .eq("id", body.id);
 

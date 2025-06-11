@@ -1,31 +1,12 @@
 import {
-  IconWorld,
   IconChartPie,
   IconBuilding,
   IconSettings,
-  IconRobot,
   IconRobotFace,
 } from "@tabler/icons-react";
 
 export const navigation = {
   main: [
-    {
-      title: "Global",
-      url: "#",
-      icon: IconWorld,
-      isActive: true,
-      items: [
-        {
-          title: "Entity",
-          url: "/foundation/entity",
-        },
-        {
-          title: "Market",
-          url: "/foundation/market",
-        },
-      ],
-    },
-
     {
       title: "Chart of Accounts",
       url: "#",

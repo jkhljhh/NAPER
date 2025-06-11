@@ -1,5 +1,5 @@
 // Filename: action.tsx
-// Path: @/app/(dashboard)/foundation/market/
+// Path: @/app/(dashboard)/charts-of-accounts/structure/create
 "use server";
 
 import { revalidatePath } from "next/cache";
@@ -14,7 +14,7 @@ export const formAction = validatedActionWithUser(schemaArray, async (body) => {
     const supabase = await createClient();
 
     const { error: insertError } = await supabase
-      .from("master_view_config")
+      .from("chart_of_accounts_structure")
       .upsert(body, { onConflict: "name" });
 
     if (insertError) {

@@ -1,8 +1,9 @@
 // Filename: page.tsx
-// Path: @/app/(dashboard)/charts-of-accounts/master-view/
+// Path: @/app/(dashboard)/branch/schema/
 import * as React from "react";
 
 import { createClient } from "@/lib/supabase/server";
+import { DataTableSkeleton } from "@/components/data-table/data-table-skeleton";
 import {
   Card,
   CardAction,
@@ -11,28 +12,22 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { DataTableSkeleton } from "@/components/data-table/data-table-skeleton";
 
-import { Table } from "./table";
 import { Form } from "./create/form";
+import { TableWrapper } from "./table-wrapper";
 
 const PageData = {
   title: "Schema",
   description: "Schema description",
 };
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
-  const supabase = await createClient();
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
-  const { page = 1, perPage = 10 } = await searchParams;
-  const pageIndex = Number(page ?? 1) - 1;
-  const pageSize = Number(perPage ?? 10);
-  const start = pageIndex * pageSize;
-  const end = start + pageSize - 1;
+export default async function Page(props: { searchParams: SearchParams }) {
+  const searchParams = await props.searchParams;
+  const safePage = Number(searchParams.page) || 1;
+  const safePerPage = Number(searchParams.perPage) || 10;
+  const supabase = await createClient();
 
   const { data: entityData, error: entityError } = await supabase
     .from("entity")
@@ -44,18 +39,6 @@ export default async function Page({
     return <p>Please create an Entity first.</p>;
   }
 
-  const { data, count, error } = await supabase
-    .from("branch_schema")
-    .select(
-      "id, code, name, city, state, latitude, longitude, type, zone, opening_date",
-      { count: "exact" },
-    )
-    .range(start, end);
-
-  if (error) {
-    return <p>Failed to fetch...</p>;
-  }
-  console.log(data);
   return (
     <Card>
       <CardHeader>
@@ -84,7 +67,7 @@ export default async function Page({
             />
           }
         >
-          <Table data={data} count={Math.ceil((count ?? 0) / pageSize)} />
+          <TableWrapper page={safePage} perPage={safePerPage} />
         </React.Suspense>
       </CardContent>
     </Card>

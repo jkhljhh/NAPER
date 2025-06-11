@@ -9,7 +9,7 @@ async function getTableData(paginationStart: number, paginationEnd: number) {
   const supabase = await createClient();
 
   const { data, count, error } = await supabase
-    .from("master_view_config")
+    .from("chart_of_accounts_structure")
     .select("id, name, type, start, end, order_by", { count: "exact" })
     .range(paginationStart, paginationEnd);
 
@@ -24,12 +24,12 @@ async function getRangeData() {
   const supabase = await createClient();
   const { data: startData, error: startError } = await supabase.rpc(
     "get_column_range",
-    { column_name: "start" },
+    { column_name: "start", table_name: "chart_of_accounts_structure" },
   );
 
   const { data: endData, error: endError } = await supabase.rpc(
     "get_column_range",
-    { column_name: "end" },
+    { column_name: "end", table_name: "chart_of_accounts_structure" },
   );
 
   if (startError || endError || !startData || !endData) {

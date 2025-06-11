@@ -1,5 +1,5 @@
 // Filename: action.tsx
-// Path: @/app/(dashboard)/foundation/market/
+// Path: @/app/(dashboard)/branch/schema/create/
 "use server";
 
 import { revalidatePath } from "next/cache";
@@ -14,14 +14,14 @@ export const formAction = validatedActionWithUser(schemaArray, async (body) => {
     const supabase = await createClient();
 
     const { error: insertError } = await supabase
-      .from("master_view_config")
-      .upsert(body, { onConflict: "name" });
+      .from("branch_schema")
+      .upsert(body, { onConflict: "code" });
 
     if (insertError) {
       throw toSupabaseError(insertError);
     }
 
-    revalidatePath("/charts-of-accounts/master-view");
+    revalidatePath("/branch/structure");
     return { message: "Impored successfully." };
   } catch (err) {
     console.error(err);
