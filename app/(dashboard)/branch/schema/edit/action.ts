@@ -16,7 +16,7 @@ export const formAction = validatedActionWithUser(schema, async (body) => {
     const { id, ...updateData } = body;
 
     const { error } = await supabase
-      .from("chart_of_accounts_structure")
+      .from("branch_schema")
       .update(updateData)
       .eq("id", id);
 
@@ -24,8 +24,8 @@ export const formAction = validatedActionWithUser(schema, async (body) => {
       throw toSupabaseError(error);
     }
 
-    revalidatePath("/charts-of-accounts/master-view");
-    return { message: "Record deleted." };
+    revalidatePath("/branch/structure");
+    return { message: "Record edited." };
   } catch (err) {
     console.error(err);
     return { error: true, message: "Internal Error" };

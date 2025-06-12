@@ -18,14 +18,14 @@ export const formAction = validatedActionWithUser(schemaArray, async (body) => {
     const supabase = await createClient();
 
     const { error: insertError } = await supabase
-      .from("chart_of_accounts_structure")
-      .upsert(body, { onConflict: "name" });
+      .from("chart_of_accounts_gl_mapping")
+      .upsert(body, { onConflict: "code" });
 
     if (insertError) {
       throw toSupabaseError(insertError);
     }
 
-    revalidatePath("/charts-of-accounts/structure");
+    revalidatePath("/charts-of-accounts/gl-mapping");
     return { message: "Impored successfully." };
   } catch (err) {
     console.error(err);

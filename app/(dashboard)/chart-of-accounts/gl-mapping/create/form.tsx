@@ -31,7 +31,6 @@ const PageData = {
 
 function F({ id }: { id: number }) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [fileName, setFileName] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
   const [csvData, setCsvData] = useState<Schema[]>([]);
 
@@ -40,7 +39,6 @@ function F({ id }: { id: number }) {
       inputRef.current.value = "";
     }
     setCsvData([]);
-    setFileName(null);
   };
 
   function onSubmit() {

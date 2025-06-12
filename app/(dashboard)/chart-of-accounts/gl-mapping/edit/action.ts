@@ -16,7 +16,7 @@ export const formAction = validatedActionWithUser(schema, async (body) => {
     const { id, ...updateData } = body;
 
     const { error } = await supabase
-      .from("chart_of_accounts_structure")
+      .from("chart_of_accounts_gl_mapping")
       .update(updateData)
       .eq("id", id);
 
@@ -24,7 +24,7 @@ export const formAction = validatedActionWithUser(schema, async (body) => {
       throw toSupabaseError(error);
     }
 
-    revalidatePath("/charts-of-accounts/structure");
+    revalidatePath("/charts-of-accounts/gl-mapping");
     return { message: "Record edited." };
   } catch (err) {
     console.error(err);

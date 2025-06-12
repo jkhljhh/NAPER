@@ -5,19 +5,26 @@
 import { useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { format } from "date-fns";
 import { toast } from "sonner";
 import { IconEdit } from "@tabler/icons-react";
+import { CalendarIcon } from "lucide-react";
 
-import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Sheet,
   SheetClose,
@@ -28,12 +35,20 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { ActionState } from "@/lib/action-helpers";
 
 import { formAction } from "./action";
 import { schema, type Schema } from "./shared";
 import { Input } from "@/components/ui/input";
+import { cn, getEnumOptions } from "@/lib/utils";
 
 const PageData = {
   title: "Edit Master View",
@@ -84,9 +99,9 @@ function F({ data }: { data: Schema }) {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="flex flex-col h-full"
+            className="flex flex-col h-full overflow-hidden"
           >
-            <div className="grid flex-1 auto-rows-min gap-6 px-4">
+            <div className="grid flex-1 auto-rows-min gap-6 px-4 overflow-auto">
               {/*  */}
               <FormField
                 control={form.control}
@@ -146,13 +161,46 @@ function F({ data }: { data: Schema }) {
               {/*  */}
               <FormField
                 control={form.control}
-                name="zone"
+                name="pincode"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Zone</FormLabel>
+                    <FormLabel>Pincode</FormLabel>
                     <FormControl>
-                      <Input placeholder="Zone" {...field} required />
+                      <Input
+                        placeholder="Pincode"
+                        type="number"
+                        {...field}
+                        required
+                      />
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/*  */}
+              <FormField
+                control={form.control}
+                name="region"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Region</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl className="w-full">
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {getEnumOptions(schema, "region").map((item) => (
+                          <SelectItem key={item.value} value={item.value}>
+                            {item.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -165,7 +213,7 @@ function F({ data }: { data: Schema }) {
                   <FormItem>
                     <FormLabel>Latitude</FormLabel>
                     <FormControl>
-                      <Input placeholder="Latitude" {...field} required />
+                      <Input type="number" {...field} required />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -179,7 +227,35 @@ function F({ data }: { data: Schema }) {
                   <FormItem>
                     <FormLabel>Longitude</FormLabel>
                     <FormControl>
-                      <Input placeholder="Longitude" {...field} required />
+                      <Input {...field} required />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/*  */}
+              <FormField
+                control={form.control}
+                name="type_acceptance"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Type Acceptance</FormLabel>
+                    <FormControl>
+                      <Input {...field} required />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/*  */}
+              <FormField
+                control={form.control}
+                name="rpc_linked"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>RPC Linked</FormLabel>
+                    <FormControl>
+                      <Input {...field} required />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -192,9 +268,93 @@ function F({ data }: { data: Schema }) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Type</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Type" {...field} required />
-                    </FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl className="w-full">
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {getEnumOptions(schema, "type").map((item) => (
+                          <SelectItem key={item.value} value={item.value}>
+                            {item.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/*  */}
+              <FormField
+                control={form.control}
+                name="opening_date"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Opening Date</FormLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant={"outline"}
+                            className={cn(
+                              "pl-3 text-left font-normal",
+                              !field.value && "text-muted-foreground",
+                            )}
+                          >
+                            {field.value ? (
+                              format(field.value, "PPP")
+                            ) : (
+                              <span>Pick a date</span>
+                            )}
+                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={field.value}
+                          onSelect={field.onChange}
+                          disabled={(date) =>
+                            date > new Date() || date < new Date("1900-01-01")
+                          }
+                          captionLayout="dropdown"
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/*  */}
+              <FormField
+                control={form.control}
+                name="category"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Category</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl className="w-full">
+                        <SelectTrigger>
+                          <SelectValue />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {getEnumOptions(schema, "category").map((item) => (
+                          <SelectItem key={item.value} value={item.value}>
+                            {item.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}

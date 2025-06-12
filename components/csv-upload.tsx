@@ -30,12 +30,14 @@ type Props<T extends ZodRawShape> = {
   id: number;
   schema: ZodObject<T>;
   setCsvData: (data: z.infer<ZodObject<T>>[]) => void;
+  hasData: boolean;
 };
 
 export function CsvUpload<T extends ZodRawShape>({
   setCsvData,
   id,
   schema,
+  hasData,
 }: Props<T>) {
   const [files, setFiles] = React.useState<File[]>([]);
 
@@ -107,22 +109,24 @@ export function CsvUpload<T extends ZodRawShape>({
       maxFiles={1}
       className="w-full"
     >
-      <FileUploadDropzone>
-        <div className="flex flex-col items-center gap-1">
-          <div className="flex items-center justify-center rounded-full border p-2.5">
-            <IconCloudUpload className="size-6 text-muted-foreground" />
+      {!hasData && (
+        <FileUploadDropzone>
+          <div className="flex flex-col items-center gap-1">
+            <div className="flex items-center justify-center rounded-full border p-2.5">
+              <IconCloudUpload className="size-6 text-muted-foreground" />
+            </div>
+            <p className="font-medium text-sm">Drag & drop CSV here</p>
+            <p className="text-muted-foreground text-xs">
+              Or click to browse (1 file, .csv only)
+            </p>
           </div>
-          <p className="font-medium text-sm">Drag & drop CSV here</p>
-          <p className="text-muted-foreground text-xs">
-            Or click to browse (1 file, .csv only)
-          </p>
-        </div>
-        <FileUploadTrigger asChild>
-          <Button variant="outline" size="sm" className="mt-2 w-fit">
-            Browse file
-          </Button>
-        </FileUploadTrigger>
-      </FileUploadDropzone>
+          <FileUploadTrigger asChild>
+            <Button variant="outline" size="sm" className="mt-2 w-fit">
+              Browse file
+            </Button>
+          </FileUploadTrigger>
+        </FileUploadDropzone>
+      )}
 
       <FileUploadList>
         {files.map((file) => (
@@ -153,27 +157,29 @@ export function CsvPreviewTable<T extends Record<string, any>>({
   const headers = Object.keys(data[0]);
 
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          {headers.map((header, i) => (
-            <TableHead key={i}>{header}</TableHead>
-          ))}
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {data.map((row, i) => (
-          <TableRow key={i}>
-            {headers.map((key, j) => (
-              <TableCell key={j}>
-                {row[key] instanceof Date
-                  ? row[key].toLocaleDateString()
-                  : String(row[key])}
-              </TableCell>
+    <div className="overflow-auto rounded-md border max-h-[40vh]">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            {headers.map((header, i) => (
+              <TableHead key={i}>{header}</TableHead>
             ))}
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {data.map((row, i) => (
+            <TableRow key={i}>
+              {headers.map((key, j) => (
+                <TableCell key={j}>
+                  {row[key] instanceof Date
+                    ? row[key].toLocaleDateString()
+                    : String(row[key])}
+                </TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   );
 }

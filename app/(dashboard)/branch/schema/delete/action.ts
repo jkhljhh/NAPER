@@ -14,7 +14,7 @@ export const formAction = validatedActionWithUser(schema, async (body) => {
     const supabase = await createClient();
 
     const { error: deleteError } = await supabase
-      .from("chart_of_accounts_structure")
+      .from("branch_schema")
       .delete()
       .eq("id", body.id);
 
@@ -22,7 +22,7 @@ export const formAction = validatedActionWithUser(schema, async (body) => {
       throw toSupabaseError(deleteError);
     }
 
-    revalidatePath("/charts-of-accounts/master-view");
+    revalidatePath("/branch/structure");
     return { message: "Record deleted." };
   } catch (err) {
     console.error(err);

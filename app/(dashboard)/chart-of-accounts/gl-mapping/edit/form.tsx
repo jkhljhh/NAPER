@@ -6,23 +6,24 @@ import { useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { IconEdit } from "@tabler/icons-react";
+import {
+  IconCheck,
+  IconSelector,
+  IconDots,
+  IconTrash,
+  IconEdit,
+} from "@tabler/icons-react";
 
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Sheet,
   SheetClose,
@@ -33,14 +34,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { ActionState } from "@/lib/action-helpers";
 
 import { formAction } from "./action";
 import { schema, type Schema } from "./shared";
 import { Input } from "@/components/ui/input";
-import { getEnumOptions } from "@/lib/utils";
 
 const PageData = {
   title: "Edit Master View",
@@ -97,13 +96,13 @@ function F({ data }: { data: Schema }) {
               {/*  */}
               <FormField
                 control={form.control}
-                name="order_by"
+                name="code"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Order</FormLabel>
+                    <FormLabel>Name</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="Order"
+                        placeholder="Name"
                         type="number"
                         {...field}
                         required
@@ -116,12 +115,12 @@ function F({ data }: { data: Schema }) {
               {/*  */}
               <FormField
                 control={form.control}
-                name="name"
+                name="pnl_head"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Name</FormLabel>
+                    <FormLabel>PNL Head</FormLabel>
                     <FormControl>
-                      <Input placeholder="Name" {...field} required />
+                      <Input placeholder="PNL Head" {...field} required />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -134,41 +133,8 @@ function F({ data }: { data: Schema }) {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Type</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl className="w-full">
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {getEnumOptions(schema, "type").map((item) => (
-                          <SelectItem key={item.value} value={item.value}>
-                            {item.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {/*  */}
-              <FormField
-                control={form.control}
-                name="start"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Start</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="Start"
-                        type="number"
-                        {...field}
-                        required
-                      />
+                      <Input placeholder="Type" {...field} required />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -177,17 +143,12 @@ function F({ data }: { data: Schema }) {
               {/*  */}
               <FormField
                 control={form.control}
-                name="end"
+                name="description"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>End</FormLabel>
+                    <FormLabel>Description</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="End"
-                        type="number"
-                        {...field}
-                        required
-                      />
+                      <Input placeholder="End" {...field} required />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

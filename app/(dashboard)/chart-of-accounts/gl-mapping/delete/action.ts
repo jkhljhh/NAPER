@@ -1,5 +1,5 @@
 // Filename: action.tsx
-// Path: @/app/(dashboard)/charts-of-accounts/structure/edit
+// Path: @/app/(dashboard)/charts-of-accounts/structure/delete
 "use server";
 
 import { revalidatePath } from "next/cache";
@@ -13,19 +13,17 @@ export const formAction = validatedActionWithUser(schema, async (body) => {
   try {
     const supabase = await createClient();
 
-    const { id, ...updateData } = body;
+    const { error: deleteError } = await supabase
+      .from("chart_of_accounts_gl_mapping")
+      .delete()
+      .eq("id", body.id);
 
-    const { error } = await supabase
-      .from("chart_of_accounts_structure")
-      .update(updateData)
-      .eq("id", id);
-
-    if (error) {
-      throw toSupabaseError(error);
+    if (deleteError) {
+      throw toSupabaseError(deleteError);
     }
 
-    revalidatePath("/charts-of-accounts/structure");
-    return { message: "Record edited." };
+    revalidatePath("/charts-of-accounts/gl-mapping");
+    return { message: "Record deleted." };
   } catch (err) {
     console.error(err);
     return { error: true, message: "Internal Error" };

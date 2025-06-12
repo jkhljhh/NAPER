@@ -10,25 +10,10 @@ export const baseSchema = z.object({
   state: z.string(),
   latitude: z.string(),
   longitude: z.string(),
-  type: z.preprocess(
-    (val) => (typeof val === "string" ? val.toLowerCase() : val),
-    z.enum(["retail", "mega retail", "business banking", "wealth"]),
-  ),
-  category: z.preprocess(
-    (val) => (typeof val === "string" ? val.toLowerCase() : val),
-    z.enum(["urban", "metro", "semi urban", "rural"]),
-  ),
-  region: z.preprocess(
-    (val) => (typeof val === "string" ? val.toLowerCase() : val),
-    z.enum(["north", "south", "east", "west"]),
-  ),
-  opening_date: z.preprocess((val) => {
-    if (typeof val === "string" || val instanceof Date) {
-      const date = new Date(val);
-      return isNaN(date.getTime()) ? undefined : date;
-    }
-    return val;
-  }, z.date()),
+  type: z.enum(["retail", "mega retail", "business banking", "wealth"]),
+  category: z.enum(["urban", "metro", "semi urban", "rural"]),
+  region: z.enum(["north", "south", "east", "west"]),
+  opening_date: z.date(),
   type_acceptance: z.string(),
   rpc_linked: z.string(),
 });

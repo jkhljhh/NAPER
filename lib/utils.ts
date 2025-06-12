@@ -9,23 +9,22 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function getEnumOptions<T extends ZodObject<any>>(
-  schema: T,
-  key: keyof z.infer<T>,
-): { label: string; value: string }[] {
-  const shape = schema.shape;
-  const field: ZodTypeAny = shape[key];
+export function getEnumOptions<
+  T extends ZodObject<Record<string, ZodTypeAny>>,
+  K extends keyof z.infer<T>,
+>(schema: T, key: K): { label: string; value: string }[] {
+  const shape = schema.shape as Record<string, ZodTypeAny>;
+  const field = shape[key as string];
 
-  // Unwrap ZodEffects if preprocess is used
-  const enumSchema =
-    field instanceof ZodEffects ? (field._def.schema as ZodTypeAny) : field;
+  // Unwrap preprocess or other effects
+  const inner = field instanceof ZodEffects ? field.innerType() : field;
 
-  if (enumSchema instanceof ZodEnum) {
-    return enumSchema.options.map((value: string) => ({
+  if (inner instanceof ZodEnum) {
+    return inner.options.map((value: string) => ({
       value,
       label: value
         .split(" ")
-        .map((w: string) => w[0].toUpperCase() + w.slice(1))
+        .map((w) => w[0].toUpperCase() + w.slice(1))
         .join(" "),
     }));
   }

@@ -11,11 +11,15 @@ export const navigation = {
       title: "Chart of Accounts",
       url: "#",
       icon: IconChartPie,
-      isActive: false,
+      isActive: true,
       items: [
         {
           title: "Structure",
           url: "/chart-of-accounts/structure",
+        },
+        {
+          title: "GL mapping",
+          url: "/chart-of-accounts/gl-mapping",
         },
       ],
     },

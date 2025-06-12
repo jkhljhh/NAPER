@@ -76,10 +76,13 @@ function F({ id }: { id: number }) {
             <DialogDescription>{PageData.description}</DialogDescription>
           </DialogHeader>
 
-          <div className="overflow-y-auto max-h-[80vh]">
-            <CsvUpload id={id} schema={schema} setCsvData={setCsvData} />
-            <CsvPreviewTable data={csvData} />
-          </div>
+          <CsvUpload
+            id={id}
+            schema={schema}
+            setCsvData={setCsvData}
+            hasData={csvData.length !== 0}
+          />
+          <CsvPreviewTable data={csvData} />
 
           <DialogFooter>
             <DialogClose asChild>
