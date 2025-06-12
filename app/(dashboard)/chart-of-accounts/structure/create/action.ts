@@ -3,11 +3,15 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { z } from "zod";
+
 import { validatedActionWithUser } from "@/lib/action-helpers";
 import { createClient } from "@/lib/supabase/server";
 import { toSupabaseError } from "@/lib/supabase/error";
 
-import { schemaArray } from "./shared";
+import { schema } from "./shared";
+
+const schemaArray = z.array(schema);
 
 export const formAction = validatedActionWithUser(schemaArray, async (body) => {
   try {

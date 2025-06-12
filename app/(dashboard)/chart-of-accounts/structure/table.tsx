@@ -20,13 +20,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, getEnumOptions } from "@/lib/utils";
 
 import { Form as DeleteForm } from "./delete/form";
 import { Form as EditForm } from "./edit/form";
-import { type Schema } from "./edit/shared";
+import { type Schema, schema } from "./edit/shared";
 
 type TableSchema = Schema;
+const tableSchema = schema;
 
 type TableProps = {
   startRange: { min: number; max: number } | null;
@@ -124,11 +125,7 @@ export function Table({ startRange, endRange, data, count }: TableProps) {
       meta: {
         label: "Type",
         variant: "multiSelect",
-        options: [
-          { label: "Expense", value: "expense" },
-          { label: "Income", value: "income" },
-          { label: "Derived", value: "derived" },
-        ],
+        options: getEnumOptions(tableSchema, "type"),
       },
       enableColumnFilter: true,
     },
@@ -146,7 +143,6 @@ export function Table({ startRange, endRange, data, count }: TableProps) {
         label: "Start",
         placeholder: "num",
         variant: "range",
-
         range: [startRange!.min, startRange!.max],
       },
       enableColumnFilter: true,

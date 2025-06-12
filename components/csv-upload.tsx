@@ -76,7 +76,7 @@ export function CsvUpload<T extends ZodRawShape>({
             const validated = z.array(schema).safeParse(dataWithEntity);
 
             if (!validated.success) {
-              console.log(validated);
+              console.error(validated.error);
               toast.error("Invalid CSV data");
               setFiles([]);
               setCsvData([]);

@@ -1,18 +1,12 @@
 // Filename: shared.ts
 // Path: @/app/(dashboard)/branch/schema/edit/
 import { z } from "zod";
+import { baseSchema } from "../base-schema";
 
-export const schema = z.object({
-  id: z.coerce.number().int().nonnegative(),
-  code: z.string(),
-  name: z.string().min(1, "Name is required"),
-  city: z.string(),
-  state: z.string(),
-  latitude: z.string(),
-  longitude: z.string(),
-  type: z.enum(["urban", "rural"]),
-  zone: z.string(),
-  opening_date: z.date(),
-});
+export const schema = z
+  .object({
+    id: z.coerce.number().int().nonnegative(),
+  })
+  .merge(baseSchema);
 
 export type Schema = z.infer<typeof schema>;

@@ -1,21 +1,128 @@
-code,name,city,state,latitude,longitude,type,zone,opening_date
-BR1001,Mumbai,Mumbai,Maharashtra,19.076,72.8777,Urban,West,2002-07-15
-BR1002,Delhi,Delhi,Delhi (NCT),28.6139,77.209,Urban,North,2005-11-02
-BR1003,Chennai,Chennai,Tamil Nadu,13.0827,80.2707,Urban,South,2009-03-21
-BR1004,Kolkata,Kolkata,West Bengal,22.5726,88.3639,Urban,East,2001-06-08
-BR1005,Bangalore,Bangalore,Karnataka,12.9716,77.5946,Urban,South,2010-09-27
-BR1006,Ahmedabad,Ahmedabad,Gujarat,23.0225,72.5714,Urban,West,2003-02-13
-BR1007,Jaipur,Jaipur,Rajasthan,26.9124,75.7873,Urban,West,2012-01-05
-BR1008,Lucknow,Lucknow,Uttar Pradesh,26.8467,80.9462,Urban,North,2015-04-18
-BR1009,Patna,Patna,Bihar,25.5941,85.1376,Urban,East,2008-08-30
-BR1010,Thiruvananthapuram,Thiruvananthapuram,Kerala,8.5241,76.9366,Urban,South,2013-05-22
-BR1011,Coimbatore,Coimbatore,Tamil Nadu,11.0168,76.9558,Urban,South,2011-10-10
-BR1012,Vijayawada,Vijayawada,Andhra Pradesh,16.5062,80.648,Urban,South,2007-12-04
-BR1013,Jodhpur,Jodhpur,Rajasthan,26.2389,73.0243,Urban,West,2016-03-19
-BR1014,Vadodara,Vadodara,Gujarat,22.3072,73.1812,Urban,West,2014-07-07
-BR1015,Varanasi,Varanasi,Uttar Pradesh,25.3176,82.9739,Urban,North,2020-01-14
-BR1016,Palghar,Palghar,Maharashtra,19.6869,72.7736,Rural,West,2023-06-01
-BR1017,Saharanpur,Saharanpur,Uttar Pradesh,29.9672,77.5512,Rural,North,2017-09-09
-BR1018,Cooch Behar,Cooch Behar,West Bengal,26.3227,89.4455,Rural,East,2018-11-23
-BR1019,Karimnagar,Karimnagar,Telangana,18.4386,79.1285,Rural,South,2022-04-12
-BR1020,Dhule,Dhule,Maharashtra,20.9042,74.7831,Rural,West,2019-02-28
+code,name,city,state,latitude,longitude,opening_date,type,region,category,type_acceptance,rpc_linked,pincode
+BR672,Hindupur,Hindupur,Andhra Pradesh,15.9129,79.74,01/01/2020,Retail,South,Urban,CASH+CHQ,YES,500001
+BR1121,Hyderabad-MGRoad,Hyderabad,Andhra Pradesh,15.9129,79.74,01/02/2020,Business Banking,South,Metro,,CASH+CHQ,500001
+BR596,Hyderabad-Malakpet,Hyderabad,Andhra Pradesh,15.9129,79.74,01/03/2020,Retail,South,Metro,,CASH+CHQ,500001
+BR1313,Ongole,Ongole,Andhra Pradesh,15.9129,79.74,01/04/2020,Retail,South,Urban,CASH+CHQ,YES,500001
+BR706,Itanagar,Itanagar,Arunachal Pradesh,28.218,94.7278,01/05/2020,Retail,East,Semi Urban,CASH+CHQ,YES,791111
+BR708,Bongaigaon,Bongaigaon,Assam,26.2006,92.9376,01/06/2020,Retail,East,Semi Urban,CASH+CHQ,YES,781001
+BR839,Dibrugarh,Dibrugarh,Assam,26.2006,92.9376,01/07/2020,Retail,East,Urban,CASH+CHQ,YES,781001
+BR2151,Guwahati-Ganeshguri,Guwahati,Assam,26.2006,92.9376,01/08/2020,Retail,East,Urban,,CASH+CHQ,781001
+BR709,Tezpur,Tezpur,Assam,26.2006,92.9376,01/09/2020,Retail,East,Semi Urban,CASH+CHQ,YES,781001
+BR710,Gopalganj,Gopalganj,Bihar,25.0961,85.3131,01/10/2020,Retail,East,Semi Urban,CASH+CHQ,YES,800001
+BR579,Patna-BSFCFraser Road,Patna,Bihar,25.0961,85.3131,01/11/2020,Retail,East,Metro,,CASH+CHQ,800001
+BR622,Arrah,Arrah,Bihar,25.0961,85.3131,01/12/2020,Retail,East,Urban,CASH+CHQ,YES,800001
+BR1337,Sitamarhi,Sitamarhi,Bihar,25.0961,85.3131,01/13/2020,Retail,East,Semi Urban,CASH+CHQ,YES,800001
+BR1638,Chandigarh-Sector8-Wealth Branch,Chandigarh,Chandigarh,30.7333,76.7794,01/14/2020,Wealth,North,Urban,,CASH+CHQ,160017
+BR1084,Chandigarh-Sector46,Chandigarh,Chandigarh,30.7333,76.7794,01/15/2020,Retail,North,Urban,,CASH+CHQ,160017
+BR403,Chandigarh-Infosys,Chandigarh,Chandigarh,30.7333,76.7794,01/16/2020,Retail,North,Urban,,CASH+CHQ,160017
+BR6592,Chandigarh-Sector44B,Chandigarh,Chandigarh,30.7333,76.7794,01/17/2020,Retail,North,Urban,,CASH+CHQ,160017
+BR425,Ambikapur,Ambikapur,Chhattisgarh,21.2787,81.8661,01/18/2020,Retail,West,Semi Urban,CASH+CHQ,YES,492001
+BR1345,Bhatapara,Bhatapara,Chhattisgarh,21.2787,81.8661,01/19/2020,Retail,West,Semi Urban,CASH+CHQ,YES,492001
+BR623,Durg,Durg,Chhattisgarh,21.2787,81.8661,01/20/2020,Retail,West,Urban,CASH+CHQ,YES,492001
+BR6581,Raipur-Sadar Bazar,Raipur,Chhattisgarh,21.2787,81.8661,01/21/2020,Retail,West,Urban,,CASH+CHQ,492001
+BR422,Silvassa,Silvasa,Dadraand Nagar Haveli,20.1809,73.0169,01/22/2020,Retail,West,Semi Urban,CASH+CHQ,YES,396230
+BR6554,Silvasa-Vapi Road,Silvasa,Dadraand Nagar Haveli,20.1809,73.0169,01/23/2020,Retail,West,Semi Urban,,CASH+CHQ,396230
+BR456,Daman,Daman,Damanand Diu,20.4283,72.8397,01/24/2020,Retail,West,Semi Urban,CASH+CHQ,YES,396210
+BR6295,New Delhi-Sadar Bazar,New Delhi,Delhi,28.6139,77.209,01/25/2020,Retail,North,Metro,,CASH+CHQ,110001
+BR6291,New Delhi-Karol Bagh,New Delhi,Delhi,28.6139,77.209,01/26/2020,Retail,North,Metro,,CASH+CHQ,110001
+BR335,New Delhi-Naraina Vihar,New Delhi,Delhi,28.6139,77.209,01/27/2020,Retail,North,Metro,,CASH+CHQ,110001
+BR6294,New Delhi-Nehru Place,New Delhi,Delhi,28.6139,77.209,01/28/2020,Business Banking,North,Metro,,CASH+CHQ,110001
+BR1362,Calangute,Calangute,Goa,15.2993,74.124,01/29/2020,Retail,West,Semi Urban,,CASH+CHQ,403001
+BR1140,Canacona,Canacona,Goa,15.2993,74.124,01/30/2020,Retail,West,Semi Urban,,CASH+CHQ,403001
+BR6994,Panjim,Goa,Goa,15.2993,74.124,01/31/2020,Retail,West,Semi Urban,,CASH+CHQ,403001
+BR1983,Panaji-Taleigao,Taleigao,Goa,15.2993,74.124,02/01/2020,Retail,West,Urban,,CASH+CHQ,403001
+BR205,Jamnagar-Indira Gandhi Marg,Jamnagar,Gujarat,22.2587,71.1924,02/02/2020,Retail,West,Urban,CASH+CHQ,YES,380001
+BR1386,Surat-Rander,Surat,Gujarat,22.2587,71.1924,02/03/2020,Retail,West,Metro,,CASH+CHQ,380001
+BR930,Ahmedabad-Bapunagar,Ahmedabad,Gujarat,22.2587,71.1924,02/04/2020,Retail,West,Metro,,CASH+CHQ,380001
+BR2236,Antela,Dahod,Gujarat,22.2587,71.1924,02/05/2020,Retail,West,Rural,,CASH+CHQ,380001
+BR6623,Sonepat-Sikka Colony,Sonepat,Haryana,29.0588,76.0856,02/06/2020,Retail,North,Urban,,CASH+CHQ,131001
+BR168,Rohtak,Rohtak,Haryana,29.0588,76.0856,02/07/2020,Retail,North,Urban,CASH+CHQ,YES,131001
+BR859,Adampur,Adampur,Haryana,29.0588,76.0856,02/08/2020,Retail,North,Semi Urban,CASH+CHQ,YES,131001
+BR484,Tarori Mandi,Karnal,Haryana,29.0588,76.0856,02/09/2020,Retail,North,Semi Urban,CASH+CHQ,YES,131001
+BR504,Solan,Solan,Himachal Pradesh,31.1048,77.1734,02/10/2020,Retail,North,Semi Urban,CASH+CHQ,YES,171001
+BR1407,Paonta Sahib,Paonta Sahib,Himachal Pradesh,31.1048,77.1734,02/11/2020,Retail,North,Semi Urban,CASH+CHQ,YES,171001
+BR499,Baddi,Baddi,Himachal Pradesh,31.1048,77.1734,02/12/2020,Retail,North,Semi Urban,CASH+CHQ,YES,171001
+BR936,Palampur,Palampur,Himachal Pradesh,31.1048,77.1734,02/13/2020,Retail,North,Rural,CASH+CHQ,YES,171001
+BR266,Jammu-Residency Road,Jammu,Jammuand Kashmir,33.7782,76.5762,02/14/2020,Retail,North,Urban,CASH+CHQ,YES,180001
+BR447,Udhampur,Udhampur,Jammuand Kashmir,33.7782,76.5762,02/15/2020,Retail,North,Semi Urban,CASH+CHQ,YES,180001
+BR863,Samba,Jammu,Jammuand Kashmir,33.7782,76.5762,02/16/2020,Retail,North,Semi Urban,,CASH+CHQ,180001
+BR1041,Jammu-Gandhinagar,Jammu,Jammuand Kashmir,33.7782,76.5762,02/17/2020,Retail,North,Urban,,CASH+CHQ,180001
+BR265,Bokaro,Bokaro,Jharkhand,23.6102,85.2799,02/18/2020,Retail,East,Urban,CASH+CHQ,YES,834001
+BR175,Ranchi,Ranchi,Jharkhand,23.6102,85.2799,02/19/2020,Business Banking,East,Urban,CASH+CHQ,YES,834001
+BR1787,Jhumri Talaiya,Jhumaritalaiya,Jharkhand,23.6102,85.2799,02/20/2020,Retail,East,Semi Urban,CASH+CHQ,YES,834001
+BR474,Chas,Bokaro,Jharkhand,23.6102,85.2799,02/21/2020,Retail,East,Semi Urban,,CASH+CHQ,834001
+BR522,Haveri,Haveri,Karnataka,15.3173,75.7139,02/22/2020,Retail,South,Semi Urban,YES,HAVERIBRANCH,560001
+BR298,Bangalore-HRBRLayout,Bangalore,Karnataka,15.3173,75.7139,02/23/2020,Retail,South,Metro,CASH+CHQ,YES,560001
+BR297,Bangalore-BTM2nd Stage,Bangalore,Karnataka,15.3173,75.7139,02/24/2020,Retail,South,Metro,,CASH+CHQ,560001
+BR1427,Koppal,Koppal,Karnataka,15.3173,75.7139,02/25/2020,Retail,South,Semi Urban,CASH+CHQ,YES,560001
+BR1164,Kochi-Wellington Island,Kochi,Kerala,10.8505,76.2711,02/26/2020,Retail,South,Urban,,CASH+CHQ,695001
+BR751,Adoor,Adoor,Kerala,10.8505,76.2711,02/27/2020,Retail,South,Semi Urban,CASH+CHQ,YES,695001
+BR10,Ernakulam,Kochi,Kerala,10.8505,76.2711,02/28/2020,Mega Retail,South,Urban,CASH+CHQ,YES,695001
+BR940,Kothamangalam-Ernakulam,Kochi,Kerala,10.8505,76.2711,02/29/2020,Retail,South,Semi Urban,CASH+CHQ,YES,695001
+BR1191,Bhopal-Bairagarh,Bhopal,Madhya Pradesh,22.9734,78.6569,03/01/2020,Retail,West,Metro,,CASH+CHQ,462001
+BR948,Rewa,Rewa,Madhya Pradesh,22.9734,78.6569,03/02/2020,Retail,West,Urban,CASH+CHQ,YES,462001
+BR758,Damoh,Damoh,Madhya Pradesh,22.9734,78.6569,03/03/2020,Retail,West,Urban,CASH+CHQ,YES,462001
+BR490,Barwani,Barwani,Madhya Pradesh,22.9734,78.6569,03/04/2020,Retail,West,Semi Urban,CASH+CHQ,YES,462001
+BR412,Mumbai-Versova,Mumbai,Maharashtra,19.7515,75.7139,03/05/2020,Retail,West,Metro,,CASH+CHQ,400001
+BR388,Mumbai-Malad-Mindspace,Mumbai,Maharashtra,19.7515,75.7139,03/06/2020,Retail,West,Metro,,CASH+CHQ,400001
+BR1965,Nagpur-Shankar Nagar,Nagpur,Maharashtra,19.7515,75.7139,03/07/2020,Retail,West,Metro,,CASH+CHQ,400001
+BR6970,Aurangabad-Jalna Road,Aurangabad,Maharashtra,19.7515,75.7139,03/08/2020,Retail,West,Urban,,CASH+CHQ,400001
+BR959,Imphal West,Imphal,Manipur,24.6637,93.9063,03/09/2020,Retail,East,Urban,CASH+CHQ,YES,795001
+BR636,Tura,Tura,Meghalaya,25.467,91.3662,03/10/2020,Retail,East,Semi Urban,CASH+CHQ,YES,793001
+BR352,Meghalaya-Shillong,Shillong,Meghalaya,25.467,91.3662,03/11/2020,Retail,East,Urban,CASH+CHQ,YES,793001
+BR772,Aizawl,Aizawl,Mizoram,23.1645,92.9376,03/12/2020,Retail,East,Urban,CASH+CHQ,YES,796001
+BR961,Kohima,Kohima,Nagaland,26.1584,94.5624,03/13/2020,Retail,East,Semi Urban,CASH+CHQ,YES,797001
+BR476,Dimapur,Dimapur,Nagaland,26.1584,94.5624,03/14/2020,Retail,East,Semi Urban,CASH+CHQ,YES,797001
+BR1495,Cuttack-Chowdhury Bazaar,Cuttack,Orissa,20.9517,85.0985,03/15/2020,Retail,East,Urban,,CASH+CHQ,751001
+BR525,Bolangir,Bolangir,Orissa,20.9517,85.0985,03/16/2020,Retail,East,Semi Urban,CASH+CHQ,YES,751001
+BR6586,Bhubneshwar-Ashok Nagar,Bhubaneswar,Orissa,20.9517,85.0985,03/17/2020,Retail,East,Urban,,CASH+CHQ,751001
+BR779,Joda,Joda,Orissa,20.9517,85.0985,03/18/2020,Retail,East,Semi Urban,CASH+CHQ,YES,751001
+BR1892,Needarajayapeer Street,Pondicherry,Pondicherry,11.9416,79.8083,03/19/2020,Retail,South,Urban,,CASH+CHQ,605001
+BR56,Pondicherry-Mission Street,Pondicherry,Pondicherry,11.9416,79.8083,03/20/2020,Business Banking,South,Urban,CASH+CHQ,YES,605001
+BR6233,Pondicherry-IGSquare,Pondicherry,Pondicherry,11.9416,79.8083,03/21/2020,Retail,South,Urban,,CASH+CHQ,605001
+BR996,Karaikal,Karaikal,Pondicherry,11.9416,79.8083,03/22/2020,Retail,South,Semi Urban,CASH+CHQ,YES,605001
+BR2176,Jalandhar-Rama Mandi,Jalandhar,Punjab,30.7333,76.7794,03/23/2020,Retail,North,Urban,,CASH+CHQ,160062
+BR968,Ahmedgarh,Ahmedgarh,Punjab,30.7333,76.7794,03/24/2020,Retail,North,Semi Urban,CASH+CHQ,YES,160062
+BR6600,Mohali-Sector70,Mohali,Punjab,30.7333,76.7794,03/25/2020,Retail,North,Urban,,CASH+CHQ,160062
+BR6593,Amritsar-Gopal Nagar,Amritsar,Punjab,30.7333,76.7794,03/26/2020,Retail,North,Metro,,CASH+CHQ,160062
+BR6758,Jaipur-Jawahar Nagar,Jaipur,Rajasthan,27.0238,74.2179,03/27/2020,Retail,North,Metro,,CASH+CHQ,302001
+BR6835,Jodhpur-Sardarpura,Jodhpur,Rajasthan,27.0238,74.2179,03/28/2020,Business Banking,North,Urban,,CASH+CHQ,302001
+BR6864,Isarda-Main Bazar,Isarda,Rajasthan,27.0238,74.2179,03/29/2020,Retail,North,Rural,,CASH+CHQ,302001
+BR454,Bundi,Bundi,Rajasthan,27.0238,74.2179,03/30/2020,Retail,North,Semi Urban,CASH+CHQ,YES,302001
+BR470,Gangtok,Gangtok,Sikkim,27.533,88.5122,03/31/2020,Retail,East,Semi Urban,CASH+CHQ,YES,737101
+BR6155,Athikkadai,Athikkadai,Tamil Nadu,11.1271,78.6569,04/01/2020,Retail,South,Rural,CASH+CHQ,YES,600001
+BR886,Sankari,Sankagiri,Tamil Nadu,11.1271,78.6569,04/02/2020,Retail,South,Semi Urban,,CASH+CHQ,600001
+BR6075,Konapet,Konapet,Tamil Nadu,11.1271,78.6569,04/03/2020,Retail,South,Rural,CASH+CHQ,YES,600001
+BR6204,Trichy-Cantonment,Trichy,Tamil Nadu,11.1271,78.6569,04/04/2020,Retail,South,Urban,,CASH+CHQ,600001
+BR471,Agartala,Agartala,Tripura,23.9408,91.9882,04/05/2020,Retail,East,Urban,CASH+CHQ,YES,799001
+BR192,Barielly,Bareilly,Uttar Pradesh,26.8467,80.9462,04/06/2020,Retail,North,Urban,CASH+CHQ,YES,226001
+BR2183,Greater Noida-Omega1,Greater Noida,Uttar Pradesh,26.8467,80.9462,04/07/2020,Retail,North,Urban,,CASH+CHQ,226001
+BR665,Hardoi,Hardoi,Uttar Pradesh,26.8467,80.9462,04/08/2020,Retail,North,Urban,CASH+CHQ,YES,226001
+BR818,Mirzapur,Mirzapur,Uttar Pradesh,26.8467,80.9462,04/09/2020,Retail,North,Urban,CASH+CHQ,YES,226001
+BR913,Roorkee,Roorkee,Uttarakhand,30.0668,79.0193,04/10/2020,Retail,North,Semi Urban,CASH+CHQ,YES,248001
+BR1589,Pithoragarh,Pithoragarh,Uttarakhand,30.0668,79.0193,04/11/2020,Retail,North,Semi Urban,CASH+CHQ,YES,248001
+BR912,Almora,Almora,Uttarakhand,30.0668,79.0193,04/12/2020,Retail,North,Semi Urban,CASH+CHQ,YES,248001
+BR1064,Kolkata-Tollygunge,Kolkata,West Bengal,22.9868,87.855,04/13/2020,Retail,East,Metro,,CASH+CHQ,700001
+BR1285,Kolkata-Strand Road-Wealth Branch,Kolkata,West Bengal,22.9868,87.855,04/14/2020,Wealth,East,Metro,,CASH+CHQ,700001
+BR372,Kolkata-Sarat Bose Road,Kolkata,West Bengal,22.9868,87.855,04/15/2020,Retail,East,Metro,,CASH+CHQ,700001
+BR903,Tamluk,Tamluk,West Bengal,22.9868,87.855,04/16/2020,Retail,East,Semi Urban,CASH+CHQ,YES,700001
+BR1001,Mumbai Branch,Mumbai,Maharashtra,19.076,72.8777,04/17/2020,Retail,West,Urban,CASH+CHQ,YES,400001
+BR1002,Delhi Branch,Delhi,Delhi (NCT),28.6139,77.209,04/18/2020,Business Banking,North,Metro,NULL,CASH+CHQ,110001
+BR1003,Chennai Branch,Chennai,Tamil Nadu,13.0827,80.2707,04/19/2020,Retail,South,Metro,NULL,CASH+CHQ,600001
+BR1004,Kolkata Branch,Kolkata,West Bengal,22.5726,88.3639,04/20/2020,Retail,East,Urban,CASH+CHQ,YES,700001
+BR1005,Bangalore Branch,Bangalore,Karnataka,12.9716,77.5946,04/21/2020,Retail,South,Semi Urban,CASH+CHQ,YES,560001
+BR1006,Ahmedabad Branch,Ahmedabad,Gujarat,23.0225,72.5714,04/22/2020,Retail,West,Semi Urban,CASH+CHQ,YES,380001
+BR1007,Jaipur Branch,Jaipur,Rajasthan,26.9124,75.7873,04/23/2020,Retail,West,Urban,CASH+CHQ,YES,302001
+BR1008,Lucknow Branch,Lucknow,Uttar Pradesh,26.8467,80.9462,04/24/2020,Retail,North,Urban,NULL,CASH+CHQ,226001
+BR1009,Patna Branch,Patna,Bihar,25.5941,85.1376,04/25/2020,Retail,East,Semi Urban,CASH+CHQ,YES,800001
+BR1010,Thiruvananthapuram Branch,Thiruvananthapuram,Kerala,8.5241,76.9366,04/26/2020,Retail,South,Semi Urban,CASH+CHQ,YES,695001
+BR1011,Coimbatore Branch,Coimbatore,Tamil Nadu,11.0168,76.9558,04/27/2020,Retail,South,Metro,NULL,CASH+CHQ,600001
+BR1012,Vijayawada Branch,Vijayawada,Andhra Pradesh,16.5062,80.648,04/28/2020,Retail,South,Urban,CASH+CHQ,YES,500001
+BR1013,Jodhpur Branch,Jodhpur,Rajasthan,26.2389,73.0243,04/29/2020,Retail,West,Semi Urban,CASH+CHQ,YES,302001
+BR1014,Vadodara Branch,Vadodara,Gujarat,22.3072,73.1812,04/30/2020,Wealth,West,Urban,NULL,CASH+CHQ,380001
+BR1015,Varanasi Branch,Varanasi,Uttar Pradesh,25.3176,82.9739,05/01/2020,Retail,North,Urban,NULL,CASH+CHQ,226001
+BR1016,Palghar Branch,Palghar,Maharashtra,19.6869,72.7736,05/02/2020,Retail,West,Urban,NULL,CASH+CHQ,400001
+BR1017,Saharanpur Branch,Saharanpur,Uttar Pradesh,29.9672,77.5512,05/03/2020,Retail,North,Urban,NULL,CASH+CHQ,226001
+BR1018,Cooch Behar Branch,Cooch Behar,West Bengal,26.3227,89.4455,05/04/2020,Retail,East,Semi Urban,CASH+CHQ,YES,700001
+BR1019,Karimnagar Branch,Karimnagar,Telangana,18.4386,79.1285,05/05/2020,Retail,South,Semi Urban,CASH+CHQ,YES,500001
+BR1020,Dhule Branch,Dhule,Maharashtra,20.9042,74.7831,05/06/2020,Retail,West,Urban,CASH+CHQ,YES,400001
