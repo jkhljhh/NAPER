@@ -11,6 +11,7 @@ async function getTableData(paginationStart: number, paginationEnd: number) {
   const { data, count, error } = await supabase
     .from("chart_of_accounts_gl_mapping")
     .select("id, code, pnl_head, type, description", { count: "exact" })
+    .order("code", { ascending: true })
     .range(paginationStart, paginationEnd);
 
   if (error || !data) {

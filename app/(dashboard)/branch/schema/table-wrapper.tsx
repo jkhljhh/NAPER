@@ -15,6 +15,7 @@ async function getTableData(paginationStart: number, paginationEnd: number) {
       "id,code,name,state,city,pincode,region,latitude,longitude,type_acceptance,rpc_linked,type,opening_date,category",
       { count: "exact" },
     )
+    .order("code", { ascending: true })
     .range(paginationStart, paginationEnd);
 
   if (error || !data) {
