@@ -4,6 +4,7 @@
 
 import React, { useRef, useState, useTransition } from "react";
 import { toast } from "sonner";
+import { IconTableImport } from "@tabler/icons-react";
 
 import {
   Dialog,
@@ -63,7 +64,10 @@ function F({ id }: { id: number }) {
     <div>
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="outline">Import</Button>
+          <Button variant="outline" className="h-8">
+            <IconTableImport />
+            Import
+          </Button>
         </DialogTrigger>
         <DialogContent
           className={cn(

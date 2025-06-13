@@ -4,6 +4,7 @@
 
 import React, { useRef, useState, useTransition } from "react";
 import { toast } from "sonner";
+import { IconTableImport } from "@tabler/icons-react";
 
 import {
   Dialog,
@@ -31,7 +32,6 @@ const PageData = {
 
 function F({ id }: { id: number }) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [fileName, setFileName] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
   const [csvData, setCsvData] = useState<Schema[]>([]);
 
@@ -40,7 +40,6 @@ function F({ id }: { id: number }) {
       inputRef.current.value = "";
     }
     setCsvData([]);
-    setFileName(null);
   };
 
   function onSubmit() {
@@ -65,7 +64,10 @@ function F({ id }: { id: number }) {
     <div>
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="outline">Import</Button>
+          <Button variant="outline" className="h-8">
+            <IconTableImport />
+            Import
+          </Button>
         </DialogTrigger>
         <DialogContent
           className={cn(
