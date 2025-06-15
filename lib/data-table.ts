@@ -30,9 +30,10 @@ export function getCommonPinningStyles<TData>({
       : undefined,
     left: isPinned === "left" ? `${column.getStart("left")}px` : undefined,
     right: isPinned === "right" ? `${column.getAfter("right")}px` : undefined,
-    opacity: isPinned ? 0.97 : 1,
+    // opacity: isPinned ? 0.6 : 1,
+    backdropFilter: isPinned ? "blur(8px)" : "",
     position: isPinned ? "sticky" : "relative",
-    background: isPinned ? "var(--background)" : "",
+    background: isPinned ? "var(--background)/10" : "",
     width: column.getSize(),
     zIndex: isPinned ? 1 : 0,
   };
