@@ -7,7 +7,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { IconCheck, IconSelector } from "@tabler/icons-react";
 import { toast } from "sonner";
-import { US } from "country-flag-icons/react/3x2";
 
 import ReactCountryFlag from "react-country-flag";
 
