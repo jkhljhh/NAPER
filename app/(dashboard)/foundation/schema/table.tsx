@@ -5,6 +5,7 @@
 import * as React from "react";
 
 import type { Column, ColumnDef } from "@tanstack/react-table";
+import { VariantProps } from "class-variance-authority";
 import { MoreHorizontal, Text } from "lucide-react";
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
 
@@ -18,7 +19,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Badge } from "@/components/ui/badge";
+import { Badge, badgeVariants } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { cn, getEnumOptions } from "@/lib/utils";
 
@@ -28,6 +29,7 @@ import { type Schema, schema } from "./edit/shared";
 
 type TableSchema = Schema;
 const tableSchema = schema;
+type BadgeVariant = VariantProps<typeof badgeVariants>["variant"];
 
 type TableProps = {
   data: TableSchema[];
@@ -136,8 +138,15 @@ export function Table({ data, count }: TableProps) {
       ),
       cell: ({ cell }) => {
         const item = cell.getValue<TableSchema["region"]>();
+        const variantMap: Record<TableSchema["region"], BadgeVariant> = {
+          north: "green",
+          south: "yellow",
+          east: "blue",
+          west: "purple",
+        };
+        const variant = variantMap[item];
         return (
-          <Badge variant="outline" className="capitalize">
+          <Badge variant={variant} className="capitalize">
             {item}
           </Badge>
         );
@@ -213,19 +222,15 @@ export function Table({ data, count }: TableProps) {
       ),
       cell: ({ cell }) => {
         const item = cell.getValue<TableSchema["type"]>();
+        const variantMap: Record<TableSchema["type"], BadgeVariant> = {
+          wealth: "green",
+          retail: "yellow",
+          "business banking": "blue",
+          "mega retail": "purple",
+        };
+        const variant = variantMap[item];
         return (
-          <Badge
-            variant="outline"
-            className={cn(
-              item === "wealth" &&
-                "bg-green-400/10 text-green-600 border-green-400/50",
-              item === "retail" &&
-                "bg-lime-500/10 text-lime-500/80 border-lime-400/50",
-              item === "business banking" &&
-                "bg-sky-400/10 text-sky-600/80 border-sky-400/50",
-              "capitalize",
-            )}
-          >
+          <Badge variant={variant} className="capitalize">
             {item}
           </Badge>
         );
@@ -259,8 +264,15 @@ export function Table({ data, count }: TableProps) {
       ),
       cell: ({ cell }) => {
         const item = cell.getValue<TableSchema["category"]>();
+        const variantMap: Record<TableSchema["category"], BadgeVariant> = {
+          metro: "green",
+          rural: "yellow",
+          "semi urban": "blue",
+          urban: "purple",
+        };
+        const variant = variantMap[item];
         return (
-          <Badge variant="outline" className="capitalize">
+          <Badge variant={variant} className="capitalize">
             {item}
           </Badge>
         );

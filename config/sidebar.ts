@@ -2,58 +2,84 @@ import {
   IconChartPie,
   IconBuilding,
   IconSettings,
-  IconRobotFace,
+  IconBrain,
 } from "@tabler/icons-react";
 
 export const navigation = {
   main: [
     {
-      title: "Chart of Accounts",
-      url: "#",
-      icon: IconChartPie,
+      title: "Foundation",
+      url: "/foundation",
+      icon: IconBuilding,
       isActive: true,
       items: [
         {
+          title: "Initialize",
+          url: "/initialize",
+        },
+        {
+          title: "Configure",
+          url: "/configure",
+        },
+        {
+          title: "GL Mapping",
+          url: "/gl-mapping",
+        },
+        {
           title: "Structure",
-          url: "/chart-of-accounts/structure",
+          url: "/structure",
         },
         {
-          title: "GL mapping",
-          url: "/chart-of-accounts/gl-mapping",
+          title: "Branch Schema",
+          url: "/schema",
         },
-      ],
-    },
-    {
-      title: "Branch",
-      url: "#",
-      icon: IconBuilding,
-      isActive: false,
-      items: [
         {
-          title: "Schema",
-          url: "/branch/schema",
+          title: "Threshold",
+          url: "/threshold",
         },
       ],
     },
     {
-      title: "Model",
-      url: "#",
-      icon: IconRobotFace,
+      title: "Intelligence",
+      url: "/intelligence",
+      icon: IconBrain,
       isActive: false,
       items: [
         {
-          title: "Schema",
-          url: "/branch/schema",
+          title: "Enrich",
+          url: "#",
+        },
+        {
+          title: "Model",
+          url: "#",
+        },
+        {
+          title: "Tune",
+          url: "#",
+        },
+        {
+          title: "Validate",
+          url: "#",
+        },
+      ],
+    },
+    {
+      title: "Strategy",
+      url: "/strategy",
+      icon: IconChartPie,
+      isActive: false,
+      items: [
+        {
+          title: "Strategize",
+          url: "#",
+        },
+        {
+          title: "Deploy",
+          url: "#",
         },
       ],
     },
   ],
 
-  misc: [
-    {
-      title: "Settings",
-      url: "/settings",
-      icon: IconSettings,
-    },
-  ],
+  misc: [],
 };

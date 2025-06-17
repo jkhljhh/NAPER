@@ -1,9 +1,12 @@
-// app/dashboard/layout.tsx
+// Filename: layout.tsx
+// Path: @/app/(dashboard)/
 import { redirect } from "next/navigation";
 
-import { AppSidebar } from "@/components/app-sidebar";
+import { AppSidebar, AppSidebarBreadcrumb } from "@/components/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { createClient } from "@/lib/supabase/server";
+import { SiteContent } from "@/components/site-content";
+import { SiteHeader } from "@/components/site-header";
 
 export default async function DashboardLayout({
   children,
@@ -27,7 +30,12 @@ export default async function DashboardLayout({
       }
     >
       <AppSidebar variant="inset" user={data.user} />
-      <SidebarInset>{children}</SidebarInset>
+      <SidebarInset>
+        <SiteHeader>
+          <AppSidebarBreadcrumb />
+        </SiteHeader>
+        <SiteContent>{children}</SiteContent>
+      </SidebarInset>
     </SidebarProvider>
   );
 }

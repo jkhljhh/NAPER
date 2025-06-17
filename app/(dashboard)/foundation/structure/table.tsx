@@ -5,6 +5,7 @@
 import * as React from "react";
 
 import type { Column, ColumnDef } from "@tanstack/react-table";
+import { VariantProps } from "class-variance-authority";
 import { MoreHorizontal, Text } from "lucide-react";
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
 
@@ -18,9 +19,9 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Badge } from "@/components/ui/badge";
+import { Badge, badgeVariants } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { cn, getEnumOptions } from "@/lib/utils";
+import { getEnumOptions } from "@/lib/utils";
 
 import { Form as DeleteForm } from "./delete/form";
 import { Form as EditForm } from "./edit/form";
@@ -28,6 +29,7 @@ import { type Schema, schema } from "./edit/shared";
 
 type TableSchema = Schema;
 const tableSchema = schema;
+type BadgeVariant = VariantProps<typeof badgeVariants>["variant"];
 
 type TableProps = {
   startRange: { min: number; max: number } | null;
@@ -104,20 +106,15 @@ export function Table({ startRange, endRange, data, count }: TableProps) {
       ),
       cell: ({ cell }) => {
         const item = cell.getValue<TableSchema["type"]>();
+        const variantMap: Record<string, BadgeVariant> = {
+          income: "green",
+          expense: "yellow",
+          derived: "blue",
+        };
+        const variant = variantMap[item] ?? "outline";
 
         return (
-          <Badge
-            variant="outline"
-            className={cn(
-              item === "income" &&
-                "bg-green-400/10 text-green-600 border-green-400/50",
-              item === "expense" &&
-                "bg-rose-500/10 text-rose-500/80 border-rose-400/50",
-              item === "derived" &&
-                "bg-sky-400/10 text-sky-600/80 border-sky-400/50",
-              "capitalize",
-            )}
-          >
+          <Badge variant={variant} className="capitalize">
             {item}
           </Badge>
         );
