@@ -79,7 +79,7 @@ export const navigation = {
           url: "#",
         },
         {
-          title: "Tune",
+          title: "Tuning",
           url: "#",
         },
         {
