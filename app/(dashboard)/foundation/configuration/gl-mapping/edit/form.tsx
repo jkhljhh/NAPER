@@ -143,6 +143,20 @@ function F({ data }: { data: Schema }) {
               {/*  */}
               <FormField
                 control={form.control}
+                name="group"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Type</FormLabel>
+                    <FormControl>
+                      <Input placeholder="group" {...field} required />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/*  */}
+              <FormField
+                control={form.control}
                 name="description"
                 render={({ field }) => (
                   <FormItem>

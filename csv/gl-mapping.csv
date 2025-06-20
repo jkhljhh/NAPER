@@ -1,61 +1,61 @@
-﻿code,pnl_head,type,description
-4001,Interest Income,Loans to customers,Home loans
-4002,Interest Income,Loans to customers,Personal loans
-4003,Interest Income,Loans to customers,Auto loans
-4004,Interest Income,Loans to customers,Education loans
-4005,Interest Income,Loans to customers,Small-business (SME) loans
-4006,Interest Income,Advances,Overdrafts
-4007,Interest Income,Advances,Cash-credit facilities
-4008,Interest Income,Advances,Call loans
-4009,Interest Income,Investment income,Government securities (G-Sec)
-4010,Interest Income,Investment income,Corporate bonds
-4011,Interest Income,Investment income,Treasury bills
-4012,Interest Income,Inter-bank placements,Call money market
-5001,Interest Expense,Customer deposits,Savings accounts
-5002,Interest Expense,Customer deposits,Current accounts (overdraft interest)
-5003,Interest Expense,Customer deposits,Fixed-term deposits (FDs)
-5004,Interest Expense,Borrowings,Inter-bank borrowings (call/notice money)
-5005,Interest Expense,Borrowings,Repo / reverse-repo obligations
-5006,Interest Expense,Borrowings,Bonds and debentures issued
-5007,Interest Expense,Other funding costs,Commercial paper
-5008,Interest Expense,Other funding costs,Subordinated debt
-6001,Other Income,Fee & commission income,Account maintenance fees
-6002,Other Income,Fee & commission income,ATM / debit-card fees
-6003,Other Income,Fee & commission income,Loan processing fees
-6004,Other Income,Fee & commission income,Locker rental fees
-6005,Other Income,Trading & FX income,Equity trading gains
-6006,Other Income,Trading & FX income,Foreign-exchange dealing
-6007,Other Income,Trading & FX income,Derivatives trading
-6008,Other Income,Dividend income,Equity investments
-6009,Other Income,Dividend income,Mutual fund holdings
-6010,Other Income,Miscellaneous income,Safe-custody charges
-6011,Other Income,Miscellaneous income,Rental income (bank premises)
-7001,Operating Expenses,Personnel expenses,Salaries & wages
-7002,Operating Expenses,Personnel expenses,Bonuses & incentives
-7003,Operating Expenses,Personnel expenses,Staff training & welfare
-7004,Operating Expenses,Depreciation & amortization,Branch infrastructure
-7005,Operating Expenses,Depreciation & amortization,IT hardware & software
-7006,Operating Expenses,Occupancy expenses,Rent & lease rentals
-7007,Operating Expenses,Occupancy expenses,"Utilities (electricity, water)"
-7008,Operating Expenses,Occupancy expenses,Property maintenance
-7009,Operating Expenses,Administrative & other overheads,IT & telecom costs
-7010,Operating Expenses,Administrative & other overheads,Marketing & advertising
-7011,Operating Expenses,Administrative & other overheads,Legal & professional fees
-7012,Operating Expenses,Administrative & other overheads,Stationery & office supplies
-8001,Provisions & Contingencies,Loan-loss provisions,"Retail portfolio (home, auto, personal)"
-8002,Provisions & Contingencies,Loan-loss provisions,Corporate portfolio
-8003,Provisions & Contingencies,Loan-loss provisions,SME portfolio
-8004,Provisions & Contingencies,Contingent liability provisions,Legal claims
-8005,Provisions & Contingencies,Contingent liability provisions,Guarantees given
-8006,Provisions & Contingencies,Other credit provisions,Standard asset provisions
-8007,Provisions & Contingencies,Other credit provisions,COVID / special provisions
-9001,Tax Expense,Current tax liability,NULL
-9002,Tax Expense,Deferred tax (assets / liabilities),NULL
-99999,Net Interest Income (NII),Derived,Derived
-999999,Total Operating Income,Derived,Derived
-9999999,Operating Profit,Derived,Derived
-99999999,Profit Before Tax (PBT),Derived,Derived
-999999999,Net Profit / PAT,Derived,Derived
-4013,CASA Interest Spread,CASA,Interest Income
-4014,WC Utilization Revenue,Working Capital Loans,Interest Income
-4017,Card Fees,Credit Cards,Interest Income
+﻿code,pnl_head,group,description,type
+4001,Interest Income,Loans to customers,Home loans,income
+4002,Interest Income,Loans to customers,Personal loans,income
+4003,Interest Income,Loans to customers,Auto loans,income
+4004,Interest Income,Loans to customers,Education loans,income
+4005,Interest Income,Loans to customers,Small-business (SME) loans,income
+4006,Interest Income,Advances,Overdrafts,income
+4007,Interest Income,Advances,Cash-credit facilities,income
+4008,Interest Income,Advances,Call loans,income
+4009,Interest Income,Investment income,Government securities (G-Sec),income
+4010,Interest Income,Investment income,Corporate bonds,income
+4011,Interest Income,Investment income,Treasury bills,income
+4012,Interest Income,Inter-bank placements,Call money market,income
+5001,Interest Expense,Customer deposits,Savings accounts,income
+5002,Interest Expense,Customer deposits,Current accounts (overdraft interest),income
+5003,Interest Expense,Customer deposits,Fixed-term deposits (FDs),income
+5004,Interest Expense,Borrowings,Inter-bank borrowings (call/notice money),income
+5005,Interest Expense,Borrowings,Repo / reverse-repo obligations,income
+5006,Interest Expense,Borrowings,Bonds and debentures issued,income
+5007,Interest Expense,Other funding costs,Commercial paper,income
+5008,Interest Expense,Other funding costs,Subordinated debt,income
+6001,Other Income,Fee & commission income,Account maintenance fees,income
+6002,Other Income,Fee & commission income,ATM / debit-card fees,income
+6003,Other Income,Fee & commission income,Loan processing fees,income
+6004,Other Income,Fee & commission income,Locker rental fees,income
+6005,Other Income,Trading & FX income,Equity trading gains,income
+6006,Other Income,Trading & FX income,Foreign-exchange dealing,income
+6007,Other Income,Trading & FX income,Derivatives trading,income
+6008,Other Income,Dividend income,Equity investments,income
+6009,Other Income,Dividend income,Mutual fund holdings,income
+6010,Other Income,Miscellaneous income,Safe-custody charges,income
+6011,Other Income,Miscellaneous income,Rental income (bank premises),income
+7001,Operating Expenses,Personnel expenses,Salaries & wages,income
+7002,Operating Expenses,Personnel expenses,Bonuses & incentives,income
+7003,Operating Expenses,Personnel expenses,Staff training & welfare,income
+7004,Operating Expenses,Depreciation & amortization,Branch infrastructure,income
+7005,Operating Expenses,Depreciation & amortization,IT hardware & software,income
+7006,Operating Expenses,Occupancy expenses,Rent & lease rentals,income
+7007,Operating Expenses,Occupancy expenses,"Utilities (electricity, water)",income
+7008,Operating Expenses,Occupancy expenses,Property maintenance,income
+7009,Operating Expenses,Administrative & other overheads,IT & telecom costs,income
+7010,Operating Expenses,Administrative & other overheads,Marketing & advertising,income
+7011,Operating Expenses,Administrative & other overheads,Legal & professional fees,income
+7012,Operating Expenses,Administrative & other overheads,Stationery & office supplies,income
+8001,Provisions & Contingencies,Loan-loss provisions,"Retail portfolio (home, auto, personal)",income
+8002,Provisions & Contingencies,Loan-loss provisions,Corporate portfolio,income
+8003,Provisions & Contingencies,Loan-loss provisions,SME portfolio,income
+8004,Provisions & Contingencies,Contingent liability provisions,Legal claims,income
+8005,Provisions & Contingencies,Contingent liability provisions,Guarantees given,income
+8006,Provisions & Contingencies,Other credit provisions,Standard asset provisions,income
+8007,Provisions & Contingencies,Other credit provisions,COVID / special provisions,income
+9001,Tax Expense,Current tax liability,NULL,income
+9002,Tax Expense,Deferred tax (assets / liabilities),NULL,income
+99999,Net Interest Income (NII),Derived,Derived,income
+999999,Total Operating Income,Derived,Derived,income
+9999999,Operating Profit,Derived,Derived,income
+99999999,Profit Before Tax (PBT),Derived,Derived,income
+999999999,Net Profit / PAT,Derived,Derived,income
+4013,CASA Interest Spread,CASA,Interest Income,income
+4014,WC Utilization Revenue,Working Capital Loans,Interest Income,income
+4017,Card Fees,Credit Cards,Interest Income,income

@@ -5,6 +5,7 @@
 import * as React from "react";
 
 import type { Column, ColumnDef } from "@tanstack/react-table";
+import { VariantProps } from "class-variance-authority";
 import { MoreHorizontal, Text } from "lucide-react";
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
 
@@ -18,9 +19,9 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Badge } from "@/components/ui/badge";
+import { Badge, badgeVariants } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { cn, getEnumOptions } from "@/lib/utils";
+import { getEnumOptions } from "@/lib/utils";
 
 import { Form as DeleteForm } from "./delete/form";
 import { Form as EditForm } from "./edit/form";
@@ -28,6 +29,7 @@ import { type Schema, schema } from "./edit/shared";
 
 type TableSchema = Schema;
 const tableSchema = schema;
+type BadgeVariant = VariantProps<typeof badgeVariants>["variant"];
 
 type TableProps = {
   data: TableSchema[];
@@ -37,6 +39,11 @@ type TableProps = {
 export function Table({ data, count }: TableProps) {
   const [pnl_head] = useQueryState("pnl_head", parseAsString.withDefault(""));
 
+  const [type] = useQueryState(
+    "type",
+    parseAsArrayOf(parseAsString).withDefault([]),
+  );
+
   const filteredData = React.useMemo(() => {
     return data.filter((item) => {
       const matchesName =
@@ -45,7 +52,7 @@ export function Table({ data, count }: TableProps) {
 
       return matchesName;
     });
-  }, [data, pnl_head]);
+  }, [data, pnl_head, type]);
 
   const columns: ColumnDef<TableSchema>[] = [
     {
@@ -86,11 +93,37 @@ export function Table({ data, count }: TableProps) {
       ),
       cell: ({ cell }) => {
         const item = cell.getValue<TableSchema["type"]>();
-        return <div>{item}</div>;
+        const variantMap: Record<string, BadgeVariant> = {
+          income: "green",
+          expense: "yellow",
+          derived: "blue",
+        };
+        const variant = variantMap[item] ?? "outline";
+
+        return (
+          <Badge variant={variant} className="capitalize">
+            {item}
+          </Badge>
+        );
       },
       meta: {
         label: "Type",
+        variant: "multiSelect",
+        options: getEnumOptions(tableSchema, "type"),
       },
+      enableColumnFilter: true,
+    },
+    {
+      id: "group",
+      accessorKey: "group",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Group" />
+      ),
+      cell: ({ cell }) => {
+        const item = cell.getValue<TableSchema["group"]>();
+        return <div>{item}</div>;
+      },
+      meta: { label: "Group" },
       enableColumnFilter: true,
     },
     {

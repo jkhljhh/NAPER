@@ -1,9 +1,4 @@
-import {
-  IconChartPie,
-  IconBuilding,
-  IconSettings,
-  IconBrain,
-} from "@tabler/icons-react";
+import { IconChartPie, IconBuilding, IconBrain } from "@tabler/icons-react";
 
 export const navigation = {
   main: [
@@ -18,20 +13,32 @@ export const navigation = {
           url: "/initialize",
         },
         {
-          title: "Configure",
-          url: "/configure",
+          title: "Connect",
+          url: "/connect",
         },
         {
-          title: "GL Mapping",
-          url: "/gl-mapping",
+          title: "Configuration",
+          url: "/configuration",
+          items: [
+            {
+              title: "Core View",
+              url: "/core-view",
+            },
+            {
+              title: "GL Mapping",
+              url: "/gl-mapping",
+            },
+          ],
         },
         {
           title: "Structure",
           url: "/structure",
-        },
-        {
-          title: "Branch Schema",
-          url: "/schema",
+          items: [
+            {
+              title: "Branch",
+              url: "/branch",
+            },
+          ],
         },
         {
           title: "Threshold",
@@ -47,7 +54,25 @@ export const navigation = {
       items: [
         {
           title: "Enrich",
-          url: "#",
+          url: "/enrich",
+          items: [
+            {
+              title: "Holidays",
+              url: "/holidays",
+            },
+            {
+              title: "Weather",
+              url: "/weather",
+            },
+            {
+              title: "Events",
+              url: "/events",
+            },
+            {
+              title: "Promotions",
+              url: "/promotions",
+            },
+          ],
         },
         {
           title: "Model",
