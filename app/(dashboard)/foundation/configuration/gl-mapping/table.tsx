@@ -93,7 +93,7 @@ export function Table({ data, count }: TableProps) {
       ),
       cell: ({ cell }) => {
         const item = cell.getValue<TableSchema["type"]>();
-        const variantMap: Record<string, BadgeVariant> = {
+        const variantMap: Record<TableSchema["type"], BadgeVariant> = {
           income: "green",
           expense: "yellow",
           derived: "blue",
