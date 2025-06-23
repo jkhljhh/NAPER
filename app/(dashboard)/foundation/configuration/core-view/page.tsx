@@ -17,8 +17,8 @@ import { Form } from "./create/form";
 import { TableWrapper } from "./table-wrapper";
 
 const PageData = {
-  title: "Structure",
-  description: "Structure description",
+  title: "Core View",
+  description: "description",
 };
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;

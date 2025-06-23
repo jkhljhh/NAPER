@@ -86,6 +86,34 @@ export function Table({ data, count }: TableProps) {
       enableColumnFilter: true,
     },
     {
+      id: "region",
+      accessorKey: "region",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Region" />
+      ),
+      cell: ({ cell }) => {
+        const item = cell.getValue<TableSchema["region"]>();
+        const variantMap: Record<TableSchema["region"], BadgeVariant> = {
+          north: "green",
+          south: "yellow",
+          east: "blue",
+          west: "purple",
+        };
+        const variant = variantMap[item];
+        return (
+          <Badge variant={variant} className="capitalize">
+            {item}
+          </Badge>
+        );
+      },
+      meta: {
+        label: "Region",
+        variant: "multiSelect",
+        options: getEnumOptions(tableSchema, "region"),
+      },
+      enableColumnFilter: true,
+    },
+    {
       id: "state",
       accessorKey: "state",
       header: ({ column }) => (
@@ -129,34 +157,6 @@ export function Table({ data, count }: TableProps) {
         label: "Pincode",
       },
       // enableColumnFilter: true,
-    },
-    {
-      id: "region",
-      accessorKey: "region",
-      header: ({ column }) => (
-        <DataTableColumnHeader column={column} title="Region" />
-      ),
-      cell: ({ cell }) => {
-        const item = cell.getValue<TableSchema["region"]>();
-        const variantMap: Record<TableSchema["region"], BadgeVariant> = {
-          north: "green",
-          south: "yellow",
-          east: "blue",
-          west: "purple",
-        };
-        const variant = variantMap[item];
-        return (
-          <Badge variant={variant} className="capitalize">
-            {item}
-          </Badge>
-        );
-      },
-      meta: {
-        label: "Region",
-        variant: "multiSelect",
-        options: getEnumOptions(tableSchema, "region"),
-      },
-      enableColumnFilter: true,
     },
     {
       id: "latitude",

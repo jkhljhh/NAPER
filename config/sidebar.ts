@@ -72,6 +72,10 @@ export const navigation = {
               title: "Promotions",
               url: "/promotions",
             },
+            {
+              title: "Signals",
+              url: "/signals",
+            },
           ],
         },
         {

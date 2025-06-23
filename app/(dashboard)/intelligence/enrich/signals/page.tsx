@@ -1,5 +1,5 @@
 // Filename: page.tsx
-// Path: @/app/(dashboard)/branch/schema/
+// Path: @/app/(dashboard)/charts-of-accounts/structure/
 import * as React from "react";
 
 import { createClient } from "@/lib/supabase/server";
@@ -17,7 +17,7 @@ import { Form } from "./create/form";
 import { TableWrapper } from "./table-wrapper";
 
 const PageData = {
-  title: "Branch",
+  title: "Signals",
   description: "description",
 };
 
