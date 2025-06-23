@@ -1,5 +1,5 @@
 // Filename: base-schema.ts
-// Path: @/app/(dashboard)/charts-of-accounts/structure/
+// Path: @/app/(dashboard)/foundation/configuration/core-view
 import { z } from "zod";
 
 export const baseSchema = z.object({

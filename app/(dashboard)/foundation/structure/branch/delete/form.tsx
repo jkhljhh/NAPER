@@ -1,5 +1,5 @@
 // Filename: form.tsx
-// Path: @/app/(dashboard)/branch/schema/delete/
+// Path: @/app/(dashboard)/foundation/structure/branch/delete
 "use client";
 
 import { useTransition } from "react";

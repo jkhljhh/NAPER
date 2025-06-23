@@ -1,5 +1,5 @@
 // Filename: table-wrapper.tsx
-// Path: @/app/(dashboard)/charts-of-accounts/structure/
+// Path: @/app/(dashboard)/foundation/configuration/core-view
 import * as React from "react";
 
 import { Table } from "./table";

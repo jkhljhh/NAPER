@@ -1,18 +1,12 @@
 // Filename: form.tsx
-// Path: @/app/(dashboard)/charts-of-accounts/structure/edit
+// Path: @/app/(dashboard)/intelligence/enrich/signals/edit
 "use client";
 
 import { useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import {
-  IconCheck,
-  IconSelector,
-  IconDots,
-  IconTrash,
-  IconEdit,
-} from "@tabler/icons-react";
+import { IconEdit } from "@tabler/icons-react";
 
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import {
@@ -96,17 +90,12 @@ function F({ data }: { data: Schema }) {
               {/*  */}
               <FormField
                 control={form.control}
-                name="code"
+                name="name"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="Name"
-                        type="number"
-                        {...field}
-                        required
-                      />
+                      <Input {...field} required />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -115,12 +104,96 @@ function F({ data }: { data: Schema }) {
               {/*  */}
               <FormField
                 control={form.control}
-                name="pnl_head"
+                name="month"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>PNL Head</FormLabel>
+                    <FormLabel>Month</FormLabel>
                     <FormControl>
-                      <Input placeholder="PNL Head" {...field} required />
+                      <Input {...field} required />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/*  */}
+              <FormField
+                control={form.control}
+                name="year"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Year</FormLabel>
+                    <FormControl>
+                      <Input {...field} required />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/*  */}
+              <FormField
+                control={form.control}
+                name="region_scope"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Region</FormLabel>
+                    <FormControl>
+                      <Input {...field} required />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/*  */}
+              <FormField
+                control={form.control}
+                name="scope_value"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Scope</FormLabel>
+                    <FormControl>
+                      <Input {...field} required />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/*  */}
+              <FormField
+                control={form.control}
+                name="value"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Value</FormLabel>
+                    <FormControl>
+                      <Input type="number" {...field} required />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/*  */}
+              <FormField
+                control={form.control}
+                name="impact_direction"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Impact Direction</FormLabel>
+                    <FormControl>
+                      <Input {...field} required />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/*  */}
+              <FormField
+                control={form.control}
+                name="weight"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Weight</FormLabel>
+                    <FormControl>
+                      <Input {...field} required />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -134,41 +207,12 @@ function F({ data }: { data: Schema }) {
                   <FormItem>
                     <FormLabel>Type</FormLabel>
                     <FormControl>
-                      <Input placeholder="Type" {...field} required />
+                      <Input {...field} required />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              {/*  */}
-              <FormField
-                control={form.control}
-                name="group"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Type</FormLabel>
-                    <FormControl>
-                      <Input placeholder="group" {...field} required />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {/*  */}
-              <FormField
-                control={form.control}
-                name="description"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Description</FormLabel>
-                    <FormControl>
-                      <Input placeholder="End" {...field} required />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {/*  */}
             </div>
             {/*  */}
             <SheetFooter>

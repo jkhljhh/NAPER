@@ -1,5 +1,5 @@
 // Filename: shared.ts
-// Path: @/app/(dashboard)/branch/schema/delete/
+// Path: @/app/(dashboard)/foundation/structure/branch/delete
 import { z } from "zod";
 
 export const schema = z.object({

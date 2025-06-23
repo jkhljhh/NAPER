@@ -1,5 +1,5 @@
 // Filename: page.tsx
-// Path: @/app/(dashboard)/branch/schema/
+// Path: @/app/(dashboard)/foundation/structure/branch
 import * as React from "react";
 
 import { createClient } from "@/lib/supabase/server";

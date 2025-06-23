@@ -1,5 +1,5 @@
 // Filename: shared.ts
-// Path: @/app/(dashboard)/foundation/market/
+// Path: @/app/(dashboard)/foundation/initialize/market/create-edit
 import { z } from "zod";
 
 export const schema = z.object({

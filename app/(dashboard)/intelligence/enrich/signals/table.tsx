@@ -1,5 +1,5 @@
 // Filename: table.tsx
-// Path: @/app/(dashboard)/charts-of-accounts/structure/
+// Path: @/app/(dashboard)/intelligence/enrich/signals
 "use client";
 
 import * as React from "react";

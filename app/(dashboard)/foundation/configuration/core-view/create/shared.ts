@@ -1,5 +1,5 @@
 // Filename: shared.ts
-// Path: @/app/(dashboard)/charts-of-accounts/structure/create
+// Path: @/app/(dashboard)/foundation/configuration/core-view/create
 import { z } from "zod";
 import { baseSchema } from "../base-schema";
 

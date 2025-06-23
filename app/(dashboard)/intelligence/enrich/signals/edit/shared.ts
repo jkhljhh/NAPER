@@ -1,5 +1,5 @@
 // Filename: shared.ts
-// Path: @/app/(dashboard)/charts-of-accounts/structure/edit
+// Path: @/app/(dashboard)/intelligence/enrich/signals/edit
 import { z } from "zod";
 import { baseSchema } from "../base-schema";
 

@@ -1,5 +1,5 @@
 // Filename: table.tsx
-// Path: @/app/(dashboard)/branch/schema/
+// Path: @/app/(dashboard)/foundation/structure/branch
 "use client";
 
 import * as React from "react";

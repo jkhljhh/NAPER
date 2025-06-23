@@ -1,5 +1,5 @@
 // Filename: shared.ts
-// Path: @/app/(dashboard)/foundation/entity/
+// Path: @/app/(dashboard)/foundation/initialize/entity/upload-logo
 import { z } from "zod";
 
 export const schema = z.object({

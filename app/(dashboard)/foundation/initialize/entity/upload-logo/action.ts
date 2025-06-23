@@ -1,5 +1,5 @@
 // Filename: action.tsx
-// Path: @/app/(dashboard)/foundation/entity/
+// Path: @/app/(dashboard)/foundation/initialize/entity/upload-logo
 "use server";
 
 import { revalidatePath } from "next/cache";

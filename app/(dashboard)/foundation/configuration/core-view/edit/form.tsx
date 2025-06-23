@@ -1,5 +1,5 @@
 // Filename: form.tsx
-// Path: @/app/(dashboard)/charts-of-accounts/structure/edit
+// Path: @/app/(dashboard)/foundation/configuration/core-view/edit
 "use client";
 
 import { useTransition } from "react";

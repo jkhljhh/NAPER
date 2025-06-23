@@ -1,5 +1,5 @@
 // Filename: action.tsx
-// Path: @/app/(dashboard)/charts-of-accounts/structure/edit
+// Path: @/app/(dashboard)/intelligence/enrich/signals/edit
 "use server";
 
 import { revalidatePath } from "next/cache";

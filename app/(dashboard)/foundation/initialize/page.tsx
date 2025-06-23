@@ -1,3 +1,5 @@
+// Filename: page.tsx
+// Path: @/app/(dashboard)/foundation/initialize
 import { createClient } from "@/lib/supabase/server";
 
 import { Form as EntityCreateEditForm } from "./entity/create-edit/form";

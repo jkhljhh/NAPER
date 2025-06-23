@@ -1,5 +1,5 @@
 // Filename: table-wrapper.tsx
-// Path: @/app/(dashboard)/branch/schema/
+// Path: @/app/(dashboard)/foundation/structure/branch
 import * as React from "react";
 
 import { Table } from "./table";
@@ -11,7 +11,6 @@ async function getTableData(paginationStart: number, paginationEnd: number) {
   const { data, count, error } = await supabase
     .from("branch_schema")
     .select(
-      // "id,code,name,city,state,latitude,longitude,opening_date,type,region,category,type_acceptance,rpc_linked,pincode",
       "id,code,name,state,city,pincode,region,latitude,longitude,type_acceptance,rpc_linked,type,opening_date,category",
       { count: "exact" },
     )

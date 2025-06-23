@@ -1,5 +1,5 @@
 // Filename: form.tsx
-// Path: @/app/(dashboard)/charts-of-accounts/structure/create
+// Path: @/app/(dashboard)/foundation/configuration/core-view/create
 "use client";
 
 import React, { useRef, useState, useTransition } from "react";

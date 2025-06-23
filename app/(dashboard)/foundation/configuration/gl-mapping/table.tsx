@@ -1,5 +1,5 @@
 // Filename: table.tsx
-// Path: @/app/(dashboard)/charts-of-accounts/structure/
+// Path: @/app/(dashboard)/foundation/configuration/gl-mapping
 "use client";
 
 import * as React from "react";
@@ -96,7 +96,6 @@ export function Table({ data, count }: TableProps) {
         const variantMap: Record<TableSchema["type"], BadgeVariant> = {
           income: "green",
           expense: "yellow",
-          derived: "blue",
         };
         const variant = variantMap[item] ?? "outline";
 

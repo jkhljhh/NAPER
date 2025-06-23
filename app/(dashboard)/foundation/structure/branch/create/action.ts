@@ -1,5 +1,5 @@
 // Filename: action.tsx
-// Path: @/app/(dashboard)/branch/schema/create/
+// Path: @/app/(dashboard)/foundation/structure/branch/create
 "use server";
 
 import { revalidatePath } from "next/cache";

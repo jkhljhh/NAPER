@@ -1,5 +1,5 @@
 // Filename: form.tsx
-// Path: @/app/(dashboard)/foundation/entity/
+// Path: @/app/(dashboard)/foundation/initialize/entity/upload-logo
 "use client";
 
 import { useTransition } from "react";

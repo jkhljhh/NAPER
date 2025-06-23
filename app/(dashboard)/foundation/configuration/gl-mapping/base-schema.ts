@@ -1,5 +1,5 @@
 // Filename: base-schema.ts
-// Path: @/app/(dashboard)/charts-of-accounts/gl-mapping/
+// Path: @/app/(dashboard)/foundation/configuration/gl-mapping
 import { z } from "zod";
 
 export const baseSchema = z.object({

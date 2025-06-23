@@ -1,24 +1,12 @@
 // Filename: form.tsx
-// Path: @/app/(dashboard)/foundation/entity/
+// Path: @/app/(dashboard)/foundation/initialize/entity/create-edit
 "use client";
 
 import { useTransition } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { IconCloudUpload, IconX, IconCalendar } from "@tabler/icons-react";
 import { toast } from "sonner";
-import { format } from "date-fns";
 
-import {
-  FileUpload,
-  FileUploadDropzone,
-  FileUploadItem,
-  FileUploadItemDelete,
-  FileUploadItemMetadata,
-  FileUploadItemPreview,
-  FileUploadList,
-  FileUploadTrigger,
-} from "@/components/ui/file-upload";
 import {
   Form,
   FormControl,
@@ -28,16 +16,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
 import { ActionState } from "@/lib/action-helpers";
-import { cn } from "@/lib/utils";
 
 import { formAction } from "./action";
 import { schema, type Schema } from "./shared";

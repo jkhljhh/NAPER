@@ -1,5 +1,5 @@
 // Filename: shared.ts
-// Path: @/app/(dashboard)/branch/schema/edit/
+// Path: @/app/(dashboard)/foundation/structure/branch/edit
 import { z } from "zod";
 import { baseSchema } from "../base-schema";
 

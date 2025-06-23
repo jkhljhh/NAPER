@@ -1,5 +1,5 @@
 // Filename: action.tsx
-// Path: @/app/(dashboard)/foundation/market/
+// Path: @/app/(dashboard)/foundation/initialize/market/create-edit
 "use server";
 
 import { revalidatePath } from "next/cache";

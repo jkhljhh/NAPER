@@ -1,5 +1,5 @@
 // Filename: base-schema.ts
-// Path: @/app/(dashboard)/branch/schema/
+// Path: @/app/(dashboard)/foundation/structure/branch
 import { z } from "zod";
 
 export const baseSchema = z.object({

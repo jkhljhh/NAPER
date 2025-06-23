@@ -1,5 +1,5 @@
 // Filename: page.tsx
-// Path: @/app/(dashboard)/charts-of-accounts/structure/
+// Path: @/app/(dashboard)/foundation/configuration/gl-mapping
 import * as React from "react";
 
 import { createClient } from "@/lib/supabase/server";
