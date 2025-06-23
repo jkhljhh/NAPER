@@ -94,8 +94,11 @@ function F({ id }: { id: number }) {
                 Cancel
               </Button>
             </DialogClose>
-            <Button onClick={onSubmit} disabled={isPending}>
-              Save Changes
+            <Button
+              onClick={onSubmit}
+              disabled={csvData.length === 0 || isPending}
+            >
+              Import
             </Button>
           </DialogFooter>
         </DialogContent>
