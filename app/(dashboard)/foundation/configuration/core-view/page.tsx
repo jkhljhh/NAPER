@@ -3,15 +3,12 @@
 import * as React from "react";
 
 import { createClient } from "@/lib/supabase/server";
-import { DataTableSkeleton } from "@/components/data-table/data-table-skeleton";
+import { TableSkeleton } from "@/components/table-skeleton";
 import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+  PageHeader,
+  PageHeaderDescription,
+  PageHeaderTitle,
+} from "@/components/page-header";
 
 import { Form } from "./create/form";
 import { TableWrapper } from "./table-wrapper";
@@ -40,36 +37,18 @@ export default async function Page(props: { searchParams: SearchParams }) {
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{PageData.title}</CardTitle>
-        <CardDescription>{PageData.description}</CardDescription>
-        <CardAction>
-          <Form id={entityData.id} />
-        </CardAction>
-      </CardHeader>
-      <CardContent>
-        <React.Suspense
-          fallback={
-            <DataTableSkeleton
-              columnCount={7}
-              filterCount={2}
-              cellWidths={[
-                "10rem",
-                "30rem",
-                "10rem",
-                "10rem",
-                "6rem",
-                "6rem",
-                "6rem",
-              ]}
-              shrinkZero
-            />
-          }
-        >
-          <TableWrapper page={safePage} perPage={safePerPage} />
-        </React.Suspense>
-      </CardContent>
-    </Card>
+    <>
+      <PageHeader>
+        <div className="gap-1 flex flex-col">
+          <PageHeaderTitle>{PageData.title}</PageHeaderTitle>
+          <PageHeaderDescription>{PageData.description}</PageHeaderDescription>
+        </div>
+        <Form id={entityData.id} />
+      </PageHeader>
+
+      <React.Suspense fallback={<TableSkeleton />}>
+        <TableWrapper page={safePage} perPage={safePerPage} />
+      </React.Suspense>
+    </>
   );
 }
