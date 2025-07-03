@@ -1,4 +1,4 @@
 export const site = {
-  title: "BiQ",
-  description: "BIQ configuration",
+  title: "NAPER",
+  description: "NAPER configuration",
 };

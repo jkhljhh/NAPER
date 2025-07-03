@@ -19,7 +19,7 @@ export const formAction = validatedActionWithUser(schema, async (body) => {
     const fileName = `${timestamp}.${fileExt}`;
 
     const { data: uploadData, error: uploadError } = await supabase.storage
-      .from("logo")
+      .from("entity")
       .upload(fileName, file, {
         cacheControl: "3600",
         upsert: false,
@@ -31,7 +31,7 @@ export const formAction = validatedActionWithUser(schema, async (body) => {
 
     const {
       data: { publicUrl },
-    } = supabase.storage.from("logo").getPublicUrl(uploadData.path);
+    } = supabase.storage.from("entity").getPublicUrl(uploadData.path);
 
     const { error: updateError } = await supabase
       .from("entity")

@@ -17,33 +17,51 @@ export const navigation = {
           url: "/connect",
         },
         {
-          title: "Configuration",
-          url: "/configuration",
-          items: [
-            {
-              title: "Core View",
-              url: "/core-view",
-            },
-            {
-              title: "GL Mapping",
-              url: "/gl-mapping",
-            },
-          ],
+          title: "Department",
+          url: "/department",
+          // items: [
+          //   // {
+          //   //   title: "Core View",
+          //   //   url: "/core-view",
+          //   // },
+          //   // {
+          //   //   title: "GL Mapping",
+          //   //   url: "/gl-mapping",
+          //   // },
+          // ],
         },
+        //  {
+        //   title: "Configuration",
+        //   url: "/configuration",
+        //   items: [
+        //     // {
+        //     //   title: "Core View",
+        //     //   url: "/core-view",
+        //     // },
+        //     {
+        //       title: "GL Mapping",
+        //       url: "/gl-mapping",
+        //     },
+        //   ],
+        // },
         {
-          title: "Structure",
-          url: "/structure",
-          items: [
-            {
-              title: "Branch",
-              url: "/branch",
-            },
-          ],
+          title: "User",
+          url: "/User",
         },
-        {
-          title: "Threshold",
-          url: "/threshold",
-        },
+        // {
+        //   title: "Structure",
+        //   url: "/structure",
+        //   items: [
+        //     {
+        //       title: "Branch",
+        //       url: "/branch",
+        //     },
+        //   ],
+        // },
+        // {
+        //   title: "Threshold",
+        //   url: "/threshold",
+        // },
       ],
     },
     {

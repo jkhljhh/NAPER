@@ -1,6 +1,6 @@
-// // page.tsx
+// page.tsx
 import { createClient } from "@/lib/supabase/server";
-import { Form as OrganizationForm } from "./entity/form";
+import { Form as OrganizationForm } from "./form";
 
 export default async function SettingsPage() {
   const supabase = await createClient();
