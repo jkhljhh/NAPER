@@ -14,6 +14,17 @@ import { Console } from "console";
 
 const schemaArray = z.array(schema);
 
+export async function getEntities() {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("entity")
+    .select("id, name")
+    .order("name");
+
+  if (error) throw error;
+  return data;
+}
+
 export const formAction = validatedActionWithUser(schemaArray, async (body) => {
   console.log("Received Data",body);
   try {
@@ -23,7 +34,7 @@ export const formAction = validatedActionWithUser(schemaArray, async (body) => {
 
     const { error: insertError } = await supabase
       .from("department")//department
-      .upsert(body, { onConflict: "dept_id" });
+      .upsert(body, { onConflict: "id" });
       console.log("data updated")
 
     if (insertError) {

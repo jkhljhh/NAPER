@@ -270,7 +270,7 @@ function F({ defaultValues }: { defaultValues: Schema }) {
       />
 
       {/* Logo Upload */}
-      <FormField
+<FormField
   control={form.control}
   name="logo"
   render={({ field }) => (
@@ -296,19 +296,17 @@ function F({ defaultValues }: { defaultValues: Schema }) {
           multiple={false}
         >
           {/* Dropzone */}
-          {/* <FileUploadDropzone>
+          <FileUploadDropzone>
             <div className="flex flex-col items-center gap-1">
               <div className="flex items-center justify-center rounded-full border p-2.5">
                 <IconCloudUpload className="size-6 text-muted-foreground" />
               </div>
-              <p className="font-medium text-sm">Drag & drop image here</p>
-              <p className="text-muted-foreground text-xs">
-                Or click to browse
-              </p>
+              <p className="font-medium text-sm">Drag & drop Image here</p>
+              <p className="text-muted-foreground text-xs">Or click to browse</p>
             </div>
-          </FileUploadDropzone> */}
+          </FileUploadDropzone>
 
-          {/* Browse button - moved outside dropzone */}
+          {/* Browse button */}
           <FileUploadTrigger asChild>
             <Button variant="outline" size="sm" className="mt-2 w-fit">
               Browse image
@@ -351,6 +349,8 @@ function F({ defaultValues }: { defaultValues: Schema }) {
     </FormItem>
   )}
 />
+
+
 
 
       <Button type="submit" disabled={isPending} className="w-30">

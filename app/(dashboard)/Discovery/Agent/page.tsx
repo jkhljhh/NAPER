@@ -1,5 +1,4 @@
-// Filename: page.tsx
-// Path: @/app/(dashboard)/foundation/configuration/core-view
+import { Form } from "./form"; // 👈 make sure this is the right path
 import * as React from "react";
 
 import { createClient } from "@/lib/supabase/server";
@@ -9,17 +8,13 @@ import {
   PageHeaderDescription,
   PageHeaderTitle,
 } from "@/components/page-header";
-
-import { Form } from "./create/form";
+const PageData = {
+  title: "Signals",
+  description: "description",
+};
 import { TableWrapper } from "./table-wrapper";
 
-const PageData = {
-  title: "DEPARTMENT",
-  description: "Information regarding all the departments present within the Entity",
-};
-
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
-
 export default async function Page(props: { searchParams: SearchParams }) {
   const searchParams = await props.searchParams;
   const safePage = Number(searchParams.page) || 1;
@@ -31,8 +26,6 @@ export default async function Page(props: { searchParams: SearchParams }) {
     .select("id")
     .limit(1)
     .single();
-   console.log(entityError);
-  
 
   if (entityError) {
     return <p>Please create an Entity first.</p>;
@@ -41,27 +34,14 @@ export default async function Page(props: { searchParams: SearchParams }) {
   return (
     <>
       <PageHeader>
-  <div className="gap-1 flex flex-col sm:flex-row sm:items-center sm:justify-between w-full">
-    <div className="flex items-center gap-3">
-      {/* Logo */}
-      <img
-        src="https://img.icons8.com/fluency/48/department.png"
-        alt="Department Logo"
-        className="h-10 w-10 rounded-full object-cover"
-      />
+        <div className="gap-1 flex flex-col">
+          <PageHeaderTitle>{PageData.title}</PageHeaderTitle>
+          <PageHeaderDescription>{PageData.description}</PageHeaderDescription>
+        </div>
 
-      {/* Title & Description */}
-      <div className="flex flex-col">
-        <PageHeaderTitle>{PageData.title}</PageHeaderTitle>
-        <PageHeaderDescription>{PageData.description}</PageHeaderDescription>
-      </div>
-    </div>
-
-    {/* Form */}
-    <Form id={entityData.id} />
-  </div>
-</PageHeader>
-
+        {/* ✅ This will render your form */}
+        <Form id={entityData.id} />
+      </PageHeader>
 
       <React.Suspense fallback={<TableSkeleton />}>
         <TableWrapper page={safePage} perPage={safePerPage} />

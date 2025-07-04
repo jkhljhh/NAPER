@@ -1,5 +1,4 @@
-// Filename: table-wrapper.tsx
-// Path: @/app/(dashboard)/foundation/configuration/core-view
+
 import * as React from "react";
 
 import { Table } from "./table";
@@ -9,9 +8,9 @@ async function getTableData(paginationStart: number, paginationEnd: number) {
   const supabase = await createClient();
 
   const { data, count, error } = await supabase
-    .from("department")//department
-    .select("name, desc,id", { count: "exact" })
-    .order("id", { ascending: true })
+    .from("agent_dept")//department
+    .select("Agent, Department,entity_id", { count: "exact" })
+    .order("Agent", { ascending: true })
     .range(paginationStart, paginationEnd);
 
   if (error || !data) {
@@ -20,28 +19,6 @@ async function getTableData(paginationStart: number, paginationEnd: number) {
 
   return { data, count: count ?? 0 };
 }
-
-// async function getRangeData() {
-//   const supabase = await createClient();
-//   const { data: startData, error: startError } = await supabase.rpc(
-//     "get_column_range",
-//     { column_name: "start", table_name: "chart_of_accounts_structure" },//department
-//   );
-
-//   const { data: endData, error: endError } = await supabase.rpc(
-//     "get_column_range",
-//     { column_name: "end", table_name: "chart_of_accounts_structure" },//department
-//   );
-
-//   if (startError || endError || !startData || !endData) {
-//     return { startRange: null, endRange: null };
-//   }
-
-//   return {
-//     startRange: { min: startData[0].min, max: startData[0].max },
-//     endRange: { min: endData[0].min, max: endData[0].max },
-//   };
-// }
 
 export async function TableWrapper({
   page,

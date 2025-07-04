@@ -2,7 +2,7 @@
 // Path: @/app/(dashboard)/foundation/configuration/core-view/create
 "use client";
 
-import React, { useRef, useState, useTransition } from "react";
+import React, { useEffect, useRef, useState, useTransition } from "react";
 import { toast } from "sonner";
 import { IconTableImport } from "@tabler/icons-react";
 import {
@@ -30,58 +30,68 @@ import { cn } from "@/lib/utils";
 
 import { formAction } from "./action";
 import { schema, type Schema } from "./shared";
+import { getEntities } from "./action";
 
 const PageData = {
-  title: "Import Master View Data",
-  description: "Import master view data here. Click save when you're done.",
+  title: "UPLOAD OR ADD",
+  description: "Upload a csv file or insert a new entry to the department",
 };
 function ManualEntryForm({ onAdd }: { onAdd: (row: Schema) => void }) {
   const [entry, setEntry] = useState<Schema>({
     entity_id: undefined as unknown as number,
-    dept_id: undefined as unknown as number,
+    id: undefined as unknown as number,
     name: "",
     desc: "",
   });
+
+  const [values,setEntities]=useState<{ id: number; name: string }[]>([]);
+
+  useEffect(()=>{
+    getEntities().then(setEntities).catch(console.error);
+  },[]);
 
   const handleChange = (key: keyof Schema, value: any) => {
     setEntry((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleSubmit = () => {
-    if (!entry.name || !entry.dept_id) return;
+    if (!entry.name || !entry.id) return;
     onAdd(entry);
-    setEntry({ entity_id: 0, dept_id: 0, name: "", desc: "" });
+    setEntry({ entity_id: 0, id: 0, name: "", desc: "" });
   };
 
- const entities = [
-  { id: 1, name: "Americana" },
-  { id: 2, name: "Domino" },
-  { id: 3, name: "KFC" },
-  { id: 4, name: "Pizza Hut" },
-];
+//  const entities = [
+//   { id: 1, name: "Americana" },
+//   { id: 2, name: "Domino" },
+//   { id: 3, name: "KFC" },
+//   { id: 4, name: "Pizza Hut" },
+// ];
 
 return (
   <div className="grid gap-4 mb-4">
     {/* Entity Dropdown */}
-    <div className="grid gap-1">
-      <label className="text-sm font-medium text-gray-700">Entity</label>
-      <select
-        className="border px-2 py-1 rounded"
-        value={entry.entity_id ?? ""}
-        onChange={(e) =>
-          handleChange(
-            "entity_id",
-            e.target.value === "" ? undefined : Number(e.target.value)
-          )
-        }
-      >
-        <option value="">Select an entity</option>
-        {entities.map((entity) => (
-          <option key={entity.id} value={entity.id}>
-            {entity.name}
-          </option>
-        ))}
-      </select>
+     <div className="grid gap-4 mb-4">
+      {/* Entity Dropdown */}
+      <div className="grid gap-1">
+        <label className="text-sm font-medium text-gray-700">Entity</label>
+        <select
+          className="border px-2 py-1 rounded"
+          value={entry.entity_id ?? ""}
+          onChange={(e) =>
+            handleChange(
+              "entity_id",
+              e.target.value === "" ? undefined : Number(e.target.value)
+            )
+          }
+        >
+          <option value="">Select an entity</option>
+          {values.map((entity) => (
+            <option key={entity.id} value={entity.id}>
+              {entity.name}
+            </option>
+          ))}
+        </select>
+      </div>
     </div>
 
     {/* Dept ID Input */}
@@ -90,10 +100,10 @@ return (
       <input
         className="border px-2 py-1 rounded"
         type="number"
-        value={entry.dept_id ?? ""}
+        value={entry.id ?? ""}
         onChange={(e) =>
           handleChange(
-            "dept_id",
+            "id",
             e.target.value === "" ? undefined : Number(e.target.value)
           )
         }
@@ -122,7 +132,7 @@ return (
       />
     </div>
 
-    <Button onClick={handleSubmit}>Add Row</Button>
+    <Button onClick={handleSubmit}>Insert Row</Button>
   </div>
 );
 
@@ -225,7 +235,7 @@ export function F({ id }: { id: number }) {
               onClick={onSubmit}
               disabled={csvData.length === 0 || isPending}
             >
-              Import
+              ADD
             </Button>
           </DialogFooter>
         </DialogContent>

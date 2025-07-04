@@ -1,5 +1,5 @@
 // Filename: action.tsx
-// Path: @/app/(dashboard)/foundation/configuration/gl-mapping/create
+// Path: @/app/(dashboard)/charts-of-accounts/structure/create
 "use server";
 
 import { revalidatePath } from "next/cache";
@@ -12,30 +12,31 @@ import { toSupabaseError } from "@/lib/supabase/error";
 import { schema } from "./shared";
 
 const schemaArray = z.array(schema);
-export async function getEntities() {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("department")
-    .select("id, name")
-    .order("name");
 
-  if (error) throw error;
-  return data;
-}
+export async function fetchDepartments() {
+      const supabase = await createClient();
+      const { data, error } = await supabase.from("department").select("dept_id,name").order("name");
+      if (data) return (data);
+    }
+
 export const formAction = validatedActionWithUser(schemaArray, async (body) => {
-  try {
+  try{
+  console.log("Creating SUPABASE CLIENT TO INTERACT WITH DB");
     const supabase = await createClient();
+    console.log('CREATED...');
 
     const { error: insertError } = await supabase
-      .from("user")//user
-      .upsert(body, { onConflict: "user_id" });//id
+      .from("agent_dept")//department
+      .upsert(body, { onConflict: "Agent" });
+      console.log("data updated")
 
     if (insertError) {
       throw toSupabaseError(insertError);
     }
-
-    revalidatePath("/user/gl-mapping");//user
-    return { message: "Impored successfully." };
+    
+    console.log("Revalidating...")
+    revalidatePath("/department/structure");//department
+    return { message: "Imported successfully." };
   } catch (err) {
     console.error(err);
     return { error: true, message: "Internal Error" };

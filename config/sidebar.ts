@@ -1,4 +1,6 @@
 import { IconChartPie, IconBuilding, IconBrain } from "@tabler/icons-react";
+import { url } from "inspector";
+import { title } from "process";
 
 export const navigation = {
   main: [
@@ -12,10 +14,10 @@ export const navigation = {
           title: "Initialize",
           url: "/initialize",
         },
-        {
-          title: "Connect",
-          url: "/connect",
-        },
+        // {
+        //   title: "Connect",
+        //   url: "/connect",
+        // },
         {
           title: "Department",
           url: "/department",
@@ -64,68 +66,94 @@ export const navigation = {
         // },
       ],
     },
+    // {
+    //   title: "Intelligence",
+    //   url: "/intelligence",
+    //   icon: IconBrain,
+    //   isActive: false,
+    //   items: [
+    //     {
+    //       title: "Enrich",
+    //       url: "/enrich",
+    //       items: [
+    //         {
+    //           title: "Holidays",
+    //           url: "/holidays",
+    //         },
+    //         {
+    //           title: "Weather",
+    //           url: "/weather",
+    //         },
+    //         {
+    //           title: "Events",
+    //           url: "/events",
+    //         },
+    //         {
+    //           title: "Promotions",
+    //           url: "/promotions",
+    //         },
+    //         {
+    //           title: "Signals",
+    //           url: "/signals",
+    //         },
+    //       ],
+    //     },
+    //     {
+    //       title: "Model",
+    //       url: "#",
+    //     },
+    //     {
+    //       title: "Tuning",
+    //       url: "#",
+    //     },
+    //     {
+    //       title: "Validate",
+    //       url: "#",
+    //     },
+    //   ],
+    // },
+    // {
+    //   title: "Strategy",
+    //   url: "/strategy",
+    //   icon: IconChartPie,
+    //   isActive: false,
+    //   items: [
+    //     {
+    //       title: "Strategize",
+    //       url: "#",
+    //     },
+    //     {
+    //       title: "Deploy",
+    //       url: "#",
+    //     },
+    //   ],
+    // },
     {
-      title: "Intelligence",
-      url: "/intelligence",
-      icon: IconBrain,
-      isActive: false,
-      items: [
+      title:"Discovery",
+      url:"/Discovery",
+      items:[
         {
-          title: "Enrich",
-          url: "/enrich",
-          items: [
-            {
-              title: "Holidays",
-              url: "/holidays",
-            },
-            {
-              title: "Weather",
-              url: "/weather",
-            },
-            {
-              title: "Events",
-              url: "/events",
-            },
-            {
-              title: "Promotions",
-              url: "/promotions",
-            },
-            {
-              title: "Signals",
-              url: "/signals",
-            },
-          ],
+          title:"Agent",
+          url:"/Agent",
+
         },
-        {
-          title: "Model",
-          url: "#",
-        },
-        {
-          title: "Tuning",
-          url: "#",
-        },
-        {
-          title: "Validate",
-          url: "#",
-        },
+        // {
+        //   title:"Department Mapping & Rename",
+        //   url:"/Department Mapping",
+        // }
       ],
     },
     {
-      title: "Strategy",
-      url: "/strategy",
-      icon: IconChartPie,
-      isActive: false,
-      items: [
+      title:"Deployment",
+      url:"/Deployment",
+      items:[
         {
-          title: "Strategize",
-          url: "#",
-        },
-        {
-          title: "Deploy",
-          url: "#",
-        },
-      ],
+          title:"Access",
+          url:"/Users Mapping",
+        }
+      ]
     },
+
   ],
 
   misc: [],

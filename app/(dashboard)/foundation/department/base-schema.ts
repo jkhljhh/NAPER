@@ -14,7 +14,7 @@
 import { z } from 'zod';
 
 export const baseSchema = z.object({
-  dept_id: z.coerce.number().int().nonnegative(),
+  id: z.coerce.number().int().nonnegative(),
   name: z.string().min(0, "Name is required"),
   desc: z.string().min(0, "Description is required"),
 });

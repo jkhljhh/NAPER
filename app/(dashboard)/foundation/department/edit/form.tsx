@@ -97,7 +97,7 @@ function F({ data }: { data: Schema }) {
                  {/*  */}
               <FormField
                 control={form.control}
-                name="dept_id"
+                name="id"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Dept_ID</FormLabel>

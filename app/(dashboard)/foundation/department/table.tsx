@@ -110,13 +110,13 @@ export function Table({ data, count }: TableProps) {
     //   enableColumnFilter: true,
     // },
     {
-      id: "dept_id",
-      accessorKey: "dept_id",
+      id: "id",
+      accessorKey: "id",
       header: ({ column }: { column: Column<TableSchema, unknown> }) => (
         <DataTableColumnHeader column={column} title="Department ID" />
       ),
       cell: ({ cell }) => {
-        const item = cell.getValue<TableSchema["dept_id"]>();
+        const item = cell.getValue<TableSchema["id"]>();
         return <div>{item === 0 ? "-" : item}</div>;
       },
       meta: {
@@ -209,7 +209,7 @@ export function Table({ data, count }: TableProps) {
     columns,
     pageCount: count,
     initialState: {
-      sorting: [{ id: "dept_id", desc: false }],
+      sorting: [{ id: "id", desc: false }],
       columnPinning: { right: ["actions"] },
     },
     shallow: false,

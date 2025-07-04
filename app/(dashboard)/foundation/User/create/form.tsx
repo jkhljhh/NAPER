@@ -29,6 +29,8 @@ import { cn } from "@/lib/utils";
 
 import { formAction } from "./action";
 import { schema, type Schema } from "./shared";
+import { getEntities } from "./action";
+import { useEffect } from "react";
 
 const PageData = {
   title: "Import Master View Data",
@@ -45,6 +47,11 @@ function ManualEntryForm({ onAdd }: { onAdd: (row: Schema) => void }) {
     email:"",
   });
 
+   const [entities, setEntities] = useState<{ id: number; name: string }[]>([]);
+    useEffect(() => {
+    getEntities().then(setEntities).catch(console.error);
+  }, []);
+
   const handleChange = (key: keyof Schema, value: any) => {
     setEntry((prev) => ({ ...prev, [key]: value }));
   };
@@ -54,12 +61,12 @@ function ManualEntryForm({ onAdd }: { onAdd: (row: Schema) => void }) {
     onAdd(entry);
     setEntry({ entity_id: 0, department: "", name: "", user_id: 0 ,id:0, email:""});
   };
-const departments = [
-  { id: 1, name: "BI" },
-  { id: 2, name: "HR" },
-  { id: 3, name: "QA" },
-  { id: 4, name: "Finance" },
-];
+// const departments = [
+//   { id: 1, name: "BI" },
+//   { id: 2, name: "HR" },
+//   { id: 3, name: "QA" },
+//   { id: 4, name: "Finance" },
+// ];
 
   return (
     <div className="grid gap-4 mb-4">
@@ -84,11 +91,11 @@ const departments = [
       handleChange("department", e.target.value === "" ? "" : e.target.value)
     }
   >
-    <option value="">Select a department</option>
-    {departments.map((dept) => (
-      <option key={dept.id} value={dept.name}>
-        {dept.name}
-      </option>
+     <option value="">Select an entity</option>
+          {entities.map((entity) => (
+            <option key={entity.id} value={entity.id}>
+              {entity.name}
+            </option>
     ))}
   </select>
 </div>
