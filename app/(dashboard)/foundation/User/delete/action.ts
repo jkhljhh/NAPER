@@ -22,7 +22,7 @@ export const formAction = validatedActionWithUser(schema, async (body) => {
       throw toSupabaseError(deleteError);
     }
 
-    revalidatePath("/user");
+    revalidatePath("/user/gl-mapping");
     return { message: "Record deleted." };
   } catch (err) {
     console.error(err);

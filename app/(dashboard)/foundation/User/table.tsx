@@ -190,7 +190,7 @@ export function Table({ data, count }: TableProps) {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <EditForm data={row.original} />
-              <DeleteForm id={row.original.id} />
+              <DeleteForm id={row.original.user_id} />
             </DropdownMenuContent>
           </DropdownMenu>
         );

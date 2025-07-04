@@ -7,16 +7,16 @@ export default async function SettingsPage() {
 
   const { data: entityData, error: entityError } = await supabase
     .from("entity")
-    .select("id, name, logoUrl")
+    .select("id, name, logoUrl,country")
     .limit(1)
     .single();
 
-  const { data: marketData } = await supabase
-    .from("market")
-    .select("country")
-    .eq("entity_id", entityData?.id || "")
-    .limit(1)
-    .single();
+  // const { data: marketData } = await supabase
+  //   .from("market")
+  //   .select("country")
+  //   .eq("entity_id", entityData?.id || "")
+  //   .limit(1)
+  //   .single();
 
   return (
     <div className="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
@@ -30,8 +30,8 @@ export default async function SettingsPage() {
             defaultValues={{
               id: entityData?.id,
               name: entityData?.name || "",
-              country: marketData?.country || "",
-              logo: entityData?.logoUrl ? [entityData.logoUrl] : [],
+              country: entityData?.country || "",
+              logo: entityData?.logoUrl ?? null,
             }}
           />
         </div>
